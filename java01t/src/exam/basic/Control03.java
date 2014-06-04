@@ -44,6 +44,38 @@ public class Control03
 
 		// 테스트 1, 2 에서 a 값을 10을 주고 테스트 해보라!
 		// do... while 문은 10 값을 출력하고, while문은 아무런 수행을 하지 않는다.
+		
+		/* 테스트 3: break
+		int a = 0;
+		while(true) {
+			if (a >= 10) 
+				break;
+			System.out.println("a = " + a);
+			a++;
+		}
+		*/
+		
+		// 테스트 4: continue 
+		// - 다음 명령을 실행하지 않고 즉시 조건 검사로 간다.
+		int a = 0;
+		while(a < 10) {
+			if ((a % 2) != 0) {
+				a++;
+				continue;
+			}
+			System.out.println("a = " + a);
+			a++;
+		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
 
