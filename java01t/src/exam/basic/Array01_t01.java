@@ -33,17 +33,20 @@ public class Array01_t01 {
 		// 임꺽정: 총점 = 270, 평균 = 90.0
 		// 장길산: 총점 = 240, 평균 = 80.0
 		Scanner scanner = new Scanner(System.in);
-		System.out.print("이름?");
-		name[0] = scanner.nextLine();
 		
-		System.out.print("국어?");
-		kor[0] = Integer.parseInt(scanner.nextLine());
-		
-		System.out.print("영어?");
-		eng[0] = Integer.parseInt(scanner.nextLine());
-		
-		System.out.print("수학?");
-		math[0] = Integer.parseInt(scanner.nextLine());
+		for (int i = 0; i < name.length; i++) {
+			System.out.print("이름?");
+			name[i] = scanner.nextLine();
+			
+			System.out.print("국어?");
+			kor[i] = Integer.parseInt(scanner.nextLine());
+			
+			System.out.print("영어?");
+			eng[i] = Integer.parseInt(scanner.nextLine());
+			
+			System.out.print("수학?");
+			math[i] = Integer.parseInt(scanner.nextLine());
+		}
 		
 		tot[0] = kor[0] + eng[0] + math[0];
 		aver[0] = tot[0] / 3.0f;
