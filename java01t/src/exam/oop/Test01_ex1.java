@@ -6,6 +6,7 @@ package exam.oop;
 import java.util.Scanner;
 
 //1. 새 데이터 타입 정의 : Address
+/* 클래스 정의를 별도의 소스 파일로 분리하였음.
 class Address {
 	String name;
 	String position;
@@ -13,6 +14,7 @@ class Address {
 	String email;
 	String company;
 }
+*/
 
 public class Test01_ex1 {
 
