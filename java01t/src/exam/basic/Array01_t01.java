@@ -9,6 +9,52 @@ import java.util.Scanner;
 public class Array01_t01 {
 
 	public static void main(String[] args) {
+		String[] name = new String[100];
+		int[] kor = new int[100];
+		int[] eng = new int[100];
+		int[] math = new int[100];
+		int[] tot = new int[100];
+		float[] aver = new float[100];
+		
+		//문제1) 다음과 같이 실행되도록 작성하시오!
+		// 이름? 홍길동
+		// 국어? 100
+		// 영어? 100
+		// 수학? 100
+		// 계속 등록하시겠습니까?(y/n) y
+		// 이름? 임꺽정
+		// 국어? 90
+		// 영어? 90
+		// 수학? 90
+		// 계속 등록하시겠습니까?(y/n) n
+		// 홍길동: 총점 = 300, 평균 = 100.0
+		// 임꺽정: 총점 = 270, 평균 = 90.0
+		Scanner scanner = new Scanner(System.in);
+		
+		for (int i = 0; i < name.length; i++) {
+			System.out.print("이름?");
+			name[i] = scanner.nextLine();
+			
+			System.out.print("국어?");
+			kor[i] = Integer.parseInt(scanner.nextLine());
+			
+			System.out.print("영어?");
+			eng[i] = Integer.parseInt(scanner.nextLine());
+			
+			System.out.print("수학?");
+			math[i] = Integer.parseInt(scanner.nextLine());
+			
+			tot[i] = kor[i] + eng[i] + math[i];
+			aver[i] = tot[i] / 3.0f;
+		}
+		
+		for(int i = 0; i < name.length; i++) {
+			System.out.println(name[i] + "님의 평균과 총점은 다음과 같습니다.");
+			System.out.println("총점: " + tot[i] + ", 평균: " + aver[i]);
+		}
+	}
+	
+	public static void main06(String[] args) {
 		String[] name = new String[3];
 		int[] kor = new int[3];
 		int[] eng = new int[3];
