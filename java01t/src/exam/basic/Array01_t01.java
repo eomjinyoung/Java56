@@ -15,6 +15,7 @@ public class Array01_t01 {
 		int[] math = new int[100];
 		int[] tot = new int[100];
 		float[] aver = new float[100];
+		int count = 0;
 		
 		//문제1) 다음과 같이 실행되도록 작성하시오!
 		// 이름? 홍길동
@@ -46,9 +47,16 @@ public class Array01_t01 {
 			
 			tot[i] = kor[i] + eng[i] + math[i];
 			aver[i] = tot[i] / 3.0f;
+			
+			count++;
+			
+			System.out.print("계속 하시겠습니까?(y/n)");
+			String text = scanner.nextLine();
+			if (text.equals("n"))
+				break;
 		}
 		
-		for(int i = 0; i < name.length; i++) {
+		for(int i = 0; i < count; i++) {
 			System.out.println(name[i] + "님의 평균과 총점은 다음과 같습니다.");
 			System.out.println("총점: " + tot[i] + ", 평균: " + aver[i]);
 		}
