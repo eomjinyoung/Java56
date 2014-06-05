@@ -4,8 +4,39 @@
  */
 package exam.basic;
 
+import java.util.Scanner;
+
 public class Array01_t01 {
 
+	public static void main(String[] args) {
+		String[] name = new String[10];
+		int[] kor = new int[10];
+		int[] eng = new int[10];
+		int[] math = new int[10];
+		int[] tot = new int[10];
+		float[] aver = new float[10];
+		
+		//문제1) 다음과 같이 실행되도록 작성하시오!
+		// 이름? 홍길동
+		// 국어? 100
+		// 영어? 100
+		// 수학? 100
+		// 홍길동 님의 총점과 평규은 다음과 같습니다.
+		// 총점 = 300, 평균 = 100.0
+		Scanner scanner = new Scanner(System.in);
+		
+		
+		name[0] = "홍길동";
+		kor[0] = 100;
+		eng[0] = 90;
+		math[0] = 100;
+		tot[0] = kor[0] + eng[0] + math[0];
+		aver[0] = tot[0] / 3.0f;
+		
+		System.out.println(name[0] + "님의 평균 점수는 " + aver[0] + "입니다.");
+	}
+	
+	
 	public static void main03(String[] args) {
 		// 배열 선언과 동시에 초기 값 할당 
 		// 배열의 크기는 중괄호에 선언된 값들의 개수이다.
