@@ -46,13 +46,15 @@ public class Array01_t01 {
 			
 			System.out.print("수학?");
 			math[i] = Integer.parseInt(scanner.nextLine());
+			
+			tot[i] = kor[i] + eng[i] + math[i];
+			aver[i] = tot[i] / 3.0f;
 		}
 		
-		tot[0] = kor[0] + eng[0] + math[0];
-		aver[0] = tot[0] / 3.0f;
-		
-		System.out.println(name[0] + "님의 평균과 총점은 다음과 같습니다.");
-		System.out.println("총점: " + tot[0] + ", 평균: " + aver[0]);
+		for(int i = 0; i < name.length; i++) {
+			System.out.println(name[i] + "님의 평균과 총점은 다음과 같습니다.");
+			System.out.println("총점: " + tot[i] + ", 평균: " + aver[i]);
+		}
 	}
 	
 	public static void main05(String[] args) {
