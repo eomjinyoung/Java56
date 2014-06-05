@@ -9,6 +9,50 @@ import java.util.Scanner;
 public class Array01_t01 {
 
 	public static void main(String[] args) {
+		String[] name = new String[3];
+		int[] kor = new int[3];
+		int[] eng = new int[3];
+		int[] math = new int[3];
+		int[] tot = new int[3];
+		float[] aver = new float[3];
+		
+		//문제1) 다음과 같이 실행되도록 작성하시오!
+		// 이름? 홍길동
+		// 국어? 100
+		// 영어? 100
+		// 수학? 100
+		// 이름? 임꺽정
+		// 국어? 90
+		// 영어? 90
+		// 수학? 90
+		// 이름? 장길산
+		// 국어? 80
+		// 영어? 80
+		// 수학? 80
+		// 홍길동: 총점 = 300, 평균 = 100.0
+		// 임꺽정: 총점 = 270, 평균 = 90.0
+		// 장길산: 총점 = 240, 평균 = 80.0
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("이름?");
+		name[0] = scanner.nextLine();
+		
+		System.out.print("국어?");
+		kor[0] = Integer.parseInt(scanner.nextLine());
+		
+		System.out.print("영어?");
+		eng[0] = Integer.parseInt(scanner.nextLine());
+		
+		System.out.print("수학?");
+		math[0] = Integer.parseInt(scanner.nextLine());
+		
+		tot[0] = kor[0] + eng[0] + math[0];
+		aver[0] = tot[0] / 3.0f;
+		
+		System.out.println(name[0] + "님의 평균과 총점은 다음과 같습니다.");
+		System.out.println("총점: " + tot[0] + ", 평균: " + aver[0]);
+	}
+	
+	public static void main05(String[] args) {
 		String[] name = new String[10];
 		int[] kor = new int[10];
 		int[] eng = new int[10];
@@ -21,19 +65,26 @@ public class Array01_t01 {
 		// 국어? 100
 		// 영어? 100
 		// 수학? 100
-		// 홍길동 님의 총점과 평규은 다음과 같습니다.
+		// 홍길동 님의 총점과 평균은 다음과 같습니다.
 		// 총점 = 300, 평균 = 100.0
 		Scanner scanner = new Scanner(System.in);
+		System.out.print("이름?");
+		name[0] = scanner.nextLine();
 		
+		System.out.print("국어?");
+		kor[0] = Integer.parseInt(scanner.nextLine());
 		
-		name[0] = "홍길동";
-		kor[0] = 100;
-		eng[0] = 90;
-		math[0] = 100;
+		System.out.print("영어?");
+		eng[0] = Integer.parseInt(scanner.nextLine());
+		
+		System.out.print("수학?");
+		math[0] = Integer.parseInt(scanner.nextLine());
+		
 		tot[0] = kor[0] + eng[0] + math[0];
 		aver[0] = tot[0] / 3.0f;
 		
-		System.out.println(name[0] + "님의 평균 점수는 " + aver[0] + "입니다.");
+		System.out.println(name[0] + "님의 평균과 총점은 다음과 같습니다.");
+		System.out.println("총점: " + tot[0] + ", 평균: " + aver[0]);
 	}
 	
 	
