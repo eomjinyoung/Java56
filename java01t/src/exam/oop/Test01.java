@@ -18,6 +18,7 @@ class Score {
 	float average;
 }
 
+
 public class Test01 {
 	public static void main01(String[] args) {
 		int i; // 정수 값을 담을 4byte 메모리를 준비
