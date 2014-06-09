@@ -8,4 +8,8 @@ public class Score2  {
 	int math;
 	int total;
 	float average;
+	
+	public Score2(String name, int kor, int eng, int math) {
+		
+	}
 }
