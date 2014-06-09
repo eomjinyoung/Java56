@@ -9,4 +9,6 @@ public class Asset {
 	String	regDate;
 	String	place;
 	String	manager;
+	
+	//public Asset() {}
 }

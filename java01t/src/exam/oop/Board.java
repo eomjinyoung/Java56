@@ -13,4 +13,6 @@ public class Board {
 	int				count;
 	String		writer;
 	String		password;
+	
+	//public Board() {}
 }

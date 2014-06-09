@@ -10,4 +10,7 @@ public class Address {
 	String tel;
 	String email;
 	String company;
+	
+	// 기본 생성자
+	//public Address() {}
 }
