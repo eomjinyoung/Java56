@@ -10,6 +10,7 @@ public class Control01_t01 {
 		// 연산자를 입력하세요? +
 		// 두 번째 수를 입력하세요? 2
 		// 계산 결과는 5입니다.
+		//ok
 		Scanner scanner = new Scanner(System.in);
 		int v1, v2;
 		String op;
