@@ -13,6 +13,7 @@ public class Test06_ex2 {
 		printCarInfo(c1);
 		printCarInfo(c2);
 		printCarInfo(c3);
+		
 	}
 	
 	static void printCarInfo(Car c) {

@@ -34,6 +34,8 @@ public class Test05_ex2 {
 	  if (s3 == s5) {
 	  	System.out.println("s3 == s5");
 	  }
+	  
+	  Test05_ex2_sub.m(s5);
   }
 
 }
