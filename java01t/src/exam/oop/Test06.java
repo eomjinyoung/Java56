@@ -12,9 +12,11 @@ package exam.oop;
 
 public class Test06 {
 	// 클래스 변수
+	// - 모든 인스턴스들이 공유하는 데이터 보관
 	static int a = 20;
 	
 	// 스태틱 블록
+	// - 생성자처럼 클래스 변수를 초기화 하는 작업
 	static {
 		System.out.println(a);
 		//System.out.println(b);
