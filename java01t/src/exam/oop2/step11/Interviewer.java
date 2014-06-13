@@ -3,7 +3,7 @@ package exam.oop2.step11;
 import java.util.Scanner;
 
 public class Interviewer {
-	Interviewee interviewee = new EomInterviewee();
+	Interviewee interviewee;
 	
 	void addInterviewee(Interviewee interviewee) {
 		this.interviewee = interviewee;
@@ -18,14 +18,8 @@ public class Interviewer {
 		} else if (command.equals("bye")) {
 			interviewee.bye();
 		}
+		scanner.close();
 	}
-	
-	public static void main(String[] args) {
-		Interviewer iv = new Interviewer();
-		iv.addInterviewee(new EomInterviewee());
-		iv.interview();
-	}
-
 }
 
 
