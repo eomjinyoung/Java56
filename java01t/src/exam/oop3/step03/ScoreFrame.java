@@ -19,10 +19,12 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class ScoreFrame  extends Frame {
-	TextField tfName = new TextField(20);
-	TextField tfKor = new TextField(5);
-	TextField tfEng = new TextField(5);
-	TextField tfMath = new TextField(5);
+	private TextField tfName = new TextField(20);
+	private TextField tfKor = new TextField(5);
+	private TextField tfEng = new TextField(5);
+	private TextField tfMath = new TextField(5);
+	
+	private ScoreDao scoreDao;
 	
 	public ScoreFrame() {
 		this.setTitle("비트 성적관리 시스템");
@@ -45,12 +47,15 @@ public class ScoreFrame  extends Frame {
 		btn.setPreferredSize(new Dimension(80, 40));
 		btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("이름:" + tfName.getText());
-				System.out.println("국어:" + tfKor.getText());
-				System.out.println("영어:" + tfEng.getText());
-				System.out.println("수학:" + tfMath.getText());
+				Score score = new Score();
+				score.setName(tfName.getText());
+				score.setKor(Integer.parseInt(tfKor.getText()));
+				score.setEng(Integer.parseInt(tfEng.getText()));
+				score.setMath(Integer.parseInt(tfMath.getText()));
 				
+				scoreDao.insert(score);
 				
+				clearForm();
 			}
 		});
 		
@@ -71,6 +76,17 @@ public class ScoreFrame  extends Frame {
 		
 		return panel;
 	}
+
+	public void setScoreDao(ScoreDao scoreDao) {
+	  this.scoreDao = scoreDao;
+  }
+
+	private void clearForm() {
+	  tfName.setText("");
+	  tfKor.setText("");
+	  tfEng.setText("");
+	  tfMath.setText("");
+  }
 
 }
 

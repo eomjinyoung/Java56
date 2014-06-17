@@ -9,6 +9,8 @@ public class ScoreApp {
 
 	public static void main(String[] args) {
 		ScoreFrame f = new ScoreFrame();
+		ScoreDao scoreDao = new ScoreDao();
+		f.setScoreDao(scoreDao);
 		f.setVisible(true);
 	}
 
