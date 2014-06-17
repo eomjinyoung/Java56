@@ -18,7 +18,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class ScoreFrame  extends Frame {
+public class ScoreFrame02  extends Frame {
 	private TextField tfName = new TextField(20);
 	private TextField tfKor = new TextField(5);
 	private TextField tfEng = new TextField(5);
@@ -26,7 +26,7 @@ public class ScoreFrame  extends Frame {
 	
 	private ScoreDao scoreDao;
 	
-	public ScoreFrame() {
+	public ScoreFrame02() {
 		this.setTitle("비트 성적관리 시스템");
 		this.setSize(400, 300);
 		
@@ -45,7 +45,8 @@ public class ScoreFrame  extends Frame {
 		
 		Panel toolbar = new Panel(new FlowLayout(FlowLayout.LEFT));
 		
-		Button btn = createToolbarButton("추가");
+		Button btn = new Button("추가");
+		btn.setPreferredSize(new Dimension(80, 30));
 		btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Score score = new Score();
@@ -61,40 +62,7 @@ public class ScoreFrame  extends Frame {
 		});
 		
 		toolbar.add(btn);
-		
-		btn = createToolbarButton("<");
-		btn.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e) {
-			  Score currScore = scoreDao.previousScore();
-			  if (currScore == null) {
-			  	System.out.println("가져올 데이터가 없습니다!");
-			  } else {
-			  	setForm(currScore);
-			  }
-			}
-		});
-		toolbar.add(btn);
-		
-		btn = createToolbarButton(">");
-		btn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Score currScore = scoreDao.nextScore();
-			  if (currScore == null) {
-			  	System.out.println("가져올 데이터가 없습니다!");
-			  } else {
-			  	setForm(currScore);
-			  }
-			}
-		});
-		toolbar.add(btn);
-		
 		this.add(toolbar);
-	}
-	
-	private Button createToolbarButton(String title) {
-		Button btn = new Button(title);
-		btn.setPreferredSize(new Dimension(80,  30));
-		return btn;
 	}
 	
 	private Panel createRowPanel(String title, Component comp) {
@@ -109,7 +77,7 @@ public class ScoreFrame  extends Frame {
 		
 		return panel;
 	}
-	
+
 	public void setScoreDao(ScoreDao scoreDao) {
 	  this.scoreDao = scoreDao;
   }
@@ -120,13 +88,6 @@ public class ScoreFrame  extends Frame {
 	  tfEng.setText("");
 	  tfMath.setText("");
   }
-	
-	private void setForm(Score score) {
-		tfName.setText(score.getName());
-  	tfKor.setText(Integer.toString(score.getKor()));
-  	tfEng.setText(Integer.toString(score.getEng()));
-  	tfMath.setText(Integer.toString(score.getMath()));
-	}
 
 }
 

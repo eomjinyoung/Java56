@@ -8,6 +8,7 @@ package exam.oop3.step03;
 public class ScoreDao {
 	Score[] scores = new Score[100];
 	int size;
+	int cursor;
 	
 	public ScoreDao() {
 		//size = 0;
@@ -16,7 +17,22 @@ public class ScoreDao {
 	public void insert(Score score) {
 		if (size < scores.length) {
 			scores[size++] = score;
+			cursor = size;
 		}
+	}
+	
+	public Score nextScore() {
+		if (cursor >= size || cursor >= scores.length - 1) 
+			return null;
+		
+		return scores[++cursor];
+	}
+	
+	public Score previousScore() {
+		if (cursor <= 0) 
+			return null;
+		
+		return scores[--cursor];
 	}
 	
 	public Score[] toArray() {
