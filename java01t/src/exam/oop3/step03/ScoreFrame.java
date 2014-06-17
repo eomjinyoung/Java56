@@ -1,8 +1,15 @@
 package exam.oop3.step03;
 
-/* 성적 등록 폼 만들기
- * - Panel 사용 
- *   > 여러 개의 UI 컴포넌트를 묶을 때 사용하는 윈도우 
+/* [<], [>] 버튼 추가 및 이벤트 처리
+ * - Frame 클래스가 ActionListener 역할을 겸한다.
+ * - OOP입장에서는 바람직하지 않다.
+ *   => Low coupling, High cohesion(하나의 클래스는 하나의 역할을 수행한다)
+ *   
+ * ActionListener 규칙
+ * - 버튼을 클릭 이벤트를 처리하는 규칙
+ * - TextField의 엔터 키 이벤트를 처리하는 규칙 
+ * 
+ * 버튼에 Action 이름을 설정한 후 이벤트 처리 시에 사용한다.
  */
 
 import java.awt.Button;
@@ -18,11 +25,41 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class ScoreFrame  extends Frame {
+public class ScoreFrame  extends Frame implements ActionListener {
 	private TextField tfName = new TextField(20);
 	private TextField tfKor = new TextField(5);
 	private TextField tfEng = new TextField(5);
 	private TextField tfMath = new TextField(5);
+	
+	public void actionPerformed(ActionEvent e) {
+	  // 추가 버튼, < 버튼, > 버튼
+		if (e.getActionCommand().equals("scoreAdd")) {
+			Score score = new Score();
+			score.setName(tfName.getText());
+			score.setKor(Integer.parseInt(tfKor.getText()));
+			score.setEng(Integer.parseInt(tfEng.getText()));
+			score.setMath(Integer.parseInt(tfMath.getText()));
+			
+			scoreDao.insert(score);
+			
+			clearForm();
+		} else if (e.getActionCommand().equals("scorePrevious")) {
+			Score currScore = scoreDao.previousScore();
+		  if (currScore == null) {
+		  	System.out.println("가져올 데이터가 없습니다!");
+		  } else {
+		  	setForm(currScore);
+		  }
+		} else if (e.getActionCommand().equals("scoreNext")) {
+			Score currScore = scoreDao.nextScore();
+		  if (currScore == null) {
+		  	System.out.println("가져올 데이터가 없습니다!");
+		  } else {
+		  	setForm(currScore);
+		  }
+		}
+	  
+	}
 	
 	private ScoreDao scoreDao;
 	
@@ -46,46 +83,18 @@ public class ScoreFrame  extends Frame {
 		Panel toolbar = new Panel(new FlowLayout(FlowLayout.LEFT));
 		
 		Button btn = createToolbarButton("추가");
-		btn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Score score = new Score();
-				score.setName(tfName.getText());
-				score.setKor(Integer.parseInt(tfKor.getText()));
-				score.setEng(Integer.parseInt(tfEng.getText()));
-				score.setMath(Integer.parseInt(tfMath.getText()));
-				
-				scoreDao.insert(score);
-				
-				clearForm();
-			}
-		});
-		
+		btn.setActionCommand("scoreAdd"); // 버튼에 액션 이름 설정
+		btn.addActionListener(this);
 		toolbar.add(btn);
 		
 		btn = createToolbarButton("<");
-		btn.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e) {
-			  Score currScore = scoreDao.previousScore();
-			  if (currScore == null) {
-			  	System.out.println("가져올 데이터가 없습니다!");
-			  } else {
-			  	setForm(currScore);
-			  }
-			}
-		});
+		btn.setActionCommand("scorePrevious"); // 버튼에 액션 이름 설정
+		btn.addActionListener(this);
 		toolbar.add(btn);
 		
 		btn = createToolbarButton(">");
-		btn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Score currScore = scoreDao.nextScore();
-			  if (currScore == null) {
-			  	System.out.println("가져올 데이터가 없습니다!");
-			  } else {
-			  	setForm(currScore);
-			  }
-			}
-		});
+		btn.setActionCommand("scoreNext"); // 버튼에 액션 이름 설정
+		btn.addActionListener(this);
 		toolbar.add(btn);
 		
 		this.add(toolbar);
