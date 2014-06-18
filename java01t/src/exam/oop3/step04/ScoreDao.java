@@ -1,12 +1,11 @@
-/* Entity 역할
- * - 데이터의 저장과 조회, 변경, 삭제 관리
- * - 데이터의 지속성(Persistence) 관리
- * - Data Access Object(DAO)
+/* 배열 대신 ArrayList 적용 
  */
 package exam.oop3.step04;
 
+import java.util.ArrayList;
+
 public class ScoreDao {
-	Score[] scores = new Score[100];
+	ArrayList<Score> scores = new ArrayList<Score>();
 	int size;
 	int cursor;
 	
