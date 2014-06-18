@@ -68,7 +68,6 @@ public class ScoreFrame  extends Frame implements ActionListener {
   public ScoreFrame() {
     this.setTitle("비트 성적관리 시스템");
     this.setSize(400, 300);
-
     this.addWindowListener(new WindowAdapter() {
       public void windowClosing(WindowEvent e) {
         try {
@@ -128,6 +127,7 @@ public class ScoreFrame  extends Frame implements ActionListener {
 
   public void setScoreDao(ScoreDao scoreDao) {
     this.scoreDao = scoreDao;
+    scoreDao.load();
   }
 
   private void clearForm() {
