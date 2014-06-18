@@ -4,6 +4,7 @@ package exam.oop3.step05;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ScoreDao {
@@ -36,14 +37,13 @@ public class ScoreDao {
     return this.scores.toArray();
   }
 
-  public void save() {
-    File data = new File("test.csv");
+  public void save() throws IOException {
+    File data = new File("f:\\test.csv");
     FileWriter out = new FileWriter(data);
     
     for (Score score : scores) {
       
     }
-    
   }
 
 }

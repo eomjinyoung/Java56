@@ -8,10 +8,11 @@ public class Exception02 {
 
   // after 예외처리
   // - 오류에 대한 정보를 값 객체에 담아서 호출자에게 던진다.
+  //    Throwable 객체에 오류 정보를 담는다.
   // - 메서드 선언부에 어떤 예외를 던지는지 표시한다.
   public static int divide(int a, int b) throws Throwable {     
     if (b == 0)
-      throw new Throwable("0으로 나누지 마세요^^");
+      throw new Throwable("0으로 나누지 마세요^^"); // Throwable만 던질 수 있다.
     
     return a / b; 
   }
@@ -23,7 +24,7 @@ public class Exception02 {
      * */
     try {
       // 예외가 발생할 수 있는 메서드 호출은 try 블록에 둔다.
-      int result = divide(999999, -1);
+      int result = divide(999999, 0);
       System.out.println(result);
       
     } catch(Throwable e) {

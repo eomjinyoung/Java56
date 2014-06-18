@@ -25,6 +25,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import javax.swing.JOptionPane;
+
 public class ScoreFrame  extends Frame implements ActionListener {
   private TextField tfName = new TextField(20);
   private TextField tfKor = new TextField(5);
@@ -69,7 +71,11 @@ public class ScoreFrame  extends Frame implements ActionListener {
 
     this.addWindowListener(new WindowAdapter() {
       public void windowClosing(WindowEvent e) {
-        scoreDao.save();
+        try {
+          scoreDao.save();
+        } catch (Throwable ex) {
+          JOptionPane.showMessageDialog(null, "저장 중에 오류가 발생했습니다");
+        }
         System.exit(0);
       }
     });
