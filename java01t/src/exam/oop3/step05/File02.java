@@ -1,6 +1,7 @@
 package exam.oop3.step05;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FilenameFilter;
 
 /* 디렉토리 다루기 */
@@ -45,8 +46,27 @@ public class File02 {
       System.out.println(name);
     }
     
-    System.out.println("listFiles() 사용 ------------------------");
+    System.out.println("---listFiles() 사용: 디렉토리 + 파일  ------------------------");
+    for (File file : f.listFiles()) {
+      System.out.println(file.getName());
+    }
     
+    System.out.println("---listFiles() 사용: 디렉토리  ------------------------");
+    for (File file : f.listFiles()) {
+      if (file.isDirectory()) {
+        System.out.println(file.getName());
+      }
+    }
+    
+    System.out.println("---listFiles() + 필터 사용: 디렉토리  ------------------------");
+    for (File file : f.listFiles( new FileFilter() {
+        public boolean accept(File pathname) {
+          return pathname.isDirectory();
+        }
+      })) {
+      System.out.println(file.getName());
+    }
+
 
   }
 
