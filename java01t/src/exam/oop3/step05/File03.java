@@ -16,12 +16,18 @@ import java.io.FilenameFilter;
 public class File03 {
 
   public static void main(String[] args) {
-    File f = new File("c:/");
+    File f = new File("c:/javaide/server");
     displayDirectory(f);
   }
   
+  // 디렉토리에 들어있는 모든 하위 디렉토리를 출력한다.
   static void displayDirectory(File dir) {
-    
+    for (File f : dir.listFiles()) {
+      if (f.isDirectory()) {
+        System.out.println(f.getAbsolutePath());
+        displayDirectory(f); // 재귀호출
+      }
+    }
   }
 
 }
