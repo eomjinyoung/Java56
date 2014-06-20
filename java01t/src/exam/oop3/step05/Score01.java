@@ -3,11 +3,7 @@
  */
 package exam.oop3.step05;
 
-import java.io.Serializable;
-
-/* Serialize 허용*/
-
-public class Score implements Serializable  {
+public class Score01  {
 	private String name;
 	private int kor;
 	private int eng;
@@ -15,9 +11,9 @@ public class Score implements Serializable  {
 	private int total;
 	private float average;
 	
-	public Score() {}
+	public Score01() {}
 	
-	public Score(String name, int kor, int eng, int math) {
+	public Score01(String name, int kor, int eng, int math) {
 		this.name = name;
 		this.kor = kor;
 		this.eng = eng;
