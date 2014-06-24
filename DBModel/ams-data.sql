@@ -77,3 +77,167 @@ alter table MEMBERS
 /* 8. 회원 기본 정보 추가 */
 insert into  MEMBERS (NAME, EMAIL, TEL, PWD)
 values ('안중근', 's6@test.com', '1111-6666', '1111'); 
+
+/* 9. 과목 등록 */
+insert into SUBJECTS (TITLE, DESCR, CAPACITY)
+values ('자바기초', '자바 기초 배우기', 30);
+
+insert into SUBJECTS (TITLE, DESCR, CAPACITY)
+values ('자바응용', '자바 응용', 25);
+
+insert into SUBJECTS (TITLE, DESCR, CAPACITY)
+values ('자바 웹 프로그래밍', '자바 웹 프로그래밍 배우기', 35);
+
+insert into SUBJECTS (TITLE, DESCR, CAPACITY)
+values ('C 기초', 'C 프로그래밍 기초', 20);
+
+insert into SUBJECTS (TITLE, DESCR, CAPACITY)
+values ('윈도우 프로그래밍', '위도우 프로그래밍 배우기', 30);
+
+/* 10. 과목에 강사 배정 */
+/* 조건절 or 연산자 */
+update SUBJECTS set
+  mno = 3
+where subno = 1 or subno = 2;
+
+/* 조건절 in 연산자 */
+update SUBJECTS set
+  mno = 9
+where subno in (4, 5);
+
+/* 11. 수강 신청 */
+insert into SUB_REQS (SUBNO, MNO, REG_DATE)
+values (1, 4, now());
+
+insert into SUB_REQS (SUBNO, MNO, REG_DATE)
+values (1, 5, now());
+
+insert into SUB_REQS (SUBNO, MNO, REG_DATE)
+values (2, 5, now());
+
+insert into SUB_REQS (SUBNO, MNO, REG_DATE)
+values (2, 6, now());
+
+/* 존재하지 않는 학생은 입력 불가*/
+insert into SUB_REQS (SUBNO, MNO, REG_DATE)
+values (2, 7, now());
+
+
+/* 12. select */
+/* SELECT: 행 선택("selection") */
+select *
+from MEMBERS
+where MNO > 6;
+
+/* 열선택 ("projection") */
+select name, email
+from MEMBERS;
+
+/* 행과 열 선택 */
+select name, email
+from MEMBERS
+where mno > 4;
+
+/* all 키워드 */
+select subno, mno, reg_date
+from sub_reqs;
+
+/* all => 결과 값의 중복을 허용한다. 기본이 all */
+select all mno
+from sub_reqs;
+
+select MNO
+from sub_reqs;
+
+/* distinct => 결과 값의 중복을 제거한다. */
+select distinct mno
+from sub_reqs;
+
+/* order by => 결과 값 정렬*/
+/* 기본은 오름차순(ASCending) */
+select mno, name, email
+from members
+order by name;
+
+select mno, name, email
+from members
+order by name asc;
+
+/* 내림차순 정렬(DESCending)*/
+select mno, name, email
+from members
+order by name desc;
+
+/* alias => 출력 결과 컬럼의 이름 바꾸기 */
+select mno, name, email, tel, pwd 
+from members;
+
+select mno memberNo, name, email, tel Phone, pwd Password 
+from members;
+
+select mno as memberNo, name, email, tel as Phone, pwd as Password 
+from members;
+
+/* 별명에 공백을 포함하고 싶으면 싱글 따옴표로 표시하라*/
+select mno 'Member No', name, email, tel Phone, pwd Password 
+from members;
+
+/* 복합 컬럼 결과 값 */
+select concat(name, '(', email , ')')  as name2
+from members;
+
+/* + 연산자 사용*/
+select subno, title, capacity, capacity + (capacity * 0.1) as max_capacity
+from subjects;
+
+/* in 연산자 */
+select *
+from members
+where mno in (3, 4, 5);
+
+/* between a and b 연산자 */
+select *
+from members 
+where mno between 3 and 5;
+
+/* 비교 연산자 */
+select *
+from members
+where mno >= 3 and mno <= 5;
+
+/* like 연산자 */
+select *
+from members
+where name like '임%';
+
+select *
+from members
+where name like '%순';
+
+/* 다음 질의문은 속도가 느리다*/
+select *
+from subjects
+where descr like '%기초%';
+
+/* 글자 하나를 와일드로 지정 */
+select *
+from members
+where name like '_중_';
+
+/* is null 연산자 */
+select *
+from students
+where company is null;
+
+select *
+from students
+where company is not null;
+
+/* 빈문자열도 값이다. null 이 아니다.*/
+select *
+from students
+where company = '';
+
+
+
+
