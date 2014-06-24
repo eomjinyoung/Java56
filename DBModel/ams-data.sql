@@ -239,5 +239,54 @@ from students
 where company = '';
 
 
+/* 13. join */
+/* 조인 : 여러 테이블에 분산되어 있는 데이터를 가져오기 */
+select * 
+from members;
+
+select *
+from students;
+
+/* 학생의 고유번호, 이름, 이메일, 학교, 학년, 전공 */
+/* cross(cartesian) 조인 => 무식한 조인 => m * n */
+select m.mno, m.name, m.email, s.SCHOOL, s.GRADE, s.MAJOR
+from members m, students s;
+
+select m.mno, m.name, m.email, s.SCHOOL, s.GRADE, s.MAJOR
+from members m cross join students s;
+
+/* natural 조인 */
+select m.mno, m.name, m.email, s.SCHOOL, s.GRADE, s.MAJOR
+from members m, students s
+where m.mno = s.mno;
+
+/* natual join => 자동으로 양쪽 테이블의 컬럼을 비교하여 처리한다.*/
+select m.mno, m.name, m.email, s.SCHOOL, s.GRADE, s.MAJOR
+from members m natural join students s;
+
+/* 조인할  컬럼 지정(이름이 같을 경우) :  join ~ using() 절 사용한다.*/
+select m.mno, m.name, m.email, s.SCHOOL, s.GRADE, s.MAJOR
+from members m join students s using(mno);
+
+/* 조인할  컬럼 지정(이름이 다를 경우) :  join ~ on 절 사용한다.*/
+select m.mno, m.name, m.email, s.SCHOOL, s.GRADE, s.MAJOR
+from members m join students s on m.mno = s.mno;
+
+/* outer join => 기준 테이블을 지정한다. 
+ * 기준이 되는 테이블은 모든 데이터를 출력한다. */
+select * from teachers;
+select * from subjects;
+
+select m.mno, m.name, m.email, t.position
+from members m left outer join teachers t on m.mno = t.mno;
+
+/* 과목명, 수용인원, 강사명, 강사직위, 강사이메일*/
+select s.title, s.capacity, m.name, t.position, m.email
+from subjects s left outer join teachers t on s.mno = t.mno
+    left outer join members m on s.mno = m.mno;
+
+/* 과목명, 수용인원, 강사명, 강사직위, 수강생명, 수강생 재직여부, 신청일, */
+
+
 
 
