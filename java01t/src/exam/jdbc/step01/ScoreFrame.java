@@ -70,11 +70,6 @@ public class ScoreFrame  extends Frame implements ActionListener {
     this.setSize(400, 300);
     this.addWindowListener(new WindowAdapter() {
       public void windowClosing(WindowEvent e) {
-        try {
-          scoreDao.save();
-        } catch (Throwable ex) {
-          JOptionPane.showMessageDialog(null, "저장 중에 오류가 발생했습니다");
-        }
         System.exit(0);
       }
     });
@@ -127,7 +122,6 @@ public class ScoreFrame  extends Frame implements ActionListener {
 
   public void setScoreDao(ScoreDao scoreDao) {
     this.scoreDao = scoreDao;
-    scoreDao.load();
   }
 
   private void clearForm() {
