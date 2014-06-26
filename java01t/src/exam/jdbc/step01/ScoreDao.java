@@ -1,4 +1,7 @@
-/* 배열 대신 ArrayList 적용 
+/* DBMS 적용
+ * 1) INSERT 처리
+ * 2) SELECT 처리
+ * 3) 서브 쿼리 적용 previousScore(), nextScore() 
  */
 package exam.jdbc.step01;
 
@@ -65,10 +68,6 @@ public class ScoreDao {
   }
 
   public Score nextScore() {
-    return null;
-  }
-
-  public Score previousScore() {
     try {
       Class.forName("com.mysql.jdbc.Driver");
       Connection con = DriverManager.getConnection(
@@ -76,9 +75,12 @@ public class ScoreDao {
           "bit", "1111"   );
       Statement stmt = con.createStatement();
       
+      // where 절에 서브 쿼리 적용 
       ResultSet rs = stmt.executeQuery(
-          "select sno, name, kor, eng, math "
-          + " from scores order by sno desc limit 1");
+          "select sno, name, kor, eng, math" +
+          " from scores " +
+          " where sno = ( select min(sno) from scores where sno > " +
+          currScore.getNo() + " )");
       
       if (rs.next()) {
         currScore = new Score();
@@ -91,8 +93,47 @@ public class ScoreDao {
       
       stmt.close();
       con.close();
+      
+      return currScore;
+      
     } catch (Exception e) {
       e.printStackTrace();
+      return null;
+    }
+  }
+
+  public Score previousScore() {
+    try {
+      Class.forName("com.mysql.jdbc.Driver");
+      Connection con = DriverManager.getConnection(
+          "jdbc:mysql://localhost:3306/bitdb?useUnicode=true&characterEncoding=UTF-8", 
+          "bit", "1111"   );
+      Statement stmt = con.createStatement();
+      
+      // where 절에 서브 쿼리 적용 
+      ResultSet rs = stmt.executeQuery(
+          "select sno, name, kor, eng, math" +
+          " from scores " +
+          " where sno = ( select max(sno) from scores where sno < " +
+          currScore.getNo() + " )");
+      
+      if (rs.next()) {
+        currScore = new Score();
+        currScore.setNo( rs.getInt("sno"));
+        currScore.setName( rs.getString("name"));
+        currScore.setKor( rs.getInt("kor"));
+        currScore.setEng( rs.getInt("eng"));
+        currScore.setMath( rs.getInt("math"));        
+      }
+      
+      stmt.close();
+      con.close();
+      
+      return currScore;
+      
+    } catch (Exception e) {
+      e.printStackTrace();
+      return null;
     }
   }
 
