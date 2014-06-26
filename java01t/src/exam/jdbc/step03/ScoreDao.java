@@ -1,15 +1,10 @@
-/* close() 정석!
- * - 오류가 발생했을 때도 정상적으로 연결을 끊을 수 있도록 처리한다.
- * - try ... catch ... finally 
- * 
- * Auto generated key 가져오기
- * - executeXXX(sql, Statement.RETURN_GENERATED_KEYS);
- * - getGeneratedKeys()
+/* DbConnectionPool 적용
+ * - 외부에서 DB 커넥션 관리자를 주입 받는다.
+ * - 의존 객체 주입 => Dependency Injection (의존성 주입)
  */
 package exam.jdbc.step03;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,18 +13,13 @@ public class ScoreDao {
   DbConnectionPool dbConnectionPool;
   Score currScore;
   
-  public ScoreDao() {
-    //dbConnectionPool = new DbConnectionPool(....);
-    
+  public void prepare() {
     Connection con = null;
     Statement stmt = null;
     ResultSet rs = null;
     
     try {
-      Class.forName("com.mysql.jdbc.Driver");
-      con = DriverManager.getConnection(
-          "jdbc:mysql://localhost:3306/bitdb?useUnicode=true&characterEncoding=UTF-8", 
-          "bit", "1111"   );
+      con = dbConnectionPool.getConnection();
       stmt = con.createStatement();
       
       rs = stmt.executeQuery(
@@ -42,17 +32,17 @@ public class ScoreDao {
         currScore.setName( rs.getString("name"));
         currScore.setKor( rs.getInt("kor"));
         currScore.setEng( rs.getInt("eng"));
-        currScore.setMath( rs.getInt("math"));        
+        currScore.setMath( rs.getInt("math"));  
       }
       
     } catch (Exception e) {
       e.printStackTrace();
       
-    } finally { // 정상적으로 수행하든, 오류가 발생하든 간에 반드시 수행하는 블록 
-      // 즉, try 블록이나 catch 블록을 나가기 전에 반드시 finally 블록을 수행한다.
+    } finally { 
       try { rs.close();} catch (SQLException e) {}
       try { stmt.close();} catch (SQLException e) {}
-      try { con.close();} catch (SQLException e) {}
+      //try { con.close();} catch (SQLException e) {}
+      dbConnectionPool.returnConnection(con);
     }
   }
 
@@ -66,10 +56,7 @@ public class ScoreDao {
     ResultSet rs = null; // 자동 생성된 PK 값을 가져오는 역할자
     
     try {
-      Class.forName("com.mysql.jdbc.Driver");
-      con = DriverManager.getConnection(
-          "jdbc:mysql://localhost:3306/bitdb?useUnicode=true&characterEncoding=UTF-8", 
-          "bit", "1111"   );
+      con = dbConnectionPool.getConnection();
       stmt = con.createStatement();
       
       int count = stmt.executeUpdate(
@@ -94,7 +81,8 @@ public class ScoreDao {
     } finally { 
       try { rs.close();} catch (SQLException e) {}
       try { stmt.close();} catch (SQLException e) {}
-      try { con.close();} catch (SQLException e) {}
+      //try { con.close();} catch (SQLException e) {}
+      dbConnectionPool.returnConnection(con);
     }
   }
 
@@ -104,10 +92,7 @@ public class ScoreDao {
     ResultSet rs = null;
     
     try {
-      Class.forName("com.mysql.jdbc.Driver");
-      con = DriverManager.getConnection(
-          "jdbc:mysql://localhost:3306/bitdb?useUnicode=true&characterEncoding=UTF-8", 
-          "bit", "1111"   );
+      con = dbConnectionPool.getConnection();
       stmt = con.createStatement();
       
       rs = stmt.executeQuery(
@@ -136,7 +121,8 @@ public class ScoreDao {
     } finally { 
       try { rs.close();} catch (SQLException e) {}
       try { stmt.close();} catch (SQLException e) {}
-      try { con.close();} catch (SQLException e) {}
+      //try { con.close();} catch (SQLException e) {}
+      dbConnectionPool.returnConnection(con);
     }
   }
 
@@ -146,10 +132,7 @@ public class ScoreDao {
     ResultSet rs = null;
     
     try {
-      Class.forName("com.mysql.jdbc.Driver");
-      con = DriverManager.getConnection(
-          "jdbc:mysql://localhost:3306/bitdb?useUnicode=true&characterEncoding=UTF-8", 
-          "bit", "1111"   );
+      con = dbConnectionPool.getConnection();
       stmt = con.createStatement();
       
       rs = stmt.executeQuery(
@@ -178,7 +161,8 @@ public class ScoreDao {
     } finally { 
       try { rs.close();} catch (SQLException e) {}
       try { stmt.close();} catch (SQLException e) {}
-      try { con.close();} catch (SQLException e) {}
+      //try { con.close();} catch (SQLException e) {}
+      dbConnectionPool.returnConnection(con);
     }
   }
   
@@ -187,10 +171,7 @@ public class ScoreDao {
     Statement stmt = null;
     
     try {
-      Class.forName("com.mysql.jdbc.Driver");
-      con = DriverManager.getConnection(
-          "jdbc:mysql://localhost:3306/bitdb?useUnicode=true&characterEncoding=UTF-8", 
-          "bit", "1111"   );
+      con = dbConnectionPool.getConnection();
       stmt = con.createStatement();
       
       int count = stmt.executeUpdate(
@@ -213,10 +194,41 @@ public class ScoreDao {
       
     } finally { 
       try { stmt.close();} catch (SQLException e) {}
-      try { con.close();} catch (SQLException e) {}
+      //try { con.close();} catch (SQLException e) {}
+      dbConnectionPool.returnConnection(con);
     }
   }
 
+  public void update() {
+    Connection con = null;
+    Statement stmt = null;
+    
+    try {
+      con = dbConnectionPool.getConnection();
+      stmt = con.createStatement();
+      
+      int count = stmt.executeUpdate(
+          "update scores set" +
+          " name = '" + currScore.getName() + "'," +
+          " kor = " + currScore.getKor() + "," +
+          " eng = " + currScore.getEng() + "," +
+          " math = " + currScore.getMath() + 
+          " where sno = " + currScore.getNo());
+      
+      if (count == 1) {
+        System.out.println("변경 성공!");
+      }
+      
+    } catch (Exception e) {
+      e.printStackTrace();
+      
+    } finally { 
+      try { stmt.close();} catch (SQLException e) {}
+      //try { con.close();} catch (SQLException e) {}
+      dbConnectionPool.returnConnection(con);
+    }
+  }  
+  
   public Score getCurrentScore() {
     return currScore;
   }

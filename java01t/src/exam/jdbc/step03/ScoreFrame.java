@@ -30,6 +30,8 @@ public class ScoreFrame  extends Frame implements ActionListener {
   private TextField tfKor = new TextField(5);
   private TextField tfEng = new TextField(5);
   private TextField tfMath = new TextField(5);
+  private TextField tfTotal = new TextField(5);
+  private TextField tfAverage = new TextField(5);
 
   public void actionPerformed(ActionEvent e) {
     // 추가 버튼, < 버튼, > 버튼
@@ -73,6 +75,15 @@ public class ScoreFrame  extends Frame implements ActionListener {
       } else {
         setForm(currScore);
       }
+    } else if (e.getActionCommand().equals("scoreUpdate")) {
+      Score currScore = scoreDao.getCurrentScore();
+      if (currScore != null) {
+        currScore.setName(tfName.getText());
+        currScore.setKor(Integer.parseInt(tfKor.getText()));
+        currScore.setEng(Integer.parseInt(tfEng.getText()));
+        currScore.setMath(Integer.parseInt(tfMath.getText()));
+        scoreDao.update();
+      }
     }
   }
 
@@ -80,7 +91,7 @@ public class ScoreFrame  extends Frame implements ActionListener {
 
   public ScoreFrame() {
     this.setTitle("BIT SMS");
-    this.setSize(400, 300);
+    this.setSize(500, 300);
     this.addWindowListener(new WindowAdapter() {
       public void windowClosing(WindowEvent e) {
         System.exit(0);
@@ -93,6 +104,8 @@ public class ScoreFrame  extends Frame implements ActionListener {
     this.add( createRowPanel("Korea", tfKor) );
     this.add( createRowPanel("English", tfEng) );
     this.add( createRowPanel("Mathmatics", tfMath) );
+    this.add( createRowPanel("Total", tfTotal) );
+    this.add( createRowPanel("Average", tfAverage) );
 
     Panel toolbar = new Panel(new FlowLayout(FlowLayout.LEFT));
 
@@ -103,6 +116,11 @@ public class ScoreFrame  extends Frame implements ActionListener {
 
     btn = createToolbarButton("Clear");
     btn.setActionCommand("formClear"); 
+    btn.addActionListener(this);
+    toolbar.add(btn);
+    
+    btn = createToolbarButton("Update");
+    btn.setActionCommand("scoreUpdate"); 
     btn.addActionListener(this);
     toolbar.add(btn);
     
@@ -126,7 +144,7 @@ public class ScoreFrame  extends Frame implements ActionListener {
 
   private Button createToolbarButton(String title) {
     Button btn = new Button(title);
-    btn.setPreferredSize(new Dimension(80,  30));
+    btn.setPreferredSize(new Dimension(60,  30));
     return btn;
   }
 
@@ -156,6 +174,8 @@ public class ScoreFrame  extends Frame implements ActionListener {
     tfKor.setText("");
     tfEng.setText("");
     tfMath.setText("");
+    tfTotal.setText("");
+    tfAverage.setText("");
   }
 
   private void setForm(Score score) {
@@ -163,6 +183,8 @@ public class ScoreFrame  extends Frame implements ActionListener {
     tfKor.setText(Integer.toString(score.getKor()));
     tfEng.setText(Integer.toString(score.getEng()));
     tfMath.setText(Integer.toString(score.getMath()));
+    tfTotal.setText(Integer.toString(score.getTotal()));
+    tfAverage.setText(Float.toString(score.getAverage()));
   }
 
 }

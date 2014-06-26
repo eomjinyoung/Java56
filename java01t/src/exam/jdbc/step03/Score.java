@@ -30,8 +30,7 @@ public class Score implements Serializable  {
     this.kor = kor;
     this.eng = eng;
     this.math = math;
-    this.total = kor + eng + math;
-    this.average = this.total / 3.0f;
+    this.compute();
   }
 
   public void compute() {
