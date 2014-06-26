@@ -1,6 +1,10 @@
 /* close() 정석!
  * - 오류가 발생했을 때도 정상적으로 연결을 끊을 수 있도록 처리한다.
  * - try ... catch ... finally 
+ * 
+ * Auto generated key 가져오기
+ * - executeXXX(sql, Statement.RETURN_GENERATED_KEYS);
+ * - getGeneratedKeys()
  */
 package exam.jdbc.step02;
 
@@ -52,6 +56,7 @@ public class ScoreDao {
   public void insert(Score score) {
     Connection con = null;
     Statement stmt = null;
+    ResultSet rs = null; // 자동 생성된 PK 값을 가져오는 역할자
     
     try {
       Class.forName("com.mysql.jdbc.Driver");
@@ -65,22 +70,28 @@ public class ScoreDao {
           + " values ('" + score.getName() + "'," + 
               score.getKor() + "," + 
               score.getEng() + "," + 
-              score.getMath() + ")");
+              score.getMath() + ")", 
+          Statement.RETURN_GENERATED_KEYS);
       
       if (count == 1) {
-        System.out.println("입력 완료!");
+        // 입력 성공 후에 자동 생성된 PK 값 가져오기
+        rs = stmt.getGeneratedKeys(); //1) 자동 생성 PK값 가져오는 역할자 얻기 
+        rs.next(); // 2) PK 값 가져오기 
+        score.setNo( rs.getInt(1)); // 3) DBMS에서 자동 생성된 PK 값을 Score에 저장. 
+        currScore = score;
       }
       
     } catch (Exception e) {
       e.printStackTrace();
       
     } finally { 
+      try { rs.close();} catch (SQLException e) {}
       try { stmt.close();} catch (SQLException e) {}
       try { con.close();} catch (SQLException e) {}
     }
   }
 
-  public Score nextScore() {
+  public Score next() {
     Connection con = null;
     Statement stmt = null;
     ResultSet rs = null;
@@ -104,22 +115,25 @@ public class ScoreDao {
         currScore.setName( rs.getString("name"));
         currScore.setKor( rs.getInt("kor"));
         currScore.setEng( rs.getInt("eng"));
-        currScore.setMath( rs.getInt("math"));        
+        currScore.setMath( rs.getInt("math"));   
+        return currScore;
+        
+      } else {
+        return null;
       }
       
-      return currScore;
     } catch (Exception e) {
       e.printStackTrace();
+      return null;
       
     } finally { 
       try { rs.close();} catch (SQLException e) {}
       try { stmt.close();} catch (SQLException e) {}
       try { con.close();} catch (SQLException e) {}
     }
-    return null;
   }
 
-  public Score previousScore() {
+  public Score previous() {
     Connection con = null;
     Statement stmt = null;
     ResultSet rs = null;
@@ -131,7 +145,6 @@ public class ScoreDao {
           "bit", "1111"   );
       stmt = con.createStatement();
       
-      // where 절에 서브 쿼리 적용 
       rs = stmt.executeQuery(
           "select sno, name, kor, eng, math" +
           " from scores " +
@@ -145,18 +158,56 @@ public class ScoreDao {
         currScore.setKor( rs.getInt("kor"));
         currScore.setEng( rs.getInt("eng"));
         currScore.setMath( rs.getInt("math"));        
+        return currScore;
+        
+      } else {
+        return null;
       }
       
-      return currScore;
     } catch (Exception e) {
       e.printStackTrace();
+      return null;
       
     } finally { 
       try { rs.close();} catch (SQLException e) {}
       try { stmt.close();} catch (SQLException e) {}
       try { con.close();} catch (SQLException e) {}
     }
-    return null;
+  }
+  
+  public void delete() {
+    Connection con = null;
+    Statement stmt = null;
+    
+    try {
+      Class.forName("com.mysql.jdbc.Driver");
+      con = DriverManager.getConnection(
+          "jdbc:mysql://localhost:3306/bitdb?useUnicode=true&characterEncoding=UTF-8", 
+          "bit", "1111"   );
+      stmt = con.createStatement();
+      
+      int count = stmt.executeUpdate(
+          "delete from scores where sno = " + currScore.getNo());
+      
+      if (count == 1) {
+        // 정상적으로 삭제했으면 이전 데이터를 가져와야 한다.
+ 
+        Score score = previous();
+        if (score == null) {
+          score = next();
+          if (score == null) {
+            currScore = null;
+          }
+        }
+      }
+      
+    } catch (Exception e) {
+      e.printStackTrace();
+      
+    } finally { 
+      try { stmt.close();} catch (SQLException e) {}
+      try { con.close();} catch (SQLException e) {}
+    }
   }
 
   public Score getCurrentScore() {

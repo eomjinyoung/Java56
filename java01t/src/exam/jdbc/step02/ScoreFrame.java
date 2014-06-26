@@ -25,8 +25,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import javax.swing.JOptionPane;
-
 public class ScoreFrame  extends Frame implements ActionListener {
   private TextField tfName = new TextField(20);
   private TextField tfKor = new TextField(5);
@@ -46,27 +44,42 @@ public class ScoreFrame  extends Frame implements ActionListener {
 
       clearForm();
     } else if (e.getActionCommand().equals("scorePrevious")) {
-      Score currScore = scoreDao.previousScore();
+      Score currScore = null;
+      if (tfName.getText().equals("")) {
+        currScore = scoreDao.getCurrentScore();
+      } else {
+        currScore = scoreDao.previous();
+      }
       if (currScore == null) {
         System.out.println("가져올 데이터가 없습니다!");
       } else {
         setForm(currScore);
       }
+      
     } else if (e.getActionCommand().equals("scoreNext")) {
-      Score currScore = scoreDao.nextScore();
+      Score currScore = scoreDao.next();
       if (currScore == null) {
         System.out.println("가져올 데이터가 없습니다!");
+      } else {
+        setForm(currScore);
+      }
+    } else if (e.getActionCommand().equals("formClear")) {
+      clearForm();
+    } else if (e.getActionCommand().equals("scoreDelete")) {
+      scoreDao.delete();
+      Score currScore = scoreDao.getCurrentScore();
+      if (currScore == null) {
+        clearForm();
       } else {
         setForm(currScore);
       }
     }
-
   }
 
   private ScoreDao scoreDao;
 
   public ScoreFrame() {
-    this.setTitle("비트 성적관리 시스템");
+    this.setTitle("BIT SMS");
     this.setSize(400, 300);
     this.addWindowListener(new WindowAdapter() {
       public void windowClosing(WindowEvent e) {
@@ -76,25 +89,35 @@ public class ScoreFrame  extends Frame implements ActionListener {
 
     this.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-    this.add( createRowPanel("이름", tfName) );
-    this.add( createRowPanel("국어", tfKor) );
-    this.add( createRowPanel("영어", tfEng) );
-    this.add( createRowPanel("수학", tfMath) );
+    this.add( createRowPanel("Name", tfName) );
+    this.add( createRowPanel("Korea", tfKor) );
+    this.add( createRowPanel("English", tfEng) );
+    this.add( createRowPanel("Mathmatics", tfMath) );
 
     Panel toolbar = new Panel(new FlowLayout(FlowLayout.LEFT));
 
-    Button btn = createToolbarButton("추가");
-    btn.setActionCommand("scoreAdd"); // 버튼에 액션 이름 설정
+    Button btn = createToolbarButton("Add");
+    btn.setActionCommand("scoreAdd"); 
     btn.addActionListener(this);
     toolbar.add(btn);
 
+    btn = createToolbarButton("Clear");
+    btn.setActionCommand("formClear"); 
+    btn.addActionListener(this);
+    toolbar.add(btn);
+    
+    btn = createToolbarButton("Delete");
+    btn.setActionCommand("scoreDelete"); 
+    btn.addActionListener(this);
+    toolbar.add(btn);
+    
     btn = createToolbarButton("<");
-    btn.setActionCommand("scorePrevious"); // 버튼에 액션 이름 설정
+    btn.setActionCommand("scorePrevious"); 
     btn.addActionListener(this);
     toolbar.add(btn);
 
     btn = createToolbarButton(">");
-    btn.setActionCommand("scoreNext"); // 버튼에 액션 이름 설정
+    btn.setActionCommand("scoreNext");
     btn.addActionListener(this);
     toolbar.add(btn);
 
