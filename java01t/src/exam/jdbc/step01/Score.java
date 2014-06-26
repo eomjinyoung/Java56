@@ -15,73 +15,82 @@ import java.io.Serializable;
 public class Score implements Serializable  {
   private static final long serialVersionUID = 1L;
 
+  private int no;
   private String name;
-	private int kor;
-	private int eng;
-	private int math;
-	transient private int total;
-	transient private float average;
-	
-	public Score() {}
-	
-	public Score(String name, int kor, int eng, int math) {
-		this.name = name;
-		this.kor = kor;
-		this.eng = eng;
-		this.math = math;
-		this.total = kor + eng + math;
-		this.average = this.total / 3.0f;
-	}
-	
-	public void compute() {
-		this.total = this.kor + this.eng + this.math;
-		this.average = this.total / 3.0f;
-	}
-	
-	public int getTotal() {
-		return this.total;
-	}
-	
-	public float getAverage() {
-		return this.average;
-	}
-	
-	public void setKor(int kor) {
-		this.kor = kor;
-		this.compute();
-	}
-	
-	public void setEng(int eng) {
-		this.eng = eng;
-		this.compute();
-	}
-	
-	public void setMath(int math) {
-		this.math = math;
-		this.compute();
-	}
+  private int kor;
+  private int eng;
+  private int math;
+  transient private int total;
+  transient private float average;
 
-	public String getName() {
-		return name;
-	}
+  public Score() {}
 
-	public void setName(String name) {
-		this.name = name;
-	}
+  public Score(String name, int kor, int eng, int math) {
+    this.name = name;
+    this.kor = kor;
+    this.eng = eng;
+    this.math = math;
+    this.total = kor + eng + math;
+    this.average = this.total / 3.0f;
+  }
 
-	public int getKor() {
-		return kor;
-	}
+  public void compute() {
+    this.total = this.kor + this.eng + this.math;
+    this.average = this.total / 3.0f;
+  }
 
-	public int getEng() {
-		return eng;
-	}
+  public int getTotal() {
+    return this.total;
+  }
 
-	public int getMath() {
-		return math;
-	}
-	
-	
+  public float getAverage() {
+    return this.average;
+  }
+
+  public void setKor(int kor) {
+    this.kor = kor;
+    this.compute();
+  }
+
+  public void setEng(int eng) {
+    this.eng = eng;
+    this.compute();
+  }
+
+  public void setMath(int math) {
+    this.math = math;
+    this.compute();
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public int getKor() {
+    return kor;
+  }
+
+  public int getEng() {
+    return eng;
+  }
+
+  public int getMath() {
+    return math;
+  }
+
+  public int getNo() {
+    return no;
+  }
+
+  public void setNo(int no) {
+    this.no = no;
+  }
+
+
 }
 
 

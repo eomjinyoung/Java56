@@ -122,6 +122,10 @@ public class ScoreFrame  extends Frame implements ActionListener {
 
   public void setScoreDao(ScoreDao scoreDao) {
     this.scoreDao = scoreDao;
+    Score score = scoreDao.getCurrentScore();
+    if (score != null) {
+      setForm(score);
+    }
   }
 
   private void clearForm() {
