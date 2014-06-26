@@ -34,6 +34,7 @@ public class ScoreDao {
         currScore.setMath( rs.getInt("math"));        
       }
       
+      rs.close();
       stmt.close();
       con.close();
     } catch (Exception e) {
@@ -91,6 +92,7 @@ public class ScoreDao {
         currScore.setMath( rs.getInt("math"));        
       }
       
+      rs.close();
       stmt.close();
       con.close();
       
@@ -126,6 +128,7 @@ public class ScoreDao {
         currScore.setMath( rs.getInt("math"));        
       }
       
+      rs.close();
       stmt.close();
       con.close();
       
