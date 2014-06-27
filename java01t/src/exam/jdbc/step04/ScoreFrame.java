@@ -30,8 +30,8 @@ public class ScoreFrame  extends Frame implements ActionListener {
   private TextField tfKor = new TextField(5);
   private TextField tfEng = new TextField(5);
   private TextField tfMath = new TextField(5);
-  private TextField tfTotal = new TextField(5);
-  private TextField tfAverage = new TextField(5);
+  private TextField tfTotal = new TextField(6);
+  private TextField tfAverage = new TextField(6);
 
   public void actionPerformed(ActionEvent e) {
     // 추가 버튼, < 버튼, > 버튼
@@ -166,7 +166,7 @@ public class ScoreFrame  extends Frame implements ActionListener {
     Score score = scoreDao.getCurrentScore();
     if (score != null) {
       setForm(score);
-    }
+    } 
   }
 
   private void clearForm() {
@@ -174,7 +174,7 @@ public class ScoreFrame  extends Frame implements ActionListener {
     tfKor.setText("");
     tfEng.setText("");
     tfMath.setText("");
-    tfTotal.setText("");
+    tfTotal.setText(""); 
     tfAverage.setText("");
   }
 
