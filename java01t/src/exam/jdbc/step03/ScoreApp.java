@@ -12,7 +12,7 @@ public class ScoreApp {
     
     DbConnectionPool dbPool = new DbConnectionPool(
         "com.mysql.jdbc.Driver",
-        "jdbc:mysql://localhost:3306/bitdb?useUnicode=true&characterEncoding=UTF-8",
+        "jdbc:mysql://localhost:3306/bitdb", //?useUnicode=true&characterEncoding=UTF-8",
         "bit", "1111");
     
     ScoreDao scoreDao = new ScoreDao();
