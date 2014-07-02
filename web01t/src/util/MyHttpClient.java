@@ -12,7 +12,7 @@ public class MyHttpClient {
     PrintStream out = new PrintStream(socket.getOutputStream());
     Scanner in = new Scanner(socket.getInputStream());
     
-    out.println("GET / HTTP/1.1");
+    out.println("HEAD / HTTP/1.1");
     out.println("Host: www.naver.com");
     out.println();
     
