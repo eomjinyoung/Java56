@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT address (person*)>
+<!ELEMENT person (name+, age?, (home|mobile))>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT age (#PCDATA)>
+<!ELEMENT home (#PCDATA)>
+<!ELEMENT mobile (#PCDATA)>
+
+<!ATTLIST person
+  no ID #REQUIRED
+  coutry CDATA #IMPLIED
+  lang (kor|eng|jp|ch) "kor"
+> 

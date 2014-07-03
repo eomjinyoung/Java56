@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+<!DOCTYPE address SYSTEM "address.dtd">
+-->
+<!DOCTYPE address PUBLIC "-//BIT//bit address//en" "address.dtd">
+<address>
+  <person no="P001">
+    <name>홍길동</name>
+    <name>홍좌진</name>
+    <home>031-1111-1111</home>
+  </person>
+  
+  <person no="P002">
+    <name>임꺽정</name>
+    <age>30</age>
+    <mobile>010-2222-2222</mobile>
+  </person>
+  
+  <person no='P003' coutry="korea" lang="kor" >
+    <name>장보고</name>
+    <home>02-1111-2222</home>
+  </person>
+  
+  
+</address>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
