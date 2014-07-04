@@ -21,6 +21,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/step04/UnitConv")
 @SuppressWarnings("serial")
 public class Servlet07 extends HttpServlet {
+  static final String[] units = {"cm", "inch", "yd", "km"};
+  
   /* @Override => 컴파일러에 전달하는 주석 => .class 파일에 포함되지 않는다.
    * - 수퍼 클래스의 메서드를 오버라이딩 한 것임을 선언.
    * - 컴파일러는 해당 메서드가 정말 수퍼 클래스에 있는지 검사한다.  
@@ -34,9 +36,10 @@ public class Servlet07 extends HttpServlet {
       value = Float.parseFloat(request.getParameter("v"));
     } catch (Exception e) {}
     
-    int from = 1, to = 1;
+    int from = 0, to = 0;
     String[] fromSelected = {"", "", "", ""};
     String[] toSelected = {"", "", "", ""};
+    
     try {
       from = Integer.parseInt(request.getParameter("from"));
       fromSelected[from] = "selected";
@@ -48,7 +51,7 @@ public class Servlet07 extends HttpServlet {
     
     float result = 0;
     if (from == 0 && to == 1) { // cm -> inch 
-      result = 1 * 0.39f;
+      result = value * 0.39f;
     }
     
     response.setContentType("text/html; charset=UTF-8");
@@ -81,6 +84,10 @@ public class Servlet07 extends HttpServlet {
     out.println("</select>");
     out.println("<input type=\"submit\" value=\"변환\">");
     out.println("</form>");
+    if (value != 0) {
+      out.format("<p>%1$.1f %2$s -> %3$.1f %4$s</p>", 
+          value, units[from], result, units[to]);
+    }
     out.println("</body>");
     out.println("</html>");
     
