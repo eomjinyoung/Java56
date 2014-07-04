@@ -94,6 +94,7 @@ public class ScoreList extends HttpServlet {
     out.println("  <th>수학</th> ");
     out.println("  <th>합계</th> ");
     out.println("  <th>평균</th>");
+    out.println("  <th></th>");
     out.println("</tr>");
 
     try {
@@ -108,6 +109,7 @@ public class ScoreList extends HttpServlet {
         out.format("  <td>%1$d</td> ", score.getMath());
         out.format("  <td>%1$d</td> ", score.getTotal());
         out.format("  <td>%1$.1f</td>", score.getAverage());
+        out.format("  <td><a href='delete?no=%1$d'>삭제</a></td>", score.getNo());
         out.println("</tr>");
       }
     } catch (Exception e) {

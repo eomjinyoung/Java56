@@ -186,7 +186,7 @@ public class ScoreDao {
     }
   }
   
-  public void delete() {
+  public int delete(int no) throws Exception {
     Connection con = null;
     PreparedStatement stmt = null;
     
@@ -195,24 +195,13 @@ public class ScoreDao {
       stmt = con.prepareStatement( 
           "delete from scores where sno = ?");
       
-      stmt.setInt(1, currScore.getNo());
+      stmt.setInt(1, no);
       
-      int count = stmt.executeUpdate();
+      return stmt.executeUpdate();
       
-      if (count == 1) {
-        // 정상적으로 삭제했으면 이전 데이터를 가져와야 한다.
- 
-        Score score = previous();
-        if (score == null) {
-          score = next();
-          if (score == null) {
-            currScore = null;
-          }
-        }
-      }
       
     } catch (Exception e) {
-      e.printStackTrace();
+      throw e;
       
     } finally { 
       try { stmt.close();} catch (SQLException e) {}
