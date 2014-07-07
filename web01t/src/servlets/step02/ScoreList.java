@@ -63,7 +63,7 @@ public class ScoreList extends HttpServlet {
     out.println("<table>");
     out.println("<tr>");
     out.println("  <th>번호</th> ");
-    out.println("  <th>이름</th> ");
+    out.println("  <th>이름< /th> ");
     out.println("  <th>국어</th> ");
     out.println("  <th>영어</th> ");
     out.println("  <th>수학</th> ");
