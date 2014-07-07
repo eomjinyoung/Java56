@@ -97,6 +97,10 @@ public class ScoreList extends HttpServlet {
     }
     
     out.println("</table>");
+    
+    RequestDispatcher rd = request.getRequestDispatcher("/score/step03/copyright");
+    rd.include(request, response);
+    
     out.println("</body>");
     out.println("</html>");
   }

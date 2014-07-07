@@ -39,6 +39,10 @@ public class ScoreDelete  extends HttpServlet {
       out.println("</head>");
       out.println("<body>");
       out.println("<p>삭제 성공입니다.</p>");
+      
+      RequestDispatcher rd = request.getRequestDispatcher("/score/step03/copyright");
+      rd.include(request, response);
+      
       out.println("</body>");
       out.println("</html>");
     } catch (Exception e) {

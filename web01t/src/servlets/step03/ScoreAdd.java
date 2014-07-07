@@ -18,7 +18,8 @@ public class ScoreAdd extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    request.setCharacterEncoding("UTF-8");
+    // 필터로 대체함
+    //request.setCharacterEncoding("UTF-8");
     
     Score score = new Score();
     score.setName(request.getParameter("name"));
@@ -43,6 +44,10 @@ public class ScoreAdd extends HttpServlet {
       out.println("</head>");
       out.println("<body>");
       out.println("<p>등록 성공입니다.</p>");
+      
+      RequestDispatcher rd = request.getRequestDispatcher("/score/step03/copyright");
+      rd.include(request, response);
+      
       out.println("</body>");
       out.println("</html>");
       

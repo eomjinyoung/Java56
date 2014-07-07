@@ -48,6 +48,10 @@ public class ScoreUpdate extends HttpServlet {
           score.getMath());
       out.println("<input type=\"submit\" value=\"변경\">");
       out.println("</form>");
+      
+      RequestDispatcher rd = request.getRequestDispatcher("/score/step03/copyright");
+      rd.include(request, response);
+      
       out.println("</body>");
       out.println("</html>");
     } catch (Exception e) {
@@ -61,7 +65,8 @@ public class ScoreUpdate extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    request.setCharacterEncoding("UTF-8");
+    // 필터로 대체함
+    //request.setCharacterEncoding("UTF-8");
     
     Score score = new Score();
     score.setNo(Integer.parseInt(request.getParameter("no")));
@@ -87,6 +92,10 @@ public class ScoreUpdate extends HttpServlet {
       out.println("</head>");
       out.println("<body>");
       out.println("<p>변경 성공입니다.</p>");
+      
+      RequestDispatcher rd = request.getRequestDispatcher("/score/step03/copyright");
+      rd.include(request, response);
+      
       out.println("</body>");
       out.println("</html>");
     } catch (Exception e) {
