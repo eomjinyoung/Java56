@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>web01t</display-name>
-
-
-  <!-- 리스너 선언 -->
-  <listener>
-    <listener-class>servlets.step03.ContextLoaderListener</listener-class>
-  </listener>
   
   <!-- 필터 클래스 선언 -->
   <filter>
@@ -19,6 +13,20 @@
     <filter-name>CharacterEncodingFilter</filter-name>
     <url-pattern>*</url-pattern>
   </filter-mapping>
+  
+  
+  
+  <!-- 서블릿 클래스를 선언 -->
+  <servlet>
+    <servlet-name>ContextLoaderServlet</servlet-name>
+    <servlet-class>servlets.step03.ContextLoaderServlet</servlet-class>
+    
+    <!-- 클라이언트가 요청하지 않아도 첫 번째로 이 서블릿을 생성하라! -->
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  <!-- 서블릿에 URL 붙이기 -->
+  
   
   <!-- URL 경로에 자원 이름을 구체적으로 지정하지 않으면 다음 태그에 정의된 파일을 찾아서 보낸다. -->
   <welcome-file-list>
