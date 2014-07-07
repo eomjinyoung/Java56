@@ -89,6 +89,13 @@ public class Score implements Serializable  {
     this.no = no;
   }
 
+  @Override
+  public String toString() {
+    return "Score [no=" + no + ", name=" + name + ", kor=" + kor + ", eng="
+        + eng + ", math=" + math + ", total=" + total + ", average=" + average
+        + "]";
+  }
+
 
 }
 
