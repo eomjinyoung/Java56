@@ -1,30 +1,3 @@
-<%--
-JSP 액션 태그
-=> 특정 자바 코드를 생성하는 태그이다.
-
-1. <jsp:useBean> : 
-=> 자바 객체를 생성
-=> ServletContext(application), HttpSession(session), 
-   ServletRequest(request), PageContext(page) 보관소에서 객체 꺼내기
-
-<jsp:useBean 
-    id="레퍼런스변수이름" 
-    type="레퍼런스변수의 타입(패키지명 포함)"
-    class="객체생성 클래스(패키지명 포함)"
-    scope="객체보관소 이름(application,session,request,page)"/>
-* type 속성을 생략하면 class 속성을 사용한다.
-* class 속성을 생략하면, 보관소에 값이 없을 때 인스턴스를 생성할 수 없다.
-예1)
-<jsp:useBean id="score" type="servlets.step04.Score" 
-    class="servlets.step04.Score" scope="request"/>
-=> 위의 태그는 다음의 자바코드와 같다.
-servlets.step04.Score score = (servlets.step04.Score)request.getAttribute("score");
-if (score == null) {
-  score = new servlets.step04.Score();
-  request.setAttribute("score", score);
-}
-
- --%>
 <%@ page import="servlets.step04.Score"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -73,13 +46,8 @@ table td {
   <th>평균</th>
   <th></th>
 </tr>
-<jsp:useBean id="scores" type="java.util.ArrayList<Score>" scope="request"/>
-<%--
-위의 태그는 다음 자바코드와 같다.
-java.util.ArrayList<Score> scores = 
-  (java.util.ArrayList<Score>)request.getAttribute("scores");
- --%>
 <%
+ArrayList<Score> scores = (ArrayList<Score>)request.getAttribute("scores");
 for (Score score : scores) {
 %>
 <tr>
