@@ -17,14 +17,15 @@ public class ContextLoaderListener implements ServletContextListener {
   @Override
   public void contextInitialized(ServletContextEvent event) {
     try {
+      ServletContext ctx = event.getServletContext();
       DbConnectionPool dbConnectionPool = new DbConnectionPool(
-          "com.mysql.jdbc.Driver",
-          "jdbc:mysql://localhost:3306/bitdb?useUnicode=true&characterEncoding=UTF-8",
-          "bit", "1111");
+          ctx.getInitParameter("driver"),
+          ctx.getInitParameter("url"),
+          ctx.getInitParameter("username"), 
+          ctx.getInitParameter("password"));
       ScoreDao scoreDao = new ScoreDao();
       scoreDao.setDbConnectionPool(dbConnectionPool);
       
-      ServletContext ctx = event.getServletContext();
       ctx.setAttribute("dbConnectionPool", dbConnectionPool);
       ctx.setAttribute("scoreDao", scoreDao);
       

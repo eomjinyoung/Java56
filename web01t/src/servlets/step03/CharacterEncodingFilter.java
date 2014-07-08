@@ -34,7 +34,7 @@ public class CharacterEncodingFilter implements Filter {
       FilterChain nextFilter) throws IOException, ServletException {
     
     // 다음 필터(서블릿 포함)를 수행하기 전에 해야할 작업을 기술
-    request.setCharacterEncoding("UTF-8");
+    request.setCharacterEncoding(config.getInitParameter("charset"));
     
     // 다음 필터(서블릿 포함)를 호출 
     nextFilter.doFilter(request, response);

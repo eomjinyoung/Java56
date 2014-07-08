@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServlet;
  * - 모든 서블릿들이 공용으로 이용할 자원을 준비하는 역할을 수행한다.
  */
 
-public class ContextLoaderServlet extends HttpServlet {
+public class ContextLoaderServlet01 extends HttpServlet {
   private static final long serialVersionUID = 1L;
   
   @Override
@@ -25,10 +25,9 @@ public class ContextLoaderServlet extends HttpServlet {
     
     try {
       DbConnectionPool dbConnectionPool = new DbConnectionPool(
-          config.getInitParameter("driver"),
-          config.getInitParameter("url"),
-          config.getInitParameter("username"), 
-          config.getInitParameter("password"));
+          "com.mysql.jdbc.Driver",
+          "jdbc:mysql://localhost:3306/bitdb?useUnicode=true&characterEncoding=UTF-8",
+          "bit", "1111");
       ScoreDao scoreDao = new ScoreDao();
       scoreDao.setDbConnectionPool(dbConnectionPool);
       
