@@ -1,34 +1,15 @@
 <%--
-JSP 액션 태그
-=> 특정 자바 코드를 생성하는 태그이다.
-
-1. <jsp:useBean> : 
-=> 자바 객체를 생성
-=> ServletContext(application), HttpSession(session), 
-   ServletRequest(request), PageContext(page) 보관소에서 객체 꺼내기
-
-<jsp:useBean 
-    id="레퍼런스변수이름" 
-    type="레퍼런스변수의 타입(패키지명 포함)"
-    class="객체생성 클래스(패키지명 포함)"
-    scope="객체보관소 이름(application,session,request,page)"/>
-* type 속성을 생략하면 class 속성을 사용한다.
-* class 속성을 생략하면, 보관소에 값이 없을 때 인스턴스를 생성할 수 없다.
-예1)
-<jsp:useBean id="score" type="servlets.step04.Score" 
-    class="servlets.step04.Score" scope="request"/>
-=> 위의 태그는 다음의 자바코드와 같다.
-servlets.step04.Score score = (servlets.step04.Score)request.getAttribute("score");
-if (score == null) {
-  score = new servlets.step04.Score();
-  request.setAttribute("score", score);
-}
+JSTL (JSP Standard Tag Library)
+=> JSP 페이지를 작성할 때 사용할 수 있는 추가 라이브러리
+=> 다양한 자바 문법을 표현할 수 있는 태그가 있다.
+=> JSP에서 직접 DBMS에 질의를 할 수 있는 태그도 있다.
 
  --%>
 <%@ page import="servlets.step04.Score"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,7 +41,7 @@ table td {
 </style>
 </head>
 <body>
-<h1>성적 관리(MVC)</h1>
+<h1>성적 관리(JSTL + EL)</h1>
 <a href='scoreform.html'>추가</a>
 <table>
 <tr>
@@ -73,27 +54,29 @@ table td {
   <th>평균</th>
   <th></th>
 </tr>
-<jsp:useBean id="scores" type="java.util.ArrayList<Score>" scope="request"/>
-<%--
-위의 태그는 다음 자바코드와 같다.
-java.util.ArrayList<Score> scores = 
-  (java.util.ArrayList<Score>)request.getAttribute("scores");
- --%>
-<%
-for (Score score : scores) {
-%>
+<c:forEach var="score" items="${scores}">
 <tr>
-  <td><a href='update?no=<%=score.getNo()%>'><%=score.getNo()%></a></td>   
-  <td><%=score.getName()%></td>   
-  <td><%=score.getKor()%></td>   
-  <td><%=score.getEng()%></td>   
-  <td><%=score.getMath()%></td>   
-  <td><%=score.getTotal()%></td>   
-  <td><%=score.getAverage()%></td>  
-  <td><a href='delete?no=<%=score.getNo()%>'>삭제</a></td>
+  <td><a href='update?no=${score.no}'>${score.no}</a></td>   
+  <td>${score.name}</td>   
+  <td>${score.kor}</td>   
+  <td>${score.eng}</td>   
+  <td>${score.math}</td>   
+  <td>${score.total}</td>   
+  <td>${score.average}</td>  
+  <td><a href='delete?no=${score.no}'>삭제</a></td>
 </tr>
-<%} %>
+</c:forEach>
 </table>
+
+<%-- 
+<jsp:include> or <jsp:forward>
+=> RequestDispatcher rd = request.getRequestDispatcher("url");
+rd.include(request, response); 
+또는
+rd.forward(request, response);
+ --%>
+<jsp:include page="/score/step04/copyright.jsp"/>
+
 </body>
 </html>
 
