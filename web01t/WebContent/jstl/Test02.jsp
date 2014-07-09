@@ -1,6 +1,8 @@
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>       
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -70,6 +72,38 @@ pageContext.setAttribute("names", new String[]{"홍길동","임꺽정","장보�
 <c:forTokens items="${data}" delims="&" var="item">
 ==> ${item}<br>
 </c:forTokens>
+
+<h1>c:url 태그: URL을 쉽게 작성</h1>
+<c:url var="searchUrl" value="http://search.naver.com/search.naver">
+  <c:param name="where" value="nexearch"/>
+  <c:param name="query" value="홍길동"/>
+  <c:param name="sm" value="top_hty"/>
+  <c:param name="fbm" value="1"/>
+  <c:param name="ie" value="utf8"/>
+</c:url>
+<a href="${searchUrl}">네이버 검색(홍길동)</a><br>
+
+<h1>c:import 태그: 특정 URL의 응답 결과를 가져오기</h1>
+<div><c:import url="http://www.google.com"/></div>
+
+<h1>c:redirect 태그: 특정 URL로 리다이렉트 하기</h1>
+<c:set var="name" value="홍길동2" scope="page"/>
+<c:if test="${name == '홍길동'}">
+  <c:redirect url="http://localhost:9999/web01t/score/list"/>
+</c:if>
+
+<h1>fmt:parseDate 태그: 문자열을 읽어서 날짜 객체(java.util.Date)로 만든다.</h1>
+<fmt:parseDate var="date1" value="2014-7-9" pattern="yyyy-MM-dd" />
+${date1.year + 1900}<br>
+
+<h1>fmt:formatDate 태그: 날짜 객체로부터 문자열을 만든다.</h1>
+<%
+pageContext.setAttribute("date2", new Date()); // 현재 날짜와 시간을 가진 객체 생성
+%>
+<fmt:formatDate value="${date2}" pattern="MM/dd/yyyy hh:mm:ss"/><br>
+
+
+
 </body>
 </html>
 
