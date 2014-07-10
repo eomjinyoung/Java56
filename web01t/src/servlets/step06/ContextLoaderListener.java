@@ -47,13 +47,7 @@ public class ContextLoaderListener implements ServletContextListener {
   }
   
   @Override
-  public void contextDestroyed(ServletContextEvent event) {
-    ServletContext ctx = event.getServletContext();
-    DbConnectionPool dbConnectionPool = 
-        (DbConnectionPool)ctx.getAttribute("dbConnectionPool");
-    dbConnectionPool.closeAll();
-    
-  }
+  public void contextDestroyed(ServletContextEvent event) {}
 }
 
 
