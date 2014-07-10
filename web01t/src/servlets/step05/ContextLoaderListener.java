@@ -24,6 +24,10 @@ public class ContextLoaderListener implements ServletContextListener {
       scoreList.setScoreDao(scoreDao);
       ctx.setAttribute("/score/step05/list.do", scoreList);
       
+      ScoreAdd scoreAdd = new ScoreAdd();
+      scoreAdd.setScoreDao(scoreDao);
+      ctx.setAttribute("/score/step05/add.do", scoreAdd);
+      
     } catch (Exception e) {
       e.printStackTrace();
     }

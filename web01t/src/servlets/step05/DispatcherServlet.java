@@ -58,10 +58,13 @@ public class DispatcherServlet extends HttpServlet {
       }
       
       // 6. 뷰 컨포넌트(JSP)를 인클루드 한다.
-      response.setContentType("text/html; charset=UTF-8");
-      RequestDispatcher rd = request.getRequestDispatcher(viewUrl);
-      rd.include(request, response);
-      
+      if (viewUrl.startsWith("redirect:")) {
+        response.sendRedirect(viewUrl.substring(9));
+      } else {
+        response.setContentType("text/html; charset=UTF-8");
+        RequestDispatcher rd = request.getRequestDispatcher(viewUrl);
+        rd.include(request, response);
+      }
     } catch (Exception e) {
       RequestDispatcher rd = request.getRequestDispatcher("/score/step05/error");
       request.setAttribute("error", e);
