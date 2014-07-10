@@ -1,4 +1,4 @@
-package servlets.step05;
+package servlets.step06;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  * 
  */
 
-//@WebServlet("*.do")
+@WebServlet("*.do")
 public class DispatcherServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
