@@ -1,4 +1,4 @@
-package servlets.step06;
+package servlets.step07;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  * 
  */
 
-//@WebServlet("*.do")
+@WebServlet("*.do")
 public class DispatcherServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
@@ -66,7 +66,7 @@ public class DispatcherServlet extends HttpServlet {
         rd.include(request, response);
       }
     } catch (Exception e) {
-      RequestDispatcher rd = request.getRequestDispatcher("/score/step06/error");
+      RequestDispatcher rd = request.getRequestDispatcher("/score/step07/error");
       request.setAttribute("error", e);
       rd.forward(request, response);
     }

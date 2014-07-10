@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- score-mapper.xml 파일 
+=> ScoreDao가 사용할 SQL문을 저장 
+-->
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="servlets.step07.ScoreDao">
+  <select id="list" resultType="servlets.step07.Score">
+    select sno as no, name, kor, eng, math 
+    from scores order by sno desc
+  </select>
+</mapper>
