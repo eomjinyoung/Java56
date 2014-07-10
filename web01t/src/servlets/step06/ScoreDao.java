@@ -1,11 +1,4 @@
-/* PreparedStatement 적용 
- * - SQL 템플릿을 정의한 후, IN-PARAMETER에 값을 넣는 방법
- * - 장점
- *   1) SQL문이 간결해진다.
- *   2) IN-PARAMETER를 통해 값을 입력하기 때문에 SQL문을 조작할 수 없다.
- *   3) 바이너리 데이터를 입력할 수 있다.
- *   4) 반복하여 작업을 수행할 때 속도가 빠르다.
- *      => 이유: SQL문을 미리 만들어 놓고 값만 입력하여 실행하기 때문이다.
+/* DataSource 사용
  */
 package servlets.step06;
 
@@ -16,20 +9,22 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.sql.DataSource;
+
 public class ScoreDao {
-  DbConnectionPool dbConnectionPool;
+  DataSource dataSource;
   
-  public void setDbConnectionPool(DbConnectionPool dbConnectionPool) {
-    this.dbConnectionPool = dbConnectionPool;
+  public void setDataSource(DataSource dataSource) {
+    this.dataSource = dataSource;
   }
-  
+
   public ArrayList<Score> list() throws Exception {
     Connection con = null;
     Statement stmt = null;
     ResultSet rs = null;
     
     try {
-      con = dbConnectionPool.getConnection();
+      con = dataSource.getConnection();
       stmt = con.createStatement();
       
       rs = stmt.executeQuery(
@@ -57,8 +52,8 @@ public class ScoreDao {
     } finally { 
       try { rs.close();} catch (SQLException e) {}
       try { stmt.close();} catch (SQLException e) {}
-      //try { con.close();} catch (SQLException e) {}
-      dbConnectionPool.returnConnection(con);
+      // DB 커넥션 풀에 반납함. 닫는 것이 아님!
+      try { con.close(); } catch (SQLException e) {}
     }
   }
 
@@ -68,7 +63,7 @@ public class ScoreDao {
     ResultSet rs = null;
     
     try {
-      con = dbConnectionPool.getConnection();
+      con = dataSource.getConnection();
       stmt = con.prepareStatement(
           "select sno, name, kor, eng, math from scores where sno=?");
       stmt.setInt(1, no);
@@ -93,8 +88,7 @@ public class ScoreDao {
     } finally { 
       try { rs.close();} catch (SQLException e) {}
       try { stmt.close();} catch (SQLException e) {}
-      //try { con.close();} catch (SQLException e) {}
-      dbConnectionPool.returnConnection(con);
+      try { con.close();} catch (SQLException e) {}
     }
   }
 
@@ -104,7 +98,7 @@ public class ScoreDao {
     ResultSet rs = null; // 자동 생성된 PK 값을 가져오는 역할자
     
     try {
-      con = dbConnectionPool.getConnection();
+      con = dataSource.getConnection();
 
       stmt = con.prepareStatement(
           "insert into scores (name, kor, eng, math)" +
@@ -132,8 +126,7 @@ public class ScoreDao {
     } finally { 
       try { rs.close();} catch (SQLException e) {}
       try { stmt.close();} catch (SQLException e) {}
-      //try { con.close();} catch (SQLException e) {}
-      dbConnectionPool.returnConnection(con);
+      try { con.close();} catch (SQLException e) {}
     }
   }
 
@@ -142,7 +135,7 @@ public class ScoreDao {
     PreparedStatement stmt = null;
     
     try {
-      con = dbConnectionPool.getConnection();
+      con = dataSource.getConnection();
       stmt = con.prepareStatement( 
           "delete from scores where sno = ?");
       
@@ -156,8 +149,7 @@ public class ScoreDao {
       
     } finally { 
       try { stmt.close();} catch (SQLException e) {}
-      //try { con.close();} catch (SQLException e) {}
-      dbConnectionPool.returnConnection(con);
+      try { con.close();} catch (SQLException e) {}
     }
   }
 
@@ -166,7 +158,7 @@ public class ScoreDao {
     PreparedStatement stmt = null;
     
     try {
-      con = dbConnectionPool.getConnection();
+      con = dataSource.getConnection();
       stmt = con.prepareStatement(
           "update scores set name=?, kor=?, eng=?, math=? where sno=?");
       
@@ -183,8 +175,7 @@ public class ScoreDao {
       
     } finally { 
       try { stmt.close();} catch (SQLException e) {}
-      //try { con.close();} catch (SQLException e) {}
-      dbConnectionPool.returnConnection(con);
+      try { con.close();} catch (SQLException e) {}
     }
   }  
   

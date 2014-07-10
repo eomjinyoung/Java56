@@ -66,7 +66,7 @@ public class DispatcherServlet extends HttpServlet {
         rd.include(request, response);
       }
     } catch (Exception e) {
-      RequestDispatcher rd = request.getRequestDispatcher("/score/step05/error");
+      RequestDispatcher rd = request.getRequestDispatcher("/score/step06/error");
       request.setAttribute("error", e);
       rd.forward(request, response);
     }

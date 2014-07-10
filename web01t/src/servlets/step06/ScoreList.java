@@ -16,7 +16,7 @@ public class ScoreList implements PageController {
       throws Exception {
       model.put("scores", scoreDao.list());
       
-      return "/score/step05/ScoreList.jsp";
+      return "/score/step06/ScoreList.jsp";
   }
 
 }

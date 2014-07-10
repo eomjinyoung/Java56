@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
  * => 다른 서블릿에서 발생한 오류를 출력하는 역할!
  */
 
-@WebServlet("/score/step05/error")
+@WebServlet("/score/step06/error")
 public class ErrorServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 

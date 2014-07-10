@@ -15,7 +15,7 @@ public class ScoreUpdate implements PageController {
     if (params.get("name") == null) { // 변경폼에서 값이 넘어오는 것이 아니다.
       model.put("score", scoreDao.selectOne(
           Integer.parseInt(params.get("no")[0])));
-      return "/score/step05/scoreupdateform.jsp";
+      return "/score/step06/scoreupdateform.jsp";
       
     } else {
       scoreDao.update(new Score()
