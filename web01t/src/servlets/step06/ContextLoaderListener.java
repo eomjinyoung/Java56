@@ -7,11 +7,15 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.sql.DataSource;
 
+import org.apache.log4j.Logger;
+
 // PageController 객체를 준비한다.
 public class ContextLoaderListener implements ServletContextListener {
-
+  static Logger logger = Logger.getLogger(ContextLoaderListener.class);
+  
   @Override
   public void contextInitialized(ServletContextEvent event) {
+    logger.debug("contextInitialized 호출됨...");
     try {
       ServletContext ctx = event.getServletContext();
       
@@ -47,7 +51,9 @@ public class ContextLoaderListener implements ServletContextListener {
   }
   
   @Override
-  public void contextDestroyed(ServletContextEvent event) {}
+  public void contextDestroyed(ServletContextEvent event) {
+    logger.debug("contextDestroyed 호출됨...");
+  }
 }
 
 
