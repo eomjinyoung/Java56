@@ -56,14 +56,14 @@ table td {
 </tr>
 <c:forEach var="score" items="${scores}">
 <tr>
-  <td><a href='update?no=${score.no}'>${score.no}</a></td>   
+  <td><a href='update.do?no=${score.no}'>${score.no}</a></td>   
   <td>${score.name}</td>   
   <td>${score.kor}</td>   
   <td>${score.eng}</td>   
   <td>${score.math}</td>   
   <td>${score.total}</td>   
   <td>${score.average}</td>  
-  <td><a href='delete?no=${score.no}'>삭제</a></td>
+  <td><a href='delete.do?no=${score.no}'>삭제</a></td>
 </tr>
 </c:forEach>
 </table>

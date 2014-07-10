@@ -28,10 +28,17 @@ public class ContextLoaderListener implements ServletContextListener {
       scoreAdd.setScoreDao(scoreDao);
       ctx.setAttribute("/score/step05/add.do", scoreAdd);
       
+      ScoreDelete scoreDelete = new ScoreDelete();
+      scoreDelete.setScoreDao(scoreDao);
+      ctx.setAttribute("/score/step05/delete.do", scoreDelete);
+      
+      ScoreUpdate scoreUpdate = new ScoreUpdate();
+      scoreUpdate.setScoreDao(scoreDao);
+      ctx.setAttribute("/score/step05/update.do", scoreUpdate);
+      
     } catch (Exception e) {
       e.printStackTrace();
     }
-    
   }
   
   @Override

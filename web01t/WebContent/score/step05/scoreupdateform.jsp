@@ -32,7 +32,7 @@ getFirstName()가 있다면, => FirstName => firstName
 </head>
 <body>
 <h1>성적 변경(EL)</h1>
-<form action="update" method="post">
+<form action="update.do" method="post">
 번호: <input type="text" name="no" value='${requestScope.score.no}' readonly><br>
 이름: <input type="text" name="name" value='${score.name}'><br>
 국어: <input type="text" name="kor" value='${score.kor}'><br>

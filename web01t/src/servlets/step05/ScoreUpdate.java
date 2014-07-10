@@ -1,65 +1,30 @@
 package servlets.step05;
 
-import java.io.IOException;
+import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-@WebServlet("/score/step05/update")
-public class ScoreUpdate extends HttpServlet {
-  private static final long serialVersionUID = 1L;
+public class ScoreUpdate implements PageController {
+  ScoreDao scoreDao;
   
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
-    int no = Integer.parseInt(request.getParameter("no"));
-    
-    try {
-      ServletContext ctx = this.getServletContext();
-      ScoreDao scoreDao = (ScoreDao)ctx.getAttribute("scoreDao");
-      Score score = scoreDao.selectOne(no);
-      
-      response.setContentType("text/html; charset=UTF-8");
-      
-      RequestDispatcher rd = request.getRequestDispatcher(
-          "/score/step04/scoreupdateform.jsp");
-      request.setAttribute("score", score);
-      rd.include(request, response);
-      
-    } catch (Exception e) {
-      RequestDispatcher rd = request.getRequestDispatcher("/score/step04/error");
-      request.setAttribute("error", e);
-      rd.forward(request, response);
-    }
-    
+  public void setScoreDao(ScoreDao scoreDao) {
+    this.scoreDao = scoreDao;
   }
   
   @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
-    Score score = new Score();
-    score.setNo(Integer.parseInt(request.getParameter("no")));
-    score.setName(request.getParameter("name"));
-    score.setKor(Integer.parseInt(request.getParameter("kor")));
-    score.setEng(Integer.parseInt(request.getParameter("eng")));
-    score.setMath(Integer.parseInt(request.getParameter("math")));
-    
-    ServletContext ctx = this.getServletContext();
-    ScoreDao scoreDao = (ScoreDao)ctx.getAttribute("scoreDao");
-    
-    try {
-      scoreDao.update(score);
-      response.sendRedirect("list");
-            
-    } catch (Exception e) {
-      RequestDispatcher rd = request.getRequestDispatcher("/score/step04/error");
-      request.setAttribute("error", e);
-      rd.forward(request, response);
+  public String execute(Map<String, String[]> params, Map<String, Object> model)
+      throws Exception {
+    if (params.get("name") == null) { // 변경폼에서 값이 넘어오는 것이 아니다.
+      model.put("score", scoreDao.selectOne(
+          Integer.parseInt(params.get("no")[0])));
+      return "/score/step05/scoreupdateform.jsp";
+      
+    } else {
+      scoreDao.update(new Score()
+        .setNo(Integer.parseInt(params.get("no")[0]))
+        .setName(params.get("name")[0])
+        .setKor(Integer.parseInt(params.get("kor")[0]))
+        .setEng(Integer.parseInt(params.get("eng")[0]))
+        .setMath(Integer.parseInt(params.get("math")[0])));
+      return "redirect:list.do";
     }
   }
 }

@@ -46,27 +46,31 @@ public class Score implements Serializable  {
     return this.average;
   }
 
-  public void setKor(int kor) {
+  public Score setKor(int kor) {
     this.kor = kor;
     this.compute();
+    return this;
   }
 
-  public void setEng(int eng) {
+  public Score setEng(int eng) {
     this.eng = eng;
     this.compute();
+    return this;
   }
 
-  public void setMath(int math) {
+  public Score setMath(int math) {
     this.math = math;
     this.compute();
+    return this;
   }
 
   public String getName() {
     return name;
   }
 
-  public void setName(String name) {
+  public Score setName(String name) {
     this.name = name;
+    return this;
   }
 
   public int getKor() {
@@ -85,8 +89,9 @@ public class Score implements Serializable  {
     return no;
   }
 
-  public void setNo(int no) {
+  public Score setNo(int no) {
     this.no = no;
+    return this;
   }
 
   @Override
