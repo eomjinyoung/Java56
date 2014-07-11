@@ -2,6 +2,7 @@
  */
 package servlets.step07;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -14,10 +15,14 @@ public class ScoreDao {
     this.sqlSessionFactory = sqlSessionFactory;
   }  
 
-  public List<Score> list() throws Exception {
+  public List<Score> list(int pageNo, int pageSize) throws Exception {
     SqlSession sqlSession = sqlSessionFactory.openSession();
     try {
-      return sqlSession.selectList("servlets.step07.ScoreDao.list"); 
+      HashMap<String,Integer> params = new HashMap<String,Integer>();
+      params.put("pageStartIndex", (pageNo - 1) * pageSize);
+      params.put("pageSize", pageSize);
+      
+      return sqlSession.selectList("servlets.step07.ScoreDao.list", params);
       
     } catch (Exception e) {
       throw e;
@@ -27,6 +32,19 @@ public class ScoreDao {
     }
   }
 
+  public int countAll() throws Exception {
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    try {
+      return sqlSession.selectOne("servlets.step07.ScoreDao.countAll");
+      
+    } catch (Exception e) {
+      throw e;
+      
+    } finally {
+      sqlSession.close();
+    }
+  }
+  
   public Score selectOne(int no) throws Exception {
     SqlSession sqlSession = sqlSessionFactory.openSession();
     try {

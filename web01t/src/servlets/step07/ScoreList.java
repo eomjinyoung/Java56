@@ -18,7 +18,22 @@ public class ScoreList implements PageController {
   public String execute(Map<String, String[]> params, Map<String, Object> model)
       throws Exception {
     logger.info("성적 목록 가져오기.....");
-    model.put("scores", scoreDao.list());
+    int pageNo = 1, pageSize = 3;
+    try {
+      pageNo = Integer.parseInt(params.get("pageNo")[0]);
+    } catch (Exception e) {}
+    try {
+      pageSize = Integer.parseInt(params.get("pageSize")[0]);
+    } catch (Exception e) {}
+    
+    int countAll = scoreDao.countAll();
+    int totalPage = countAll / pageSize;
+    if ((countAll % pageSize) > 0) {
+      totalPage++;
+    }
+    model.put("scores", scoreDao.list(pageNo, pageSize));
+    model.put("totalPage", totalPage);
+    model.put("pageNo", pageNo);
     
     return "/score/step07/ScoreList.jsp";
   }

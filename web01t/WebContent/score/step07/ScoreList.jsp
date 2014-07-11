@@ -67,7 +67,24 @@ table td {
 </tr>
 </c:forEach>
 </table>
+<div>
 
+<c:choose>
+<c:when test="${pageNo > 1}">
+  <a href="list.do?pageNo=${pageNo - 1}">[이전]</a>
+</c:when>
+<c:otherwise>[이전]</c:otherwise>
+</c:choose>
+
+${pageNo}
+
+<c:choose>
+<c:when test="${pageNo < totalPage}">
+  <a href="list.do?pageNo=${pageNo + 1}">[다음]</a>
+</c:when>
+<c:otherwise>[다음]</c:otherwise>
+</c:choose>
+</div>
 <jsp:include page="/score/step07/copyright.jsp"/>
 
 </body>
