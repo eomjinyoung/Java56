@@ -39,8 +39,16 @@ public class ScoreList implements PageController {
     }
     
     model.put("scores", scoreDao.list(pageNo, pageSize, order));
+    
+    // 클라이언트로부터 정렬할 컬럼이름과 정렬 타입을 입력 받아 실행한다.
+    /* 안전하지 않은 방법
+    String columnName = params.get("columnName")[0];
+    String orderType = params.get("orderType")[0];
+    model.put("scores", scoreDao.list(pageNo, pageSize, columnName, orderType));
+    */
     model.put("totalPage", totalPage);
     model.put("pageNo", pageNo);
+    model.put("pageSize", pageSize);
     
     
     return "/score/step07/ScoreList.jsp";

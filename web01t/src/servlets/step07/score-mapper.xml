@@ -26,7 +26,25 @@
   -->
   <select id="list" parameterType="map" resultMap="scoreMap">
     <include refid="scoreSelect"/>
-    order by sno desc
+    order by 
+    <choose>
+      <when test="order == 'NM_A'">name asc</when>
+      <when test="order == 'NM_D'">name desc</when>
+      <when test="order == 'KO_A'">kor asc</when>
+      <when test="order == 'KO_D'">kor desc</when>
+      <when test="order == 'EN_A'">eng asc</when>
+      <when test="order == 'EN_D'">eng desc</when>
+      <when test="order == 'MA_A'">math asc</when>
+      <when test="order == 'MA_D'">math desc</when>
+      <otherwise>sno desc</otherwise>
+    </choose>
+    limit #{pageStartIndex}, #{pageSize}
+  </select>
+  
+  <!-- 사용자의 입력 값을 그대로 SQL에 포함 => 해킹할 가능성이 높다. => 안전하지 않은 코드 -->
+  <select id="list2" parameterType="map" resultMap="scoreMap">
+    <include refid="scoreSelect"/>
+    order by ${columnName} ${orderType}
     limit #{pageStartIndex}, #{pageSize}
   </select>
   

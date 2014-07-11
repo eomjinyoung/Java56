@@ -32,6 +32,26 @@ public class ScoreDao {
       sqlSession.close();
     }
   }
+  
+  public List<Score> list(int pageNo, int pageSize, 
+      String columnName, String orderType) throws Exception {
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    try {
+      HashMap<String,Object> params = new HashMap<String,Object>();
+      params.put("pageStartIndex", (pageNo - 1) * pageSize);
+      params.put("pageSize", pageSize);
+      params.put("orderType", orderType);
+      params.put("columnName", columnName);
+      
+      return sqlSession.selectList("servlets.step07.ScoreDao.list2", params);
+      
+    } catch (Exception e) {
+      throw e;
+      
+    } finally {
+      sqlSession.close();
+    }
+  }
 
   public int countAll() throws Exception {
     SqlSession sqlSession = sqlSessionFactory.openSession();
