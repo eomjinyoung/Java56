@@ -34,6 +34,27 @@
     from scores
     where sno=#{value} 
   </select>
+  
+  <!-- 자동으로 생성된 키 값을 파라미터 객체에 저장하기 
+    useGeneratedKeys : true로 설정한다.
+    keyColumn : 키 컬럼의 이름을 지정한다.
+    keyProperty : 키 값을 할당할 파라미터 객체의 프로퍼티 이름을 지정한다.
+   -->
+  <insert id="insert" parameterType="servlets.step07.Score"
+      useGeneratedKeys="true" keyColumn="sno" keyProperty="no">
+    insert into scores (name, kor, eng, math)
+    values(#{name}, #{kor}, #{eng}, #{math})
+  </insert>
+  
+  <delete id="delete" parameterType="java.lang.Integer">
+    delete from scores where sno=#{okok}
+  </delete>
+  
+  <update id="update" parameterType="servlets.step07.Score">
+    update scores set 
+      name=#{name}, kor=#{kor}, eng=#{eng}, math=#{math} 
+    where sno=#{no}
+  </update>    
 </mapper>
 
 
