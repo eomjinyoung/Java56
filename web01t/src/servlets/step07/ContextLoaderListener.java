@@ -31,7 +31,13 @@ public class ContextLoaderListener implements ServletContextListener {
           "java:/comp/env/jdbc/bitdb");
       
       // MyBatis 데이터 처리 대행 객체 준비
+      // 1) 설정 파일을 읽어들일 때 사용할 도구(InputStream)를 준비한다.
+      // 2) SqlSessionBuilder를 준비한다.
+      // 3) SqlSessionBuilder로부터 SqlSessionFactory를 얻는다.
+      // 4) SqlSessionFactory로부터 SqlSession을 얻는다.
+      // ex) 망치 <- 망치공장 <-망치공장건설사 + 설계도면 
       String resource = "servlets/step07/mybatis-config.xml";
+      // 자바 클래스 경로(classpath)에서 MyBatis 설정파일을 찾는다.
       InputStream inputStream = Resources.getResourceAsStream(resource);
       SqlSessionFactory sqlSessionFactory = 
           new SqlSessionFactoryBuilder().build(inputStream);

@@ -40,37 +40,15 @@ public class ScoreDao {
   }
 
   public Score selectOne(int no) throws Exception {
-    Connection con = null;
-    PreparedStatement stmt = null;
-    ResultSet rs = null;
-    
+    SqlSession sqlSession = sqlSessionFactory.openSession();
     try {
-      con = dataSource.getConnection();
-      stmt = con.prepareStatement(
-          "select sno, name, kor, eng, math from scores where sno=?");
-      stmt.setInt(1, no);
-      rs = stmt.executeQuery();
-      
-      if (rs.next()) {
-        Score score = new Score();
-        score.setNo( rs.getInt("sno"));
-        score.setName( rs.getString("name"));
-        score.setKor( rs.getInt("kor"));
-        score.setEng( rs.getInt("eng"));
-        score.setMath( rs.getInt("math"));
-        return score;
-        
-      } else {
-        return null;
-      }
+      return sqlSession.selectOne("servlets.step07.ScoreDao.selectOne", no);
       
     } catch (Exception e) {
       throw e;
       
     } finally { 
-      try { rs.close();} catch (SQLException e) {}
-      try { stmt.close();} catch (SQLException e) {}
-      try { con.close();} catch (SQLException e) {}
+      sqlSession.close();
     }
   }
 
