@@ -15,12 +15,13 @@ public class ScoreDao {
     this.sqlSessionFactory = sqlSessionFactory;
   }  
 
-  public List<Score> list(int pageNo, int pageSize) throws Exception {
+  public List<Score> list(int pageNo, int pageSize, String order) throws Exception {
     SqlSession sqlSession = sqlSessionFactory.openSession();
     try {
-      HashMap<String,Integer> params = new HashMap<String,Integer>();
+      HashMap<String,Object> params = new HashMap<String,Object>();
       params.put("pageStartIndex", (pageNo - 1) * pageSize);
       params.put("pageSize", pageSize);
+      params.put("order", order);
       
       return sqlSession.selectList("servlets.step07.ScoreDao.list", params);
       

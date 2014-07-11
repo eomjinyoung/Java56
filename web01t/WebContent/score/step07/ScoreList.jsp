@@ -46,7 +46,19 @@ table td {
 <table>
 <tr>
   <th>번호</th> 
-  <th>이름</th> 
+  <th>
+  <c:choose>
+    <c:when test="${order == 'NM_A'}">
+      <a href="list.do?pageNo=${pageNO}&pageSize=${pageSize}&order=NM_D">이름(a-z)</a>
+    </c:when>
+    <c:when test="${order == 'NM_D'}">
+      <a href="list.do?pageNo=${pageNO}&pageSize=${pageSize}">이름(z-a)</a>
+    </c:when>
+    <c:otherwise>
+      <a href="list.do?pageNo=${pageNO}&pageSize=${pageSize}&order=NM_A">이름</a>
+    </c:otherwise>
+  </c:choose>
+  </th> 
   <th>국어</th> 
   <th>영어</th> 
   <th>수학</th> 

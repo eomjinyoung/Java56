@@ -31,9 +31,17 @@ public class ScoreList implements PageController {
     if ((countAll % pageSize) > 0) {
       totalPage++;
     }
-    model.put("scores", scoreDao.list(pageNo, pageSize));
+    
+    String order = null;
+    if (params.get("order") != null) {
+      order = params.get("order")[0];
+      model.put("order", order);
+    }
+    
+    model.put("scores", scoreDao.list(pageNo, pageSize, order));
     model.put("totalPage", totalPage);
     model.put("pageNo", pageNo);
+    
     
     return "/score/step07/ScoreList.jsp";
   }
