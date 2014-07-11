@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- score-mapper.xml 파일 
+=> ScoreDao가 사용할 SQL문을 저장 
+-->
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="servlets.step07.ScoreDao">
+  <!-- resultType : select 결과를 담을 자바 클래스의 이름(패키지명 포함) 
+  => MyBatis는 VO 객체를 생성하여 select한 결과를 담는다.
+  => 각 컬럼의 값은 컬럼 이름과 같은 프로퍼티에 할당한다.
+  => 만약 컬럼이름이 프로퍼티 이름과 일치하지 않는다면 그 컬럼의 값을 할당되지 않는다.
+  => 컬럼이름과 프로퍼티 이름과 다를 경우 => 컬럼에 프로퍼티와 같은 이름으로 별명을 설정하라! 
+  => select 결과가 여러 개일 경우 자동으로 List 객체를 생성하여 VO를 List에 담는다.
+  => 그리고 그 List 객체를 리턴한다.
+  -->
+  <select id="list" resultType="servlets.step07.Score">
+    select sno as no, name, kor, eng, math 
+    from scores 
+    order by sno desc
+  </select>
+  
+  <!-- parameterType : MyBatis 메서드를 호출할 때 넘어오는 값을 타입
+    => 파라미터 값을 꺼내기 => #{프로퍼티명}
+    => 만약 타입이 Wrapper 클래스(java.lang.Byte, java.lang.Short, ...)나 
+       String 클래스일 경우 값을 꺼낼 때 이름을 마음대로 해도 된다.
+    => select 결과가 한 개일 경우 리턴 값은 List가 아니라 resultType에 지정된 객체이다.
+   -->
+  <select id="selectOne" 
+      parameterType="java.lang.Integer" 
+      resultType="servlets.step07.Score">
+    select sno as no, name, kor, eng, math 
+    from scores
+    where sno=#{value} 
+  </select>
+  
+  <!-- 자동으로 생성된 키 값을 파라미터 객체에 저장하기 
+    useGeneratedKeys : true로 설정한다.
+    keyColumn : 키 컬럼의 이름을 지정한다.
+    keyProperty : 키 값을 할당할 파라미터 객체의 프로퍼티 이름을 지정한다.
+   -->
+  <insert id="insert" parameterType="servlets.step07.Score"
+      useGeneratedKeys="true" keyColumn="sno" keyProperty="no">
+    insert into scores (name, kor, eng, math)
+    values(#{name}, #{kor}, #{eng}, #{math})
+  </insert>
+  
+  <delete id="delete" parameterType="java.lang.Integer">
+    delete from scores where sno=#{okok}
+  </delete>
+  
+  <update id="update" parameterType="servlets.step07.Score">
+    update scores set 
+      name=#{name}, kor=#{kor}, eng=#{eng}, math=#{math} 
+    where sno=#{no}
+  </update>    
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
