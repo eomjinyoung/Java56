@@ -3,6 +3,7 @@ package servlets.step08;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -23,7 +24,7 @@ public class ContextLoaderListener implements ServletContextListener {
     try {
       ServletContext ctx = event.getServletContext();
       
-      String resource = "servlets/step07/mybatis-config.xml";
+      String resource = "servlets/step08/mybatis-config.xml";
       InputStream inputStream = Resources.getResourceAsStream(resource);
       SqlSessionFactory sqlSessionFactory = 
           new SqlSessionFactoryBuilder().build(inputStream);
@@ -54,6 +55,9 @@ public class ContextLoaderListener implements ServletContextListener {
       //=> servlets.step08 패키지에 소속된 클래스를 로딩한다.
       Class clazz = null;
       Component compAnno = null;
+      PageController pageController = null;
+      Method method = null;
+      
       for (String filename : files) {
         clazz = Class.forName("servlets.step08." + 
             filename.substring(0, filename.indexOf('.')) );
@@ -61,16 +65,26 @@ public class ContextLoaderListener implements ServletContextListener {
         
         //4. 클래스 정보 객체로부터 Component 애노테이션 정보를 추출한다.
         compAnno = (Component)clazz.getAnnotation(Component.class);
+        
+        //5. 만약 Component 애노테이션이 있다면 해당 클래스의 인스턴스를 생성한다.
         if (compAnno != null) {
           logger.debug("     value=" + compAnno.value());
+          
+          pageController = (PageController)clazz.newInstance();
+          logger.debug("     " + clazz.getSimpleName() + " 인스턴스 생성됨");
+          
+          //6. 그리고 의존 객체를 주입한다.
+          method = clazz.getMethod("setScoreDao", ScoreDao.class);
+          logger.debug("     setScoreDao() 메서드 정보 꺼내기");
+          
+          method.invoke(pageController, scoreDao);
+          logger.debug("     setScoreDao() 호출");
+          
+          //7. ServletContext에 보관한다.
+          ctx.setAttribute(compAnno.value(), pageController);
+          logger.debug("     " + clazz.getSimpleName() + " 인스턴스를 ServletContext 보관.");
         }
-      } 
-      
-      
-      //5. 만약 Component 애노테이션이 있다면 해당 클래스의 인스턴스를 생성한다.
-      //6. 그리고 의존 객체를 주입한다.
-      //7. ServletContext에 보관한다.
-      
+      }   
       
     } catch (Exception e) {
       e.printStackTrace();
