@@ -97,7 +97,8 @@ public class ContextLoaderListener implements ServletContextListener {
     Object dependancy = null;
     for (Method method : methods) {
       if (method.getName().startsWith("set")
-          && method.getParameterCount() == 1) { //setter 메서드인 경우
+          //&& method.getParameterTypes().length == 1 /* JDK 1.7*/
+          && method.getParameterCount() == 1 /*JDK 1.8*/) { //setter 메서드인 경우
         logger.debug(instance.getClass().getSimpleName() + ":" + method.getName());
         
         dependancy = findDependancyFromServletContext(
