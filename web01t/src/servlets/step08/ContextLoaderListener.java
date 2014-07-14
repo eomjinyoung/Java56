@@ -31,9 +31,9 @@ public class ContextLoaderListener implements ServletContextListener {
       
       prepareMyBatis();
       
-      String[] classnames = getClassNames();
+      String[] classnames = getClassNamesFromPackage();
       
-      prepareObjects(classnames);
+      prepareObjectsForClassWithComponentAnnotation(classnames);
       
       prepareDependancies();
       
@@ -50,7 +50,7 @@ public class ContextLoaderListener implements ServletContextListener {
     ctx.setAttribute("sqlSessionFactory", sqlSessionFactory);
   }
 
-  private String[] getClassNames() throws Exception {
+  private String[] getClassNamesFromPackage() throws Exception {
     logger.debug(ctx.getRealPath("/WEB-INF/classes/servlets/step08"));
     File classDir = new File(
         ctx.getRealPath("/WEB-INF/classes/servlets/step08"));
@@ -64,7 +64,8 @@ public class ContextLoaderListener implements ServletContextListener {
     });
   }
   
-  private void prepareObjects(String[] classnames) throws Exception {
+  private void prepareObjectsForClassWithComponentAnnotation(String[] classnames) 
+      throws Exception {
     Class<?> clazz = null;
     Object instance = null;
     Component compAnno = null;
