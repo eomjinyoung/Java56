@@ -101,7 +101,7 @@ public class ContextLoaderListener implements ServletContextListener {
         logger.debug(instance.getClass().getSimpleName() + ":" + method.getName());
         
         dependancy = findDependancyFromServletContext(
-            method.getParameters()[0].getType());
+            method.getParameterTypes()[0]);
         
         if (dependancy != null) { // setter 메서드의 의존 객체를 찾았다면, setter 호출!
           logger.debug(method.getName() + " 호출");
