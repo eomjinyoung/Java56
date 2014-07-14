@@ -21,7 +21,7 @@ getName() => Name => name
 getFirstName()가 있다면, => FirstName => firstName  
 
  --%>
-<%@page import="servlets.step04.Score"%>
+<%@page import="servlets.step07.Score"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>

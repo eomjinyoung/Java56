@@ -21,7 +21,7 @@ getName() => Name => name
 getFirstName()가 있다면, => FirstName => firstName  
 
  --%>
-<%@page import="servlets.step04.Score"%>
+<%@page import="servlets.step06.Score"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -41,7 +41,7 @@ getFirstName()가 있다면, => FirstName => firstName
 <input type="submit" value="변경">
 </form>
 
-<jsp:include page="/score/step04/copyright.jsp"/>
+<jsp:include page="/score/step06/copyright.jsp"/>
 
 </body>
 </html>

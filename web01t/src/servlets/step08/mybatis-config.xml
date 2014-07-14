@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- mybatis-config.xml 파일 
+=> MyBatis를 위한 설정 정보
+-->
+
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <typeAliases>
+    <typeAlias type="servlets.step08.Score" alias="score"/>
+    <!-- 다음 별명은 설정할 필요가 없다. 
+        MyBatis는 자주 사용하는 클래스에 대해 별명을 정의해 두었다. 
+    -->
+    <!--  
+    <typeAlias type="java.lang.Integer" alias="int"/>
+    -->
+  </typeAliases>
+
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC"/>
+      <!-- 톰캣 서버가 관리하는 DataSource 사용하기 -->
+      <dataSource type="JNDI">
+        <property name="data_source" value="java:comp/env/jdbc/bitdb"/>
+      </dataSource>
+      
+      <!-- MyBatis에서 직접 DB 커넥션을 관리한다. -->
+      <!--  
+      <dataSource type="POOLED">
+        <property name="driver" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/bitdb?useUnicode=true&amp;characterEncoding=UTF-8"/>
+        <property name="username" value="bit"/>
+        <property name="password" value="1111"/>
+      </dataSource>
+      -->
+    </environment>
+  </environments>
+  
+  <mappers> <!-- SQL문이 들어 있는 파일 -->
+    <mapper resource="servlets/step08/score-mapper.xml"/>
+  </mappers>
+</configuration>
+
+
+
+
+
+

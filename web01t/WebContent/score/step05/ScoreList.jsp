@@ -5,7 +5,7 @@ JSTL (JSP Standard Tag Library)
 => JSP에서 직접 DBMS에 질의를 할 수 있는 태그도 있다.
 
  --%>
-<%@ page import="servlets.step04.Score"%>
+<%@ page import="servlets.step05.Score"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>

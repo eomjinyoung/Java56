@@ -5,7 +5,7 @@ JSTL (JSP Standard Tag Library)
 => JSP에서 직접 DBMS에 질의를 할 수 있는 태그도 있다.
 
  --%>
-<%@ page import="servlets.step07.Score"%>
+<%@ page import="servlets.step08.Score"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -133,7 +133,7 @@ ${pageNo}
 <c:otherwise>[다음]</c:otherwise>
 </c:choose>
 </div>
-<jsp:include page="/score/step07/copyright.jsp"/>
+<jsp:include page="/score/step08/copyright.jsp"/>
 
 </body>
 </html>
