@@ -1,5 +1,4 @@
-/* DataSource 사용
- */
+
 package servlets.step08;
 
 import java.util.HashMap;
@@ -8,6 +7,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+@Component("scoreDao")
 public class ScoreDao {
   SqlSessionFactory sqlSessionFactory;
   

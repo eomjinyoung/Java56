@@ -2,8 +2,10 @@ package servlets.step08;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
+import java.util.Enumeration;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -14,81 +16,134 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.log4j.Logger;
 
-// myBatis 도입
+// => DAO 및 SqlSessionFactory 객체도 ServletContext에 보관한다.
+// => setter 메서드를 찾아서 호출한다.
+
 public class ContextLoaderListener implements ServletContextListener {
   static Logger logger = Logger.getLogger(ContextLoaderListener.class);
+  ServletContext ctx;
   
   @Override
   public void contextInitialized(ServletContextEvent event) {
     logger.debug("contextInitialized 호출됨...");
     try {
-      ServletContext ctx = event.getServletContext();
+      ctx = event.getServletContext();
       
-      String resource = "servlets/step08/mybatis-config.xml";
-      InputStream inputStream = Resources.getResourceAsStream(resource);
-      SqlSessionFactory sqlSessionFactory = 
-          new SqlSessionFactoryBuilder().build(inputStream);
+      prepareMyBatis();
       
-      ScoreDao scoreDao = new ScoreDao();
-      scoreDao.setSqlSessionFactory(sqlSessionFactory);
+      String[] classnames = getClassNames();
       
-      // 페이지 컨트롤러를 ServletContext에 보관함.
-      //=> servlets 패키지에서 @Component 애노테이션이 들어 있는 클래스를 찾아 인스턴스를 생성하라!
-      //=> 생성된 인스턴스는 ServletContext에 보관하라!
-      //1. 웹 애플리케이션의 클래스 경로를 알아낸다.
-      // => 웹 애플리케이션이 배치된 폴더/WEB-INF/classes
-      // => 예) .../.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/web01/WEB-INF/classes
-      logger.debug(ctx.getRealPath("/WEB-INF/classes/servlets/step08"));
-      String pageControllerPath = ctx.getRealPath("/WEB-INF/classes/servlets/step08");
+      prepareObjects(classnames);
       
-      //2. File 객체를 사용하여 해당 servlets/step08 폴더에 들어 있는 클래스 이름을 알아낸다.
-      File pageControllerDir = new File(pageControllerPath);
-      String[] files = pageControllerDir.list(new FilenameFilter() {
-        @Override
-        public boolean accept(File dir, String name) {
-          if (name.endsWith(".class")) return true;
-          else return false;
-        }
-      });
-      
-      //3. 클래스 이름으로 클래스를 로딩한다.
-      //=> servlets.step08 패키지에 소속된 클래스를 로딩한다.
-      Class clazz = null;
-      Component compAnno = null;
-      PageController pageController = null;
-      Method method = null;
-      
-      for (String filename : files) {
-        clazz = Class.forName("servlets.step08." + 
-            filename.substring(0, filename.indexOf('.')) );
-        logger.debug("==>" + clazz.getName());
-        
-        //4. 클래스 정보 객체로부터 Component 애노테이션 정보를 추출한다.
-        compAnno = (Component)clazz.getAnnotation(Component.class);
-        
-        //5. 만약 Component 애노테이션이 있다면 해당 클래스의 인스턴스를 생성한다.
-        if (compAnno != null) {
-          logger.debug("     value=" + compAnno.value());
-          
-          pageController = (PageController)clazz.newInstance();
-          logger.debug("     " + clazz.getSimpleName() + " 인스턴스 생성됨");
-          
-          //6. 그리고 의존 객체를 주입한다.
-          method = clazz.getMethod("setScoreDao", ScoreDao.class);
-          logger.debug("     setScoreDao() 메서드 정보 꺼내기");
-          
-          method.invoke(pageController, scoreDao);
-          logger.debug("     setScoreDao() 호출");
-          
-          //7. ServletContext에 보관한다.
-          ctx.setAttribute(compAnno.value(), pageController);
-          logger.debug("     " + clazz.getSimpleName() + " 인스턴스를 ServletContext 보관.");
-        }
-      }   
+      prepareDependancies();
       
     } catch (Exception e) {
       e.printStackTrace();
     }
+  }
+
+  private void prepareMyBatis() throws IOException {
+    String resource = "servlets/step08/mybatis-config.xml";
+    InputStream inputStream = Resources.getResourceAsStream(resource);
+    SqlSessionFactory sqlSessionFactory = 
+        new SqlSessionFactoryBuilder().build(inputStream);
+    ctx.setAttribute("sqlSessionFactory", sqlSessionFactory);
+  }
+
+  private String[] getClassNames() throws Exception {
+    logger.debug(ctx.getRealPath("/WEB-INF/classes/servlets/step08"));
+    File classDir = new File(
+        ctx.getRealPath("/WEB-INF/classes/servlets/step08"));
+    
+    return classDir.list(new FilenameFilter() {
+      @Override
+      public boolean accept(File dir, String name) {
+        if (name.endsWith(".class")) return true;
+        else return false;
+      }
+    });
+  }
+  
+  private void prepareObjects(String[] classnames) throws Exception {
+    Class<?> clazz = null;
+    Object instance = null;
+    Component compAnno = null;
+    
+    for (String classname : classnames) {
+      clazz = loadClass(classname);
+      compAnno = getComponentAnnotation(clazz);
+      if (compAnno != null) {
+        instance = createInstance(clazz);
+        ctx.setAttribute(compAnno.value(), instance);
+      }
+    }
+  }
+  
+  private void prepareDependancies() throws Exception {
+    Enumeration<String> instanceNames = ctx.getAttributeNames();
+    Object instance = null;
+    
+    String instanceName = null;
+    while (instanceNames.hasMoreElements()) {
+      instanceName = instanceNames.nextElement();
+      instance = ctx.getAttribute(instanceName);
+      
+      injectDependancy(instance);
+    }
+  }
+
+  private void injectDependancy(Object instance) throws Exception {
+    Method[] methods = instance.getClass().getMethods();
+    Object dependancy = null;
+    for (Method method : methods) {
+      if (method.getName().startsWith("set")
+          && method.getParameterCount() == 1) { //setter 메서드인 경우
+        logger.debug(instance.getClass().getSimpleName() + ":" + method.getName());
+        
+        dependancy = findDependancyFromServletContext(
+            method.getParameters()[0].getType());
+        
+        if (dependancy != null) { // setter 메서드의 의존 객체를 찾았다면, setter 호출!
+          logger.debug(method.getName() + " 호출");
+          method.invoke(instance, dependancy);
+        }
+      }
+    }
+  }
+  
+  private Object findDependancyFromServletContext(Class<?> clazz) {
+    logger.debug("파라미터 찾기 => " + clazz.getSimpleName() + " 타입 인스턴스");
+    Enumeration<String> instanceNames = ctx.getAttributeNames();
+    Object instance = null;
+    
+    String instanceName = null;
+    while (instanceNames.hasMoreElements()) {
+      instanceName = instanceNames.nextElement();
+      instance = ctx.getAttribute(instanceName);
+      if (instance != null && clazz.isInstance(instance)) {
+        return instance;
+      }
+    }
+    
+    return null;
+  }
+  
+  private Object createInstance(Class<?> clazz) throws InstantiationException,
+      IllegalAccessException {
+    Object instance = clazz.newInstance();
+    logger.debug("     " + clazz.getSimpleName() + " 인스턴스 생성됨");
+    return instance;
+  }
+
+  private Component getComponentAnnotation(Class<?> clazz) {
+    return (Component)clazz.getAnnotation(Component.class);
+  }
+
+  private Class<?> loadClass(String classname) throws ClassNotFoundException {
+    Class<?> clazz = Class.forName("servlets.step08." + 
+        classname.substring(0, classname.indexOf('.')) );
+    logger.debug("==>" + clazz.getName());
+    return clazz;
   }
   
   @Override
