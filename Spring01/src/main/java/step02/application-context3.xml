@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:c="http://www.springframework.org/schema/c"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <!-- 생성자를 호출할 때 파라미터 값을 <bean>의 속성으로 지정하기 
+         1. 네임스페이스 지정 =>  xmlns:c="http://www.springframework.org/schema/c"
+                => 생성자 속성을 위한 네임스페이스는 스키마 URL을 지정하지 않는다.
+         2. 사용 => c:생성자파라미터명="값"
+    -->
+    <bean id="c1" class="step02.Car" 
+          c:maker="현대자동차" c:model="소나타" c:capacity="5"/>
+    
+    <!-- <bean>의 속성으로 프로퍼티 값 지정하기 
+         1. 네임스페이스 지정 =>  xmlns:p="http://www.springframework.org/schema/p"
+                => 프로퍼티 값을 속성으로 지정하는 네임스페이스는 스키마 URL을 지정하지 않는다.
+         2. 사용 => p:프로퍼티명="값"
+    -->
+    <bean id="c2" class="step02.Car" 
+          p:maker="기아자동차" p:model="K5" p:capacity="5"/>
+          
+    <bean id="c3" class="step02.Car" 
+          p:maker="쌍용자동차" p:model="코란도" p:capacity="5"/>
+                
+    <bean id="c4" class="step02.Car" 
+          p:maker="삼성르노자동차" p:model="SM5" p:capacity="5"/>      
+</beans>
+
+
+
+
+
