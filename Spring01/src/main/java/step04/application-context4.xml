@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <bean id="c1" class="step04.Car4">
+      <property name="maker" value="현대자동차4"/>
+      <property name="model" value="에쿠스4"/>
+      <property name="capacity" value="5"/>
+      <property name="engine"><ref bean="e1"/></property>
+      <property name="tires">
+        <set>
+          <ref bean="t1"/>
+          <ref bean="t1"/>
+          <ref bean="t1"/>
+          <ref bean="t1"/>
+          <bean class="step04.Tire" p:maker="금호타이어" p:radius="28"/>
+        </set>
+      </property>
+      <property name="options">
+        <map>
+          <entry>
+            <key><value>에어컨</value></key>
+            <value>예</value>
+          </entry>
+          <entry key="에어백" value="예"/>
+          <entry key="스페어타이어" value-ref="t1"/>
+        </map>
+      </property>
+    </bean>
+
+    <bean id="e1" class="step04.Engine">
+      <property name="type" value="가솔린"/>
+      <property name="cc" value="3000"/>
+    </bean>
+    
+    <bean id="t1" class="step04.Tire">
+      <property name="maker" value="한국타이어"/>
+      <property name="radius" value="26"></property>
+    </bean>
+    
+</beans>
+
+
+
+
+
