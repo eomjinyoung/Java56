@@ -53,7 +53,16 @@ public class Car {
     return engine;
   }
   public void setEngine(Engine engine) {
+    System.out.println("setEngine() 호출");
     this.engine = engine;
   }
   
 }
+
+
+
+
+
+
+
+

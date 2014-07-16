@@ -4,27 +4,33 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
     
-    <!-- 의존 객체 주입 
-        => <ref> 태그를 이용하여 의존 객체의 주소 할당
-    -->
     <bean id="c1" class="step03.Car">
       <property name="maker" value="현대자동차"/>
       <property name="model" value="에쿠스"/>
       <property name="capacity" value="5"/>
-      <property name="engine"><ref bean="e1"/></property>
+      
+      <!-- 프로퍼티 설정 코드에 빈 생성 코드 넣기 -->
+      <property name="engine">
+        <bean class="step03.Engine">
+		      <property name="type" value="가솔린"/>
+		      <property name="cc" value="3000"/>
+		    </bean>
+      </property>
     </bean>
 
     <bean id="c2" class="step03.Car">
       <property name="maker" value="현대자동차"/>
       <property name="model" value="에쿠스"/>
       <property name="capacity" value="5"/>
-      <property name="engine" ref="e1"/>
+      <property name="engine">
+        <bean class="step03.Engine">
+          <property name="type" value="가솔린"/>
+          <property name="cc" value="3000"/>
+        </bean>
+      </property>
     </bean>
     
-    <bean id="e1" class="step03.Engine">
-      <property name="type" value="가솔린"/>
-      <property name="cc" value="3000"/>
-    </bean>
+    
     
 </beans>
 
