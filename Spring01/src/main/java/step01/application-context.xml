@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <!-- 기본 생성자 호출하여 빈 생성 -->
+    <bean id="c1" class="step01.Car"/>
+
+    <!-- 빈 생성 후에 setter 메서드 자동 호출 -->
+    <bean id="c2" class="step01.Car">
+      <property name="maker" value="현대자동자"/>
+      <property name="model" value="소나타"/>
+      <property name="capacity" value="5"/>
+    </bean>
+</beans>
+
+
+
+
+
