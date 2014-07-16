@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <!-- 프로퍼티 설정 : setter 메서드 자동 호출 -->
+    <bean id="c1" class="step02.Car">
+      <property name="maker"> <!-- setMaker() 호출 -->
+        <value type="java.lang.String">현대자동차</value>
+      </property>
+      <property name="model"> <!-- setModel() 호출 -->
+        <value type="java.lang.String">소나타</value>
+      </property>
+    </bean>
+    
+    <!-- 프로퍼티 설정 : setter 메서드 자동 호출 
+         => 프로퍼티의 타입 생략
+    -->
+    <bean id="c2" class="step02.Car">
+      <property name="maker"><value>현대자동차</value></property>
+      <property name="model"><value>소나타</value></property>
+    </bean>
+    
+    <!-- 프로퍼티 설정 : setter 메서드 자동 호출 
+         => value 태그 사용 안함.
+    -->
+    <bean id="c3" class="step02.Car">
+      <property name="maker" value="현대자동차"/>
+      <property name="model" value="소나타"/>
+    </bean>
+    
+</beans>
+
+
+
+
+

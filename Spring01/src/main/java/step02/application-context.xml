@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <!-- 기본 생성자 호출하여 빈 생성 -->
+    <bean id="c1" class="step02.Car"/>
+
+    <!-- Car(maker, model) 생성자 호출 -->
+    <bean id="c2" class="step02.Car">
+      <constructor-arg>
+        <value type="java.lang.String">현대자동차</value>
+      </constructor-arg>
+      <constructor-arg>
+        <value type="java.lang.String">소나타</value>
+      </constructor-arg>
+    </bean>
+    
+    <!-- Car(maker, model, capacity) 생성자 호출 -->
+    <!-- 파라미터 값의 타입 생략 가능 -->
+    <bean id="c3" class="step02.Car">
+      <constructor-arg><value>현대자동차</value></constructor-arg>
+      <constructor-arg><value>소나타</value></constructor-arg>
+      <constructor-arg><value>5</value></constructor-arg>
+    </bean>
+    
+    <!-- Car(maker, model, capacity) 생성자 호출 -->
+    <!-- value 태그 사용하지 않기 -->
+    <bean id="c4" class="step02.Car">
+      <constructor-arg type="java.lang.String" value="기아자동차"/>
+      <constructor-arg type="java.lang.String" value="K5"/>
+      <constructor-arg type="int" value="5"/>
+    </bean>
+    
+    <!-- Car(maker, model, capacity) 생성자 호출 -->
+    <!-- value 태그 사용하지 않기 + type 속성 생략 가능 -->
+    <bean id="c5" class="step02.Car">
+      <constructor-arg value="기아자동차"/>
+      <constructor-arg value="K5"/>
+      <constructor-arg value="5"/>
+    </bean>
+    
+    <!-- Car(maker, model, capacity) 생성자 호출 -->
+    <!-- 생성자에 들어갈 파라미터의 인덱스 지정 : 파라미터 값의 순서를 자유롭게 설정할 수 있다 -->
+    <bean id="c6" class="step02.Car">
+      <constructor-arg value="5" index="2"/>
+      <constructor-arg value="K5" index="1"/>
+      <constructor-arg value="기아자동차" index="0"/>
+    </bean>
+    
+</beans>
+
+
+
+
+
