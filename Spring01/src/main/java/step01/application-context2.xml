@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <!-- 빈의 별명 추가하기 -->
+    <bean id="c1" name="ok1 ok2 ok3" class="step01.Car">
+      <property name="maker" value="현대자동자"/>
+      <property name="model" value="소나타"/>
+      <property name="capacity" value="5"/>
+    </bean>
+    
+    <!-- 빈의 별명만 지정 -->
+    <bean name="no1 no2 no3" class="step01.Car">
+      <property name="maker" value="기아자동자"/>
+      <property name="model" value="K5"/>
+      <property name="capacity" value="5"/>
+    </bean>
+</beans>
+
+
+
+
+

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <!-- 익명 빈 선언 : 클래스 이름이 빈 이름으로 사용됨
+      1) 빈의 이름을 지정하지 않으면 클래스 이름을 사용하여 빈을 저장한다.
+             단, 같은 클래스의 빈을 여러 개 생성할 수 있기 때문에 클래스 이름 뒤에 인덱스를 붙인다.
+         ex) step01.Car#0
+      2) 같은 클래스의 빈이 여러 개 생성될 경우 첫 번째 빈에 대해서만 별명이 부여된다.
+             별명은 클래스 이름과 같다. 인덱스가 붙지 않는다.
+             
+         왜 첫 번째 익명 클래스에 대해서는 별명이 부여될까? 그것도 클래스 이름과 똑 같이?
+         보통 객체를 생성할 때 한 개만 생성해서 쓰기 때문이다. 
+          
+    -->
+    <!-- 빈의 이름: step01.Car#0, 빈의 별명: step01.Car -->
+    <bean class="step01.Car">
+      <property name="maker" value="현대자동자"/>
+      <property name="model" value="소나타"/>
+      <property name="capacity" value="5"/>
+    </bean>
+    
+    <!-- 빈의 이름: step01.Car#1, 빈의 별명: 없다. -->
+    <bean class="step01.Car">
+      <property name="maker" value="기아자동자"/>
+      <property name="model" value="K5"/>
+      <property name="capacity" value="5"/>
+    </bean>
+</beans>
+
+
+
+
+
