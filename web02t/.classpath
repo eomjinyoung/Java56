@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="output" path="bin"/>
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry kind="src" path="src/test/java"/>
 	<classpathentry kind="src" path="src/test/resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER" exported="true"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container" exported="true"/>
+	<classpathentry kind="output" path="bin"/>
+	<classpathentry sourcepath="C:/Users/bit/.gradle/caches/modules-2/files-2.1/org.springframework/spring-jdbc/4.0.6.RELEASE/d8a48063da5e97fbd37f0b4fb05c6e48901999/spring-jdbc-4.0.6.RELEASE-sources.jar" kind="lib" path="C:/Users/bit/.gradle/caches/modules-2/files-2.1/org.springframework/spring-jdbc/4.0.6.RELEASE/28fa5e60c3d68132d83d9c1e7d9fccebb83c9104/spring-jdbc-4.0.6.RELEASE.jar" exported="true">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/bit/.gradle/caches/modules-2/files-2.1/org.mybatis/mybatis-spring/1.2.2/37d4385e146df3794aab4f773ac709e6cb83517d/mybatis-spring-1.2.2-sources.jar" kind="lib" path="C:/Users/bit/.gradle/caches/modules-2/files-2.1/org.mybatis/mybatis-spring/1.2.2/1e40a7f5373e4242075a1d386817e7dd49b1697d/mybatis-spring-1.2.2.jar" exported="true">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
+		</attributes>
+	</classpathentry>
 	<classpathentry sourcepath="C:/Users/bit/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context/4.0.6.RELEASE/778949f894ac1ee2d42a8f074a7477540f4d04a/spring-context-4.0.6.RELEASE-sources.jar" kind="lib" path="C:/Users/bit/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context/4.0.6.RELEASE/3bb3a52edabf9ffe73aa534fb085c816bac28b4d/spring-context-4.0.6.RELEASE.jar" exported="true">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
@@ -37,6 +47,11 @@
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
+	<classpathentry sourcepath="C:/Users/bit/.gradle/caches/modules-2/files-2.1/javax.servlet/javax.servlet-api/3.0.1/1952f91d84016a39e31346c9d18bd8c9c4a128a/javax.servlet-api-3.0.1-sources.jar" kind="lib" path="C:/Users/bit/.gradle/caches/modules-2/files-2.1/javax.servlet/javax.servlet-api/3.0.1/6bf0ebb7efd993e222fc1112377b5e92a13b38dd/javax.servlet-api-3.0.1.jar" exported="true">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
+		</attributes>
+	</classpathentry>
 	<classpathentry sourcepath="C:/Users/bit/.gradle/caches/modules-2/files-2.1/junit/junit/4.11/28e0ad201304e4a4abf999ca0570b7cffc352c3c/junit-4.11-sources.jar" kind="lib" path="C:/Users/bit/.gradle/caches/modules-2/files-2.1/junit/junit/4.11/4e031bb61df09069aeb2bffb4019e7a5034a4ee0/junit-4.11.jar" exported="true">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
@@ -53,6 +68,11 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry sourcepath="C:/Users/bit/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/4.0.6.RELEASE/5e37af2dc3a230912dbb06b45cc2c1d53c2c9abb/spring-beans-4.0.6.RELEASE-sources.jar" kind="lib" path="C:/Users/bit/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/4.0.6.RELEASE/587879b58acebeb5b0a63c01e822f9b44d9a4c77/spring-beans-4.0.6.RELEASE.jar" exported="true">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
+		</attributes>
+	</classpathentry>
+	<classpathentry sourcepath="C:/Users/bit/.gradle/caches/modules-2/files-2.1/org.springframework/spring-tx/4.0.6.RELEASE/ae723c80e57780824d3e5bd62a07233981b0bb5f/spring-tx-4.0.6.RELEASE-sources.jar" kind="lib" path="C:/Users/bit/.gradle/caches/modules-2/files-2.1/org.springframework/spring-tx/4.0.6.RELEASE/6b4ed868e07d58f2cf15bcd7958acd86fd4f3da4/spring-tx-4.0.6.RELEASE.jar" exported="true">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>

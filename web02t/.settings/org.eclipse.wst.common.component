@@ -4,6 +4,10 @@
 		<property name="context-root" value="web02t"/>
 		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/main/resources"/>
 		<wb-resource deploy-path="/WEB-INF/classes" source-path="src/main/java"/>
+		<wb-resource deploy-path="/" source-path="src/main/webapp"/>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/bit/.gradle/caches/modules-2/files-2.1/org.springframework/spring-jdbc/4.0.6.RELEASE/28fa5e60c3d68132d83d9c1e7d9fccebb83c9104/spring-jdbc-4.0.6.RELEASE.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
 		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/bit/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context/4.0.6.RELEASE/3bb3a52edabf9ffe73aa534fb085c816bac28b4d/spring-context-4.0.6.RELEASE.jar">
 			<dependency-type>uses</dependency-type>
 		</dependent-module>
@@ -11,6 +15,9 @@
 			<dependency-type>uses</dependency-type>
 		</dependent-module>
 		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/bit/.gradle/caches/modules-2/files-2.1/org.mybatis/mybatis/3.2.7/37e87ae533c834ba0692f9aa695549c1043a531c/mybatis-3.2.7.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/bit/.gradle/caches/modules-2/files-2.1/org.mybatis/mybatis-spring/1.2.2/1e40a7f5373e4242075a1d386817e7dd49b1697d/mybatis-spring-1.2.2.jar">
 			<dependency-type>uses</dependency-type>
 		</dependent-module>
 		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/bit/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/4.0.6.RELEASE/587879b58acebeb5b0a63c01e822f9b44d9a4c77/spring-beans-4.0.6.RELEASE.jar">
@@ -23,6 +30,9 @@
 			<dependency-type>uses</dependency-type>
 		</dependent-module>
 		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/bit/.gradle/caches/modules-2/files-2.1/commons-collections/commons-collections/3.2/f951934aa5ae5a88d7e6dfaa6d32307d834a88be/commons-collections-3.2.jar">
+			<dependency-type>uses</dependency-type>
+		</dependent-module>
+		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/bit/.gradle/caches/modules-2/files-2.1/org.springframework/spring-tx/4.0.6.RELEASE/6b4ed868e07d58f2cf15bcd7958acd86fd4f3da4/spring-tx-4.0.6.RELEASE.jar">
 			<dependency-type>uses</dependency-type>
 		</dependent-module>
 		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/bit/.gradle/caches/modules-2/files-2.1/org.springframework/spring-expression/4.0.6.RELEASE/5f0a135b8cf290aa244097dc6264ad0989d25c56/spring-expression-4.0.6.RELEASE.jar">

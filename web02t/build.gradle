@@ -38,7 +38,13 @@ repositories {
 // 다운로드 받아야 할 의존 라이브러리 지정
 // 라이브러리 이름 검색 =-> http://mvnrepository.com/
 dependencies {
+  // 실행할 때 서버쪽에서 제공하는 라이브러리는 providedCompile으로 선언한다.
+  // providedCompile : 컴파일하는 동안만 사용. 배치할 때는 제외되는 라이브러리.
+  providedCompile 'javax.servlet:javax.servlet-api:3.0.1'
+  
   // compile로 지정된 라이브러리 => 컴파일할 때도 사용하고 배치할 때도 포함시킴.
+  compile 'org.springframework:spring-jdbc:4.0.6.RELEASE'
+  compile 'org.mybatis:mybatis-spring:1.2.2'
   compile 'org.springframework:spring-context:4.0.6.RELEASE'
   compile 'javax.servlet:jstl:1.2'
   compile 'mysql:mysql-connector-java:5.1.31'
