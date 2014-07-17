@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <!-- 스프링 규격에 따라 만든 팩토리 클래스 사용하기 -->
+    <!-- 주의!!!!
+      => 클래스 이름이 FactoryBean으로 끝난다면 주의해서 살펴보라!
+      => 스프링 IoC 컨테이너가 리턴하는 것은 그 클래스의 객체가 아니라 
+         .그 클래스의 createInstance()의 리턴 값이다.
+     -->
+    <bean id="tire" class="step06.TireFactoryBean">
+      <property name="maker" value="오호라타이어"/>
+      <property name="radiusMap">
+        <map>
+          <entry key="regular" value="32"/>
+          <entry key="sports" value="36"/>
+          <entry key="other" value="26"/>
+        </map>
+      </property>
+      <property name="type" value="regular"/>
+    </bean>
+    
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

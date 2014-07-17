@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <!-- 팩토리로부터 객체를 생성하기2
+    => 팩토리 메서드가 인스턴스 메서드일 경우
+    => 팩토리 객체를 생성한 후 factory-bean 속성으로 해당 객체를 가리킨다.
+    => 이때 팩토리 메서드는 인스턴스 메서드여야 한다.
+     -->
+     
+    <!-- 공장 객체를 명시적으로 만든다.
+    => 공장 객체의 속성을 자세하게 설정할 수 있다.
+     -->
+    <bean id="tireFactory" class="step06.TireFactory2">
+      <property name="maker" value="비트타이어"/>
+      <property name="radiusMap">
+        <map>
+          <entry key="regular" value="32"/>
+          <entry key="sports" value="36"/>
+          <entry key="other" value="26"/>
+        </map>
+      </property>
+    </bean>
+    
+    <!-- 공장 객체로부터 Tire 인스턴스를 생성한다. 
+    class 속성 대신 factory-bean 속성으로 공장 객체를 지정한다.
+    -->
+    <bean id="tire" factory-bean="tireFactory" factory-method="createTire">
+      <constructor-arg value="sports"/>
+    </bean>
+    
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
