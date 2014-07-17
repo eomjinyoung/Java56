@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+    
+    <!-- @Component 애노테이션이 붙은 클래스가 어느 패키지에 있는지 지정한다. 
+    => 스프링 IoC 컨테이너는 해당 애노테이션이 붙은 클래스의 인스턴스를 생성한다.
+    -->
+    <context:component-scan base-package="step08"/>
+    
+    <!-- Engine 객체가 두 개 있으면, Car 객체에 주입할 때 오류가 발생한다.
+    => 둘 중에 어떤 객체를 주입해야 할지 결정할 수 없기 때문이다.
+    => 해결책: @Qualifier 애노테이션으로 주입할 객체의 이름을 명시하라!
+     -->
+    <bean id="e1" class="step08.Engine">
+      <property name="type" value="가솔린"/>
+      <property name="cc" value="5000"/>
+    </bean>
+    
+    <bean id="e2" class="step08.Engine">
+      <property name="type" value="디젤"/>
+      <property name="cc" value="8000"/>
+    </bean>
+    
+    
+</beans>
+
+
+
+
+
