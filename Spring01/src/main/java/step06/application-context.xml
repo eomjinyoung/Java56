@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    <!-- 팩토리로부터 객체를 생성하기
+    => factory-method 속성: 객체를 생성하는 메서드 이름을 지정
+    => 팩토리 메서드에 들어갈 파라미터 값은 <constructor-arg> 태그를 사용하여 지정한다.
+    => "tire"라는 이름으로 저장되는 객체는 createTire()의 리턴 값이다.
+     -->
+    <bean id="tire" class="step06.TireFactory"
+        factory-method="createTire">
+      <constructor-arg value="sports"/>
+      <constructor-arg value="비트타이어"/>
+    </bean>
+    
+</beans>
+
+
+
+
+
