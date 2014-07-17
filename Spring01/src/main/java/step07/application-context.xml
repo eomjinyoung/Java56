@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+    
+    <!-- @Component 애노테이션이 붙은 클래스가 어느 패키지에 있는지 지정한다. 
+    => 스프링 IoC 컨테이너는 해당 애노테이션이 붙은 클래스의 인스턴스를 생성한다.
+    -->
+    <context:component-scan base-package="step07"/>
+    
+</beans>
+
+
+
+
+
