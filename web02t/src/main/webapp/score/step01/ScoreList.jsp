@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>     
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,6 +38,7 @@ table td {
 <table>
 <tr>
   <th>번호</th> 
+  <th>시험일</th>
   <th>
 	  <c:choose>
 	    <c:when test="${order == 'NM_A'}">
@@ -95,7 +97,8 @@ table td {
 </tr>
 <c:forEach var="score" items="${scores}">
 <tr>
-  <td><a href='update.do?no=${score.no}'>${score.no}</a></td>   
+  <td><a href='update.do?no=${score.no}'>${score.no}</a></td> 
+  <td><fmt:formatDate value="${score.execDate}" pattern="yyyy-MM-dd"/></td>     
   <td>${score.name}</td>   
   <td>${score.kor}</td>   
   <td>${score.eng}</td>   

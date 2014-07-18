@@ -13,11 +13,12 @@
     <result column="kor" property="kor"/>
     <result column="eng" property="eng"/>
     <result column="math" property="math"/>
+    <result column="exec_date" property="execDate"/>
   </resultMap>
   
   <!-- SQL문의 일부를 별도로 정의해 두고 필요할 때 포함시킨다. -->
   <sql id="scoreSelect">
-    select sno, name, kor, eng, math 
+    select sno, name, kor, eng, math, exec_date 
     from scores 
   </sql>
   
@@ -59,8 +60,8 @@
   
   <insert id="insert" parameterType="score"
       useGeneratedKeys="true" keyColumn="sno" keyProperty="no">
-    insert into scores (name, kor, eng, math)
-    values(#{name}, #{kor}, #{eng}, #{math})
+    insert into scores (name, kor, eng, math, exec_date)
+    values(#{name}, #{kor}, #{eng}, #{math}, #{execDate})
   </insert>
   
   <delete id="delete" parameterType="int">
