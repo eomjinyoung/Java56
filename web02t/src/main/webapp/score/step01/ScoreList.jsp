@@ -1,12 +1,3 @@
-<%--
-JSTL (JSP Standard Tag Library)
-=> JSP 페이지를 작성할 때 사용할 수 있는 추가 라이브러리
-=> 다양한 자바 문법을 표현할 수 있는 태그가 있다.
-=> JSP에서 직접 DBMS에 질의를 할 수 있는 태그도 있다.
-
- --%>
-<%@ page import="java56.servlets.step01.Score"%>
-<%@ page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
@@ -41,7 +32,7 @@ table td {
 </style>
 </head>
 <body>
-<h1>성적 관리(Front Controller 도입)</h1>
+<h1>성적 관리</h1>
 <a href='scoreform.html'>추가</a>
 <table>
 <tr>
@@ -49,52 +40,52 @@ table td {
   <th>
 	  <c:choose>
 	    <c:when test="${order == 'NM_A'}">
-	      <a href="list.do?pageNo=${pageNO}&pageSize=${pageSize}&order=NM_D">이름(a-z)</a>
+	      <a href="list.do?pageNo=${pageNo}&pageSize=${pageSize}&order=NM_D">이름(a-z)</a>
 	    </c:when>
 	    <c:when test="${order == 'NM_D'}">
-	      <a href="list.do?pageNo=${pageNO}&pageSize=${pageSize}">이름(z-a)</a>
+	      <a href="list.do?pageNo=${pageNo}&pageSize=${pageSize}">이름(z-a)</a>
 	    </c:when>
 	    <c:otherwise>
-	      <a href="list.do?pageNo=${pageNO}&pageSize=${pageSize}&order=NM_A">이름</a>
+	      <a href="list.do?pageNo=${pageNo}&pageSize=${pageSize}&order=NM_A">이름</a>
 	    </c:otherwise>
 	  </c:choose>
   </th> 
   <th>
 	  <c:choose>
 	    <c:when test="${order == 'KO_A'}">
-	      <a href="list.do?pageNo=${pageNO}&pageSize=${pageSize}&order=KO_D">국어(a-z)</a>
+	      <a href="list.do?pageNo=${pageNo}&pageSize=${pageSize}&order=KO_D">국어(a-z)</a>
 	    </c:when>
 	    <c:when test="${order == 'KO_D'}">
-	      <a href="list.do?pageNo=${pageNO}&pageSize=${pageSize}">국어(z-a)</a>
+	      <a href="list.do?pageNo=${pageNo}&pageSize=${pageSize}">국어(z-a)</a>
 	    </c:when>
 	    <c:otherwise>
-	      <a href="list.do?pageNo=${pageNO}&pageSize=${pageSize}&order=KO_A">국어</a>
+	      <a href="list.do?pageNo=${pageNo}&pageSize=${pageSize}&order=KO_A">국어</a>
 	    </c:otherwise>
 	  </c:choose>
   </th> 
   <th>
     <c:choose>
     <c:when test="${order == 'EN_A'}">
-      <a href="list.do?pageNo=${pageNO}&pageSize=${pageSize}&order=EN_D">영어(a-z)</a>
+      <a href="list.do?pageNo=${pageNo}&pageSize=${pageSize}&order=EN_D">영어(a-z)</a>
     </c:when>
     <c:when test="${order == 'EN_D'}">
-      <a href="list.do?pageNo=${pageNO}&pageSize=${pageSize}">영어(z-a)</a>
+      <a href="list.do?pageNo=${pageNo}&pageSize=${pageSize}">영어(z-a)</a>
     </c:when>
     <c:otherwise>
-      <a href="list.do?pageNo=${pageNO}&pageSize=${pageSize}&order=EN_A">영어</a>
+      <a href="list.do?pageNo=${pageNo}&pageSize=${pageSize}&order=EN_A">영어</a>
     </c:otherwise>
   </c:choose>
   </th> 
   <th>
     <c:choose>
     <c:when test="${order == 'MA_A'}">
-      <a href="list.do?pageNo=${pageNO}&pageSize=${pageSize}&order=MA_D">수학(a-z)</a>
+      <a href="list.do?pageNo=${pageNo}&pageSize=${pageSize}&order=MA_D">수학(a-z)</a>
     </c:when>
     <c:when test="${order == 'MA_D'}">
-      <a href="list.do?pageNo=${pageNO}&pageSize=${pageSize}">수학(z-a)</a>
+      <a href="list.do?pageNo=${pageNo}&pageSize=${pageSize}">수학(z-a)</a>
     </c:when>
     <c:otherwise>
-      <a href="list.do?pageNo=${pageNO}&pageSize=${pageSize}&order=MA_A">수학</a>
+      <a href="list.do?pageNo=${pageNo}&pageSize=${pageSize}&order=MA_A">수학</a>
     </c:otherwise>
   </c:choose>
   </th> 

@@ -1,4 +1,3 @@
-<%@page import="java56.servlets.step01.Score"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -8,7 +7,7 @@
 <title>성적 변경폼</title>
 </head>
 <body>
-<h1>성적 변경(EL)</h1>
+<h1>성적 변경</h1>
 <form action="update.do" method="post">
 번호: <input type="text" name="no" value='${requestScope.score.no}' readonly><br>
 이름: <input type="text" name="name" value='${score.name}'><br>
