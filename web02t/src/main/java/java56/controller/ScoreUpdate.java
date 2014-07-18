@@ -11,18 +11,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
+@RequestMapping("/score/step01/update")
 public class ScoreUpdate {
   @Autowired
   ScoreDao scoreDao;
   
-  @RequestMapping(value="/score/step01/update", method=RequestMethod.GET)
+  //@RequestMapping(value="/score/step01/update", method=RequestMethod.GET)
+  @RequestMapping(method=RequestMethod.GET)
   public String detail(int no, Map<String, Object> model)
       throws Exception {
     model.put("score", scoreDao.selectOne(no));
     return "/score/step01/scoreupdateform.jsp";
   }
   
-  @RequestMapping(value="/score/step01/update", method=RequestMethod.POST)
+  //@RequestMapping(value="/score/step01/update", method=RequestMethod.POST)
+  @RequestMapping(method=RequestMethod.POST)
   public String update(Score score, Map<String, Object> model)
       throws Exception {
     scoreDao.update(score);
