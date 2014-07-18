@@ -16,7 +16,8 @@
    . PageController 인터페이스 삭제
    . 페이지 컨트롤러의 메서드 선언 앞에 @RequestMapping 애노테이션 붙임
    . 메서드에서 요청 정보를 받기 위해 파라미터 변수를 선언함 -> @RequestParam 애노테이션으로 속성 조정 
-    
+   . ScoreAdd 클래스의 경우 요청 정보를 받을 때 Score VO를 파라미터 
+     변수로 선언함.
 
 
 
