@@ -1,29 +1,32 @@
 package java56.controller;
 
 import java.util.Map;
+
 import java56.dao.ScoreDao;
 import java56.vo.Score;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-@Component("/score/step01/update.do")
+@Controller
 public class ScoreUpdate {
   @Autowired
   ScoreDao scoreDao;
   
-  @RequestMapping
-  public String execute(Score score, Map<String, Object> model)
+  @RequestMapping(value="/score/step01/update", method=RequestMethod.GET)
+  public String detail(int no, Map<String, Object> model)
       throws Exception {
-    if (score.getName() == null) { // 변경폼에서 값이 넘어오는 것이 아니다.
-      model.put("score", scoreDao.selectOne(score.getNo()));
-      return "/score/step01/scoreupdateform.jsp";
-      
-    } else {
-      scoreDao.update(score);
-      return "redirect:list.do";
-    }
+    model.put("score", scoreDao.selectOne(no));
+    return "/score/step01/scoreupdateform.jsp";
+  }
+  
+  @RequestMapping(value="/score/step01/update", method=RequestMethod.POST)
+  public String update(Score score, Map<String, Object> model)
+      throws Exception {
+    scoreDao.update(score);
+    return "redirect:list.do";
   }
 }
 

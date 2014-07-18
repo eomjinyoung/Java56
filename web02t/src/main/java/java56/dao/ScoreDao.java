@@ -8,9 +8,9 @@ import java56.vo.Score;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
-@Component("scoreDao")
+@Repository
 public class ScoreDao {
   @Autowired
   SqlSessionFactory sqlSessionFactory;
