@@ -1,4 +1,4 @@
-package java56.servlets.step01;
+package java56.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
