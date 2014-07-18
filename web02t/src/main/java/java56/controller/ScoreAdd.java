@@ -19,14 +19,8 @@ public class ScoreAdd {
   ScoreDao scoreDao;
   
   @RequestMapping
-  public String execute(Map<String, String[]> params, Map<String, Object> model)
+  public String execute(Score score, Map<String, Object> model)
       throws Exception {
-    Score score = new Score();
-    score.setName(params.get("name")[0]);
-    score.setKor(Integer.parseInt(params.get("kor")[0]));
-    score.setEng(Integer.parseInt(params.get("eng")[0]));
-    score.setMath(Integer.parseInt(params.get("math")[0]));
-    
     scoreDao.insert(score);
     return "redirect:list.do";
   }

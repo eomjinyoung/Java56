@@ -13,9 +13,8 @@ public class ScoreDelete {
   ScoreDao scoreDao;
   
   @RequestMapping
-  public String execute(Map<String, String[]> params, Map<String, Object> model)
+  public String execute(int no, Map<String, Object> model)
       throws Exception {
-    int no = Integer.parseInt(params.get("no")[0]);
     scoreDao.delete(no);
     
     return "redirect:list.do";
