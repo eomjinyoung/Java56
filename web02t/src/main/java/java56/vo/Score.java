@@ -4,6 +4,7 @@
 package java56.vo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /* transient
  * - 지속성(Persistence)을 가질 필요가 없는 데이터에 대해 표시한다.
@@ -20,6 +21,7 @@ public class Score implements Serializable  {
   private int kor;
   private int eng;
   private int math;
+  private Date execDate;
   transient private int total;
   transient private float average;
 
@@ -93,14 +95,21 @@ public class Score implements Serializable  {
     this.no = no;
     return this;
   }
+  
+  public Date getExecDate() {
+    return execDate;
+  }
+
+  public Score setExecDate(Date execDate) {
+    this.execDate = execDate;
+    return this;
+  }
 
   @Override
   public String toString() {
     return "Score [no=" + no + ", name=" + name + ", kor=" + kor + ", eng="
-        + eng + ", math=" + math + ", total=" + total + ", average=" + average
-        + "]";
+        + eng + ", math=" + math + ", execDate=" + execDate + "]";
   }
-
 
 }
 
