@@ -42,7 +42,16 @@ The request sent by the client was syntactically incorrect.
 
 4) @InitBinder
 . 요청 정보의 문자열을 특정 객체로 변환시켜주는 "커스텀 에디터" 준비
-. ScoreAdd 클래스의 initBinder() 참조
+. 페이지 컨트롤러에서 요청 데이터를 처리하기 위해 커스텀 에디터가 필요하다면 커스텀 에디터를 등록하는 메서드가 필요함.
+. 이 애노테이션이 붙은 메서드는 요청이 있을 때 마다 자동 호출됨.
+. ScoreAdd 클래스의 initBinder() 메서드 참고 
+
+5) @ControllerAdvice
+. 페이지 컨트롤러에게 도움을 주는 클래스에 대해 표시
+. 특히 글로벌 @InitBinder를 만들 때 사용
+. java56.controller.bind.GlobalInitBinder 클래스 참조
+. 단 이 애노테이션이 동작하려면 do-servlet.xml 파일에 다음의 선언을 해야 한다.
+  <mvc:annotation-driven/>
 
 
 

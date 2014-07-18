@@ -1,10 +1,10 @@
 package java56.controller;
 
 import java.util.Map;
-
 import java56.dao.ScoreDao;
 import java56.vo.Score;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/score/step01/update")
 public class ScoreUpdate {
+  static Logger logger = Logger.getLogger(ScoreUpdate.class);
+  
   @Autowired
   ScoreDao scoreDao;
   

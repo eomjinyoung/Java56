@@ -70,7 +70,11 @@
   
   <update id="update" parameterType="score">
     update scores set 
-      name=#{name}, kor=#{kor}, eng=#{eng}, math=#{math} 
+      name=#{name}, 
+      kor=#{kor}, 
+      eng=#{eng}, 
+      math=#{math},
+      exec_date=#{execDate} 
     where sno=#{no}
   </update>    
 </mapper>
