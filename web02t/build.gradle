@@ -43,6 +43,7 @@ dependencies {
   providedCompile 'javax.servlet:javax.servlet-api:3.0.1'
   
   // compile로 지정된 라이브러리 => 컴파일할 때도 사용하고 배치할 때도 포함시킴.
+  compile 'org.springframework:spring-webmvc:4.0.6.RELEASE'
   compile 'org.springframework:spring-jdbc:4.0.6.RELEASE'
   compile 'org.mybatis:mybatis-spring:1.2.2'
   compile 'org.springframework:spring-context:4.0.6.RELEASE'
