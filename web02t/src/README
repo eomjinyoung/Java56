@@ -1,24 +1,21 @@
-1) 패키지 구조 변경
-   . 유지 보수하기 좋게 컨트롤러와, DAO, VO 등을 분리함
-     . src/main/java/java56/controller, dao, vo 
-   . SQL 맵퍼 파일은 src/main/resources/java56/dao 폴더로 이동
-   . log4j.properties 파일은 src/main/resources 폴더로 이동
-   . application-context.xml 파일은 /WEB-INF 폴더로 이동
-     
-2) 자체 제작한 DispatcherServlet 대신 스프링 클래스 사용
-   . web.xml 변경 
-   . do-servlet.xml 생성 => 페이지 컨트롤러 준비
-   . application-context.xml은 DAO와 DataSource, 트랜잭션 객체 준비
-   . 기존 DispatcherServlet 클래스 삭제
-   
+1) 스프링 빈 컨테이너를 위한 빈 지정 애노테이션
+@Component -> 역할에 따라 여러 개의 애노테이션을 추가로 제공
+@Controller : 페이지 컨트롤러를 위한 애노테이션
+@Service : 서비스 객체를 위한 애노테이션
+@Repository: DAO를 위한 애노테이션
 
-3) 기존 페이지 컨트롤러를 스프링 규격에 맞추어 변경
-   . PageController 인터페이스 삭제
-   . 페이지 컨트롤러의 메서드 선언 앞에 @RequestMapping 애노테이션 붙임
-   . 메서드에서 요청 정보를 받기 위해 파라미터 변수를 선언함 -> @RequestParam 애노테이션으로 속성 조정 
-   . ScoreAdd 클래스의 경우 요청 정보를 받을 때 Score VO를 파라미터 
-     변수로 선언함.
+역할에 따라 애노테이션을 다르게 지정해 두면, 필요할 때 특정 역할의 클래스만 찾을 수 있다.
+코드를 이해하는데 도움이 된다.
 
+2) @RequestMapping에 대하여
+. value 속성: 요청 URL을 지정. 확장자 명을 적지 않는 것이 유지보수에 좋다. 나중에 바뀔 수 있기 때문이다.
+. method 속성: GET, POST 지정
+
+호출 제약 조건을 설정할 수 있다.
+. headers 속성: 속성에 지정된 헤더 이름이 요청 헤더에 있을 때만 호출한다.
+. consumes 속성: 속성에 지정된 값이 요청 헤더 Content-Type과 일치할 때만 호출한다.
+. produces 속성: 속성에 지정된 값이 요청 헤더 Accept와 일치할 때만 호출한다.
+. params 속성: 속성에 지정된 값이 요청 정보에 있을 때만 호출한다.
 
 
 
