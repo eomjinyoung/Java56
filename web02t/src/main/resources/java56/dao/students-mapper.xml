@@ -25,7 +25,7 @@
   <select id="exist" parameterType="map" resultMap="studentMap">
     select s.mno, m.name, m.email, s.working
 		from students s left outer join members m using(mno)
-		where email=#{email} and pwd=#{password}
+		where m.email=#{email} and m.pwd=#{password}
   </select>
 </mapper>
 
