@@ -7,11 +7,13 @@ public class Member {
   protected String    email;
   protected String    tel;
   protected char      valid;
+  protected String    photoPath;
   
   @Override
   public String toString() {
     return "Member [no=" + no + ", name=" + name + ", password=" + password
-        + ", email=" + email + ", tel=" + tel + ", valid=" + valid + "]";
+        + ", email=" + email + ", tel=" + tel + ", valid=" + valid
+        + ", photoPath=" + photoPath + "]";
   }
   
   public int getNo() {
@@ -50,6 +52,10 @@ public class Member {
   public void setValid(char valid) {
     this.valid = valid;
   }
-  
-  
+  public String getPhotoPath() {
+    return photoPath;
+  }
+  public void setPhotoPath(String photoPath) {
+    this.photoPath = photoPath;
+  }
 }

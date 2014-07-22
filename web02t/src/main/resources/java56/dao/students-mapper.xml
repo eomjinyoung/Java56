@@ -11,6 +11,7 @@
     <result column="email" property="email"/>
     <result column="tel" property="tel"/>
     <result column="valid" property="valid"/>
+    <result column="photo_path" property="photoPath"/>
     <result column="postno" property="postNo"/>
     <result column="bas_addr" property="baseAddress"/>
     <result column="det_addr" property="detailAddress"/>
@@ -27,6 +28,7 @@
 		from students s left outer join members m using(mno)
 		where m.email=#{email} and m.pwd=#{password}
   </select>
+  
 </mapper>
 
 
