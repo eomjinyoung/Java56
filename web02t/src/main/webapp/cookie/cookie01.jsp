@@ -19,6 +19,13 @@ Cookie cookie2 = new Cookie("age", "30");
 // 즉 이 경우 다음 코드와 같다.
 //cookie.setPath("/web02t/cookie");
 response.addCookie(cookie2);
+
+Cookie cookie3 = new Cookie("gender", "male");
+// 쿠키의 유효 시간(초) 설정하기
+// 지정된 시간이 지나면 웹 브라우저는 더이상 서버에 해당 쿠키를 보내지 않는다.
+cookie3.setMaxAge(30);
+response.addCookie(cookie3);
+
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
