@@ -33,6 +33,11 @@ table td {
 </style>
 </head>
 <body>
+<div>
+<c:if test="${not empty sessionScope.loginUser}">
+${loginUser.name}(${loginUser.email})
+</c:if>
+</div>
 <h1>성적 관리</h1>
 <a href='scoreform.html'>추가</a>
 <table>
