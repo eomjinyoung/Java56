@@ -1,9 +1,10 @@
+<%@page import="java.net.URLEncoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 // 쿠키란? 웹 서버가 웹 브라우저에게 일시적으로 맡기는 데이터.
 // 웹 브라우저는 쿠키 설정에 따라 해당 서버에게 요청할 때마다 쿠키를 서버에 보내야 한다.
-Cookie cookie = new Cookie("name", "Hong kil dong");
+Cookie cookie = new Cookie("name", URLEncoder.encode("홍길동"));
 // 쿠키의 사용 범위 설정
 // => 경로를 설정하면 웹 브라우저는 해당 경로의 자원을 요청할 때 쿠키를 서버에 전송한다.
 // => 경로가 다르면 서버에 전송하지 않는다.
