@@ -1,25 +1,22 @@
 package java56.controller;
 
 import java.io.File;
-import java56.dao.MemberDao;
-import java56.dao.StudentDao;
+import java56.service.StudentService;
 import java56.vo.Student;
 
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
-/* 트랜잭션 적용
- * => 코딩으로 직접 특랜잭션 관리하기 (잘 사용하지 않는다)
- * => 애노테이션으로 관리하기
+/* 트랜잭션 처리를 StudentService 객체에 위임. 
+ * => 비즈니스 로직을 분리하여 관리
+ * => 재사용성이 높아지고 유지보수가 쉬워진다.
  */
 
 @Controller
@@ -30,10 +27,7 @@ public class StudentControl {
   ServletContext servletContext;
   
   @Autowired
-  MemberDao memberDao;
-  
-  @Autowired
-  StudentDao studentDao;
+  StudentService studentService;
   
   @RequestMapping("/signup")
   public String signup() {
@@ -76,13 +70,8 @@ public class StudentControl {
   }
   
   @RequestMapping(value="/signupComplete", method=RequestMethod.POST)
-  @Transactional(
-    //value="트랜잭션관리자 빈 이름", // do-servlet.xml 설정파일에서 이미 트랜잭션 관리자를 지정했기 때문에 제거한다.
-    propagation=Propagation.REQUIRED, 
-    rollbackFor={Throwable.class})
   public String signupComplete(Student student) throws Exception {
-    memberDao.insert(student); // 학생 기본 정보 입력
-    studentDao.insert(student); // 학생 추가 정보 입력
+    studentService.signup(student);
     return "/member/MemberSignupComplete.jsp";
   }
 }
