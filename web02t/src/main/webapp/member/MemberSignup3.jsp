@@ -16,6 +16,22 @@
 사진: ${student.photoPath}<br>
 <img src="../fileupload/${student.photoPath}"><br>
 <hr>
+
+<h2>추가정보</h2>
+우편번호: ${student.postNo}<br>
+기본주소: ${student.baseAddress}<br>
+상세주소: ${student.detailAddress}<br>
+학교: ${student.school}<br>
+학년: ${student.grade}<br>
+전공: ${student.major}<br>
+재직자: ${student.working}<br>
+회사: ${student.company}<br>
+사업자번호: ${student.companyNo}<br>
+
+<form action="signupComplete.do" method="post">
+<input type="submit" value="등록">
+<input type="button" value="취소" onclick="location.href='../auth/login.do';">
+</form>
 </body>
 </html>
 
