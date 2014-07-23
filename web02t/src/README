@@ -73,6 +73,13 @@ The request sent by the client was syntactically incorrect.
 . do-servlet.xml 빈 설정 파일에 멀티파트 폼데이터 처리기 등록
 . MemberControl의 signup()과 signup2() 메서드에서 파일 업로드 처리
 
+10) @SessionAttributes 애노테이션 사용법
+. StudentControl에 signup3() 메서드 추가
+. MemberSignup2.jsp 변경, MemberSignup3.jsp 추가
+
+11) 회원 등록을 처리할 DAO 정리
+. MemberDao의 insert() 메서드 정리
+. StudentDao의 insert() 메서드 추가
 
 
 

@@ -29,6 +29,15 @@
 		where m.email=#{email} and m.pwd=#{password}
   </select>
   
+  <insert id="insert" parameterType="student">
+    insert into students (
+            mno, post_no, bas_addr, det_addr, 
+            school, grade, major, working, company, comp_code)
+    values (
+            #{no}, #{postNo}, #{baseAddress}, #{detailAddress},
+            #{school}, #{grade}, #{major}, #{working}, #{company}, #{companyNo})
+  </insert>
+  
 </mapper>
 
 

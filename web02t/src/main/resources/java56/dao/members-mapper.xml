@@ -14,7 +14,8 @@
     <result column="photo_path" property="photoPath"/>
   </resultMap>
   
-  <insert id="insert" parameterType="member">
+  <insert id="insert" parameterType="member"
+      useGeneratedKeys="true" keyColumn="mno" keyProperty="no">
     insert into members (name, email, tel, pwd, photo_path)
     values (#{name},#{email},#{tel},#{password},#{photoPath})
   </insert>

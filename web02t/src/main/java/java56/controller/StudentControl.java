@@ -68,8 +68,12 @@ public class StudentControl {
     return "/member/MemberSignup3.jsp";
   }
   
-  public String signupComplete() {
+  @RequestMapping(value="/signupComplete", method=RequestMethod.POST)
+  public String signupComplete(Student student) throws Exception {
+    memberDao.insert(student); // 학생 기본 정보 입력
+    studentDao.insert(student); // 학생 추가 정보 입력 
     
+    return "/member/MemberSignupComplete.jsp";
   }
 }
 
