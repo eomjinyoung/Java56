@@ -36,11 +36,11 @@ public class StudentDao {
     SqlSession sqlSession = sqlSessionFactory.openSession();
     try {
       int count = sqlSession.insert("java56.dao.StudentDao.insert", student);
-      sqlSession.commit();
+      //sqlSession.commit(); 트랜잭션 관리자를 적용하게 되면 commit()은 동작하지 않는다. 따라서 제거한다.
       return count;
       
     } catch (Exception e) {
-      sqlSession.rollback();
+      //sqlSession.rollback();
       throw e;
       
     } finally {

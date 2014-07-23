@@ -16,11 +16,11 @@ public class MemberDao {
     SqlSession sqlSession = sqlSessionFactory.openSession();
     try {
       int count = sqlSession.insert("java56.dao.MemberDao.insert", member);
-      sqlSession.commit();
+      //sqlSession.commit(); // 트랜잭션 관리자 도입으로 이 코드 제거.
       return count;
       
     } catch (Exception e) {
-      sqlSession.rollback();
+      //sqlSession.rollback(); 
       throw e;
       
     } finally {
