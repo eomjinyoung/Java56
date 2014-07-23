@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="java56.dao.StudentDao">
+
+  <resultMap type="student" id="studentMap">
+    <id column="mno" property="no"/>
+    <result column="name" property="name"/>
+    <result column="pwd" property="password"/>
+    <result column="email" property="email"/>
+    <result column="tel" property="tel"/>
+    <result column="valid" property="valid"/>
+    <result column="photo_path" property="photoPath"/>
+    <result column="post_no" property="postNo"/>
+    <result column="bas_addr" property="baseAddress"/>
+    <result column="det_addr" property="detailAddress"/>
+    <result column="school" property="school"/>
+    <result column="grade" property="grade"/>
+    <result column="major" property="major"/>
+    <result column="working" property="working"/>
+    <result column="comp_code" property="companyNo"/>
+    <result column="company" property="company"/>
+  </resultMap>
+  
+  <select id="exist" parameterType="map" resultMap="studentMap">
+    select s.mno, m.name, m.email, s.working
+		from students s left outer join members m using(mno)
+		where m.email=#{email} and m.pwd=#{password}
+  </select>
+  
+  <insert id="insert" parameterType="student">
+    insert into students (
+            mno, post_no, bas_addr, det_addr, 
+            school, grade, major, working, company, comp_code)
+    values (
+            #{no}, #{postNo}, #{baseAddress}, #{detailAddress},
+            #{school}, #{grade}, #{major}, #{working}, #{company}, #{companyNo})
+  </insert>
+  
+</mapper>
+
+
+
+
+
+
+
+
+
+
+

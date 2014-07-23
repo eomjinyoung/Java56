@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="java56.dao.MemberDao">
+
+  <resultMap type="member" id="memberMap">
+    <id column="mno" property="no"/>
+    <result column="name" property="name"/>
+    <result column="pwd" property="password"/>
+    <result column="email" property="email"/>
+    <result column="tel" property="tel"/>
+    <result column="valid" property="valid"/>
+    <result column="photo_path" property="photoPath"/>
+  </resultMap>
+  
+  <insert id="insert" parameterType="member"
+      useGeneratedKeys="true" keyColumn="mno" keyProperty="no">
+    insert into members (name, email, tel, pwd, photo_path)
+    values (#{name},#{email},#{tel},#{password},#{photoPath})
+  </insert>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
