@@ -1,0 +1,9 @@
+1) 프로그램 코드로 직접 트랜잭션 관리하기
+. StudentControl01 클래스의 signupComplete() 메서드 참조
+
+2) 애노테이션으로 트랜잭션 관리하기
+. StudentControl02 클래스의 signupComplete() 메서드 참조
+. do-servlet.xml에 @Transactional 애노테이션 처리기를 등록했다.
+. StudentControl02 클래스에서 PlatformTransactionManager 의존 객체 제거
+
+3)  
