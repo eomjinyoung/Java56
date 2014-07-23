@@ -80,6 +80,12 @@ The request sent by the client was syntactically incorrect.
 11) 회원 등록을 처리할 DAO 정리
 . MemberDao의 insert() 메서드 정리
 . StudentDao의 insert() 메서드 추가
+. students-mapper.xml 파일에 insert SQL 추가
+
+12) 페이지 컨트롤러에 회원 등록 처리 메서드 추가
+. StudentControl에 signupComplete() 메서드 추가
+. MemberSignupComplete.jsp 추가
+
 
 
 
