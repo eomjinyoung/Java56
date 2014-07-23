@@ -2,6 +2,7 @@
 package java56.dao;
 
 import java.util.HashMap;
+
 import java56.vo.Student;
 
 import org.apache.ibatis.session.SqlSession;
@@ -31,6 +32,21 @@ public class StudentDao {
     }
   }
   
+  public int insert(Student student) throws Exception {
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    try {
+      int count = sqlSession.insert("java56.dao.StudentDao.insert", student);
+      sqlSession.commit();
+      return count;
+      
+    } catch (Exception e) {
+      sqlSession.rollback();
+      throw e;
+      
+    } finally {
+      sqlSession.close();
+    }
+  }
 }
 
 

@@ -27,7 +27,7 @@
 <input type="radio" name="working" value="N" checked>미취업<br>
 회사명: <input type="text" name="company"><br>
 사업자번호: <input type="text" name="companyNo"><br>
-<input type="submit" value="등록">
+<input type="submit" value="다음">
 </form>
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.js"></script>

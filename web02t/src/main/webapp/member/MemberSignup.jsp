@@ -15,7 +15,7 @@
 전화: <input type="tel" name="tel"><br>
 암호: <input type="password" name="password"><br>
 사진: <input type="file" name="photo"><br>
-<input type="submit" value="등록">
+<input type="submit" value="다음">
 </form>
 </body>
 </html>

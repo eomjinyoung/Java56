@@ -22,6 +22,9 @@ public class MemberDao {
     } catch (Exception e) {
       sqlSession.rollback();
       throw e;
+      
+    } finally {
+      sqlSession.close();
     }
   }
 }

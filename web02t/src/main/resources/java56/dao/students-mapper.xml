@@ -12,7 +12,7 @@
     <result column="tel" property="tel"/>
     <result column="valid" property="valid"/>
     <result column="photo_path" property="photoPath"/>
-    <result column="postno" property="postNo"/>
+    <result column="post_no" property="postNo"/>
     <result column="bas_addr" property="baseAddress"/>
     <result column="det_addr" property="detailAddress"/>
     <result column="school" property="school"/>
