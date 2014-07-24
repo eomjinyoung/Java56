@@ -1,6 +1,6 @@
 package java56.controller;
 
-import java56.dao.StudentDao;
+import java56.service.StudentService;
 import java56.vo.Student;
 
 import javax.servlet.http.Cookie;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class AuthControl {
   
   @Autowired
-  StudentDao studentDao;
+  StudentService studentService;
   
   @RequestMapping(value="/login", method=RequestMethod.GET)
   public String form(
@@ -29,7 +29,7 @@ public class AuthControl {
       // form.jsp에 전달한다.
       model.addAttribute("userEmail", userEmail);
     }
-    return "/auth/form.jsp";
+    return "/auth/form";
   }
   
   @RequestMapping(value="/login", method=RequestMethod.POST)
@@ -39,7 +39,7 @@ public class AuthControl {
       String saveId,
       HttpServletResponse response,
       HttpSession session) throws Exception {
-    Student student = studentDao.exist(email, password);
+    Student student = studentService.exist(email, password);
     
     if (student != null) {
       session.setAttribute("loginUser", student); // 세션에 Student 객체 보관 

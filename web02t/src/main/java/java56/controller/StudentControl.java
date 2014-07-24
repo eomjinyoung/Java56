@@ -1,6 +1,7 @@
 package java56.controller;
 
 import java.io.File;
+
 import java56.service.StudentService;
 import java56.vo.Student;
 
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 
 /* 트랜잭션 처리를 StudentService 객체에 위임. 
@@ -31,7 +33,7 @@ public class StudentControl {
   
   @RequestMapping("/signup")
   public String signup() {
-    return "/member/MemberSignup.jsp";
+    return "/member/MemberSignup";
   }
   
   @RequestMapping(value="/signup2", method=RequestMethod.POST)
@@ -51,7 +53,7 @@ public class StudentControl {
     // 해당 객체는 세션에 보관될 것이다.
     model.addAttribute("student", student);
     
-    return "/member/MemberSignup2.jsp";
+    return "/member/MemberSignup2";
   }
  
   // @SessionAttributes로 지정된 값 꺼내기
@@ -66,13 +68,20 @@ public class StudentControl {
     // 굳이 모델 객체에 저장할 필요가 없다. 왜냐하면 이미 student 객체는 세션에 보관되어 있기 때문이다.
     //model.addAttribute("student", studentok);
     
-    return "/member/MemberSignup3.jsp";
+    return "/member/MemberSignup3";
   }
   
   @RequestMapping(value="/signupComplete", method=RequestMethod.POST)
-  public String signupComplete(Student student) throws Exception {
+  public String signupComplete(
+      Student student, SessionStatus sessionStatus) throws Exception {
     studentService.signup(student);
-    return "/member/MemberSignupComplete.jsp";
+
+    // setComplete()을 호출하면 
+    // 클래스 상단에 지정한(@SessionAttribute(...)) 세션 보관 객체를 제거한다.
+    // 즉, 세션 보관소에서 "student" 이름으로 저장된 객체를 제거한다.
+    sessionStatus.setComplete();
+    
+    return "/member/MemberSignupComplete";
   }
 }
 

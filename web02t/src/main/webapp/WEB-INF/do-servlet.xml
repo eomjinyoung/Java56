@@ -25,8 +25,8 @@
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass"
 			value="org.springframework.web.servlet.view.JstlView" />
-		<property name="prefix" value="" />
-		<property name="suffix" value="" />
+		<property name="prefix" value="/WEB-INF/view" />
+		<property name="suffix" value=".jsp" />
 	</bean>
 	
 	<!-- 멀티 파트 파일 업로드 처리기 등록 -->

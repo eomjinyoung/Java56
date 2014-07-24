@@ -1,5 +1,6 @@
 package java56.service;
 
+import java.util.HashMap;
 import java56.dao.MemberDao;
 import java56.dao.StudentDao;
 import java56.vo.Student;
@@ -26,6 +27,15 @@ public class StudentServiceImpl implements StudentService {
   public void signup(Student student) throws Exception {
     memberDao.insert(student);
     studentDao.insert(student);
+  }
+  
+  @Override
+  public Student exist(String email, String password) throws Exception {
+    HashMap<String,Object> paramMap = new HashMap<String,Object>();
+    paramMap.put("email", email);
+    paramMap.put("password", password);
+    
+    return studentDao.exist(paramMap);
   }
 }
 
