@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>test03</title>
+</head>
+<body>
+<script>
+//1. inner 함수 => 클로저(closure)
+function makeCalcFunc(op) {
+	if (op == "plus") {
+		return function(a,b) {return a + b;};
+		
+	} else if (op == "minus") {
+		return function(a,b) {return a - b;};
+		
+	} else if (op == "expo") {
+		return function(base, exp) { 
+			var r = 1;
+			for (i = 0; i < exp; i++) {
+				r *= base;
+			}
+			return r;
+		};
+	}
+}
+
+var myFunc = makeCalcFunc("plus");
+console.log(myFunc(20, 30));
+
+myFunc = makeCalcFunc("minus");
+console.log(myFunc(20, 30));
+
+myFunc = makeCalcFunc("expo");
+console.log(myFunc(2, 5));
+
+//2. 파라미터 값으로 함수 넘기기
+function plus(a, b) {return a + b;};
+function minus(a, b) {return a - b;};
+function multiple(a, b) {return a * b;};
+
+function runner(arr, func) {
+	var r = arr[0];
+	for (i = 1; i < arr.length; i++) {
+		r = func(r, arr[i]);
+	}
+	console.log(r);
+}
+
+var arrList = [10, 20, 30, 40]; 
+runner(arrList, plus);
+runner(arrList, minus);
+runner(arrList, multiple);
+
+console.log("실무에서는 함수를 따로 정의해서 파라미터로 넘기지 않는다. 메서드 호출 시 즉시 정의하여 넘긴다.");
+runner(arrList, function(a, b) {return a + b;});
+runner(arrList, function(a, b) {return a - b;});
+runner(arrList, function(a, b) {return a * b;});
+
+
+</script>
+</body>
+</html>
+
+
+
+

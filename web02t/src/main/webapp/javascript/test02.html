@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>test02</title>
+</head>
+<body>
+<script>
+//1. 함수 선언
+//=> 리턴 타입을 선언하지 않는다.
+//=> 파라미터 선언할 때 var 붙이지 않는다.
+function plus(a, b) {
+	return a + b;
+}
+console.log(plus(20, 30));
+
+//2. arguments 내장 변수: 모든 파라미터 값을 담고 있는 배열
+function plus2() {
+	console.log(arguments);
+}
+plus2(10, 20, 30, 40)
+
+//3. 파라미터 변수와 arguments를 함께 사용할 수 있다.
+function plus3(a, b) {
+	console.log(a, b);
+	console.log(arguments);
+	console.log(arguments[0], arguments[1], arguments[2], arguments[3]);
+}
+plus3(10, 20, 30, 40);
+
+//4. 함수 정의 두 번째 방법
+var plus4 = function(a, b) {
+	return a + b;
+};
+console.log(plus4(10, 20));
+
+//*주의*
+//<script> 태그를 실행할 때 순서
+//1) 함수 선언(function 함수명 {})을 먼저 실행 
+//2) 다시 처음부터 자바스크립트 문장을 수행한다.
+
+//console.log(plus7(30, 30)); // 다른 <script>에 선언된 함수는 현재 찾을 수 없다.
+console.log(plus5(20, 30)); // 이 문장은 plus5() 함수 선언문 보다 늦게 실행한다. 결론=> plus5() 호출 가능
+//console.log(plus6(20, 30)); // 이 문장은 var plus6 =... 문장 보다 먼저 실행한다.결론=> plus6() 호출 오류!
+
+function plus5(a, b) {return a + b;}
+var plus6 = function(a, b){return a + b;};
+
+
+</script>
+
+<script>
+function plus7(a, b) {return a + b;}
+console.log(plus5(20, 30)); //이전 <script>태그에서 만든 함수는 현재 호출할 수 있다. 
+</script>
+</body>
+</html>
+
+
+
+
+
+
