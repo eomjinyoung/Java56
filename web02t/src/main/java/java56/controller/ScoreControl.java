@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/score/step02")
+@RequestMapping("/score")
 public class ScoreControl {
   static Logger logger = Logger.getLogger(ScoreControl.class);
   
@@ -56,9 +56,14 @@ public class ScoreControl {
     mv.addObject("pageNo", pageNo);
     mv.addObject("pageSize", pageSize);
     
-    mv.setViewName("/score/step02/ScoreList.jsp");
+    mv.setViewName("/score/ScoreList");
     
     return mv;
+  }
+  
+  @RequestMapping(value="/add", method=RequestMethod.GET)
+  public String form() {
+    return "/score/scoreform";
   }
   
   @RequestMapping(value="/add", method=RequestMethod.POST)
@@ -79,7 +84,7 @@ public class ScoreControl {
   public String detail(int no, Model model)
       throws Exception {
     model.addAttribute("score", scoreDao.selectOne(no));
-    return "/score/step02/scoreupdateform.jsp";
+    return "/score/scoreupdateform";
   }
   
   @RequestMapping(value="/update", method=RequestMethod.POST)
