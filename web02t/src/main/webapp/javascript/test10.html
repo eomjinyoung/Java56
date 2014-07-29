@@ -46,10 +46,16 @@ document.getElementById("p2").onclick = function(event) {
 };
 document.getElementById("btn1").onclick = function(event) {
   console.log("btn1을 클릭했다.");
+  event.stopPropagation(); // 이 타켓에 등록된 이벤트 리스너까지만 호출하고 버블링을 멈춰라!
 };
-document.getElementById("btn2").onclick = function(event) {
-  console.log("btn2를 클릭했다.");
-};
+
+document.getElementById("btn2").addEventListener("click", function(event) {
+  console.log("btn2를 클릭했다.11111111");
+  event.stopImmediatePropagation(); // 현재 리스너까지만 호출하고 즉시 버블링을 멈춰라! 
+});
+document.getElementById("btn2").addEventListener("click", function(event) {
+  console.log("btn2를 클릭했다.22222222");
+});
 </script>
 </body>
 </html>
