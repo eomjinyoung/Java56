@@ -1,4 +1,31 @@
 window.onload = function() {
+  loadScoreList();
+};
+
+function loadScoreDetail(event) {
+  event.preventDefault(); // 웹 브라우저야, a 태그를 클릭할 때 수행하는 기본 작업을 하지 말아라!
+
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function(event) {
+    if (xhr.readyState == 4) {
+      // JSON 형식의 문자열을 실행하여 자바스크립트 객체를 생성한다. 
+	  var score = JSON.parse(xhr.responseText); 
+	  
+	  // 서버로부터 받은 정보를 가지고 입력폼에 값을 설정한다.
+	  document.getElementById("no").value = score.no;
+	  document.getElementById("name").value = score.name;
+	  document.getElementById("kor").value = score.kor;
+	  document.getElementById("eng").value = score.eng;
+	  document.getElementById("math").value = score.math;
+	  document.getElementById("execDate").value = 
+		  new Date(score.execDate).toString("yyyy-MM-dd");
+    }
+  };
+  xhr.open('GET', this.href, true);
+  xhr.send(null);
+}
+
+function loadScoreList() {
   var xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function(event) {
 	if (xhr.readyState == 4) {
@@ -17,13 +44,14 @@ window.onload = function() {
 		
 		td = document.createElement("td"); //<td></td>
 		a = document.createElement("a"); //<a></a>
-		a.href = 'update.do?no=' + scores[i].no; //<a href="..."></a>
+		a.href = 'update.json?no=' + scores[i].no; //<a href="..."></a>
 		a.textContent = scores[i].no; //<a href="...">번호</a>
+		a.onclick = loadScoreDetail;
 		td.appendChild(a); //<td><a>...</a></td>
 		tr.appendChild(td); //<tr><td>...</td></tr>
 		
 		td = document.createElement("td");
-		td.textContent = scores[i].execDate;
+		td.textContent = new Date(scores[i].execDate).toString("yyyy-MM-dd");
 		tr.appendChild(td);
 		
 		td = document.createElement("td");
@@ -52,8 +80,9 @@ window.onload = function() {
 		
 		td = document.createElement("td");
 		a = document.createElement("a");
-		a.href = 'delete.do?no=' + scores[i].no;
+		a.href = 'delete.json?no=' + scores[i].no;
 		a.textContent = '삭제';
+		a.className = "btn btn-danger btn-xs";
 		td.appendChild(a);
 		tr.appendChild(td);
 	  }
@@ -61,8 +90,8 @@ window.onload = function() {
   };
   
   xhr.open('GET', 'list.json', true);
-  xhr.send(null);
-};
+  xhr.send(null);	
+}
 
 
 

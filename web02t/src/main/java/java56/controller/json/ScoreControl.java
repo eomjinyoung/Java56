@@ -84,7 +84,7 @@ public class ScoreControl {
   public String detail(int no, Model model)
       throws Exception {
     model.addAttribute("score", scoreDao.selectOne(no));
-    return "/score/scoreupdateform";
+    return "/score/json/scoreupdateform";
   }
   
   @RequestMapping(value="/update", method=RequestMethod.POST)

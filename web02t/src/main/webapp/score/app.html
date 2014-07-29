@@ -3,12 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <title>성적관리</title>
+
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 <link rel="stylesheet" type="text/css" href="app.css">
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="http://www.datejs.com/build/date.js" type="text/javascript"></script>
 <script type="text/javascript" src="app.js"></script>
+
 </head>
 <body>
+<div id="main" class="container">
 <h1>성적목록</h1>
-<table id="scoreTable">
+<table id="scoreTable" class="table table-striped">
 <tr>
   <th>번호</th>
   <th>시험일</th>
@@ -21,9 +31,30 @@
   <th></th>
 </tr>
 </table>
-
+<hr>
+<h2>성적정보</h2>
+<form action="update.do" method="post">
+번호: <input id="no" type="text" name="no" readonly><br>
+이름: <input id="name" type="text" name="name"><br>
+국어: <input id="kor" type="text" name="kor"><br>
+영어: <input id="eng" type="text" name="eng"><br>
+수학 : <input id="math" type="text" name="math"><br>
+시험일 : <input id="execDate" type="text" name="execDate"><br>
+<input type="submit" value="변경">
+</form>
+</div>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
 
 
 
