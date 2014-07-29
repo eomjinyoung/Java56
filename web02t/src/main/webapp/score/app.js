@@ -12,15 +12,15 @@ window.onload = function() {
 		scores[i].total = scores[i].kor + scores[i].eng + scores[i].math;
 		scores[i].average = scores[i].total / 3;
 		
-		tr = document.createElement("tr");
-		table.appendChild(tr);
+		tr = document.createElement("tr"); //<tr></tr>
+		table.appendChild(tr); //<table>...<tr></tr></table>
 		
-		td = document.createElement("td");
-		a = document.createElement("a");
-		a.href = 'update.do?no=' + scores[i].no;
-		a.textContent = scores[i].no;
-		td.appendChild(a);
-		tr.appendChild(td);
+		td = document.createElement("td"); //<td></td>
+		a = document.createElement("a"); //<a></a>
+		a.href = 'update.do?no=' + scores[i].no; //<a href="..."></a>
+		a.textContent = scores[i].no; //<a href="...">번호</a>
+		td.appendChild(a); //<td><a>...</a></td>
+		tr.appendChild(td); //<tr><td>...</td></tr>
 		
 		td = document.createElement("td");
 		td.textContent = scores[i].execDate;
