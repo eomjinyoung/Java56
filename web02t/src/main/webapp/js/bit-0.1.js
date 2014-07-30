@@ -98,6 +98,33 @@ function bit(value) {
   return elements; // NodeList + 양념들
 }
 
+// 함수도 객체이기 때문에 프로퍼티를 추가할 수 있다.
+bit.ajax = function(url, settings) {
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function(event) {
+	if (xhr.readyState == 4) {  
+	  var result = JSON.parse(xhr.responseText);
+	  if (settings.success) {
+		  settings.success(result);
+	  }
+	}
+  }
+  xhr.open(settings.type, url, true);
+  if (settings.type == "POST") { // POST 요청
+    xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+    var queryString = "";
+    for (var propName in settings.data) {
+      if (queryString.length > 0) {
+    	queryString += "&";
+      }
+      queryString = queryString + propName + "=" 
+    					+ encodeURIComponent(settings.data[propName]);
+    }
+    xhr.send(queryString);
+  } else { //GET 요청
+	xhr.send(null);  
+  }
+};
 
 var $ = bit;
 
