@@ -36,7 +36,6 @@ function addScore(event) {
   
   $.ajax('add.json', {
 	type: "POST",
-	dataType: "json",
 	data: {
 		name: $("#name").val(),
 		kor: $("#kor").val(),
@@ -55,7 +54,6 @@ function updateScore(event) {
   
   $.ajax('update.json', {
 	type: "POST",
-	dataType: "json",
 	data: {
 		no: $("#no").val(),
 		name: $("#name").val(),
@@ -73,7 +71,6 @@ function updateScore(event) {
 function deleteScore(no) {
   $.ajax("delete.json?no=" + no, {
 	type: "GET",
-	dataType: "json",
 	success: function(result) {
 	  if (result.status == "success") {
 		  alert("삭제 성공입니다.");
@@ -88,7 +85,9 @@ function deleteScore(no) {
 function loadScoreDetail(event) {
   event.preventDefault(); // 웹 브라우저야, a 태그를 클릭할 때 수행하는 기본 작업을 하지 말아라!
 
-  $.getJSON(this.href, function(score) {
+  $.ajax(this.href, {
+	type: "GET",
+	success: function(score) {
 	  $("#no").val(score.no);
 	  $("#name").val(score.name);
 	  $("#kor").val(score.kor);
@@ -97,13 +96,13 @@ function loadScoreDetail(event) {
 	  $("#execDate").val(new Date(score.execDate).toString("yyyy-MM-dd"));
 	  
 	  changeFormState("updateState");
-	});
+	}
+  });
 }
 
 function loadScoreList() {
   $.ajax('list.json', {
 	type: "GET",
-	dataType: "json",
 	success: function(scores) {
 	  var table = $("#scoreTable");
 	  var tr, td, a;
