@@ -1,14 +1,14 @@
 window.onload = function() {
   loadScoreList();
   
-  document.getElementById("btnUpdate").onclick = updateScore;
-  document.getElementById("btnReset").onclick = resetForm;
+  $("#btnUpdate").click(updateScore);
+  $("#btnReset").click(resetForm);
   
-  document.getElementById("btnDelete").onclick = function(event) {
+  $("#btnDelete").click(function(event) {
 	deleteScore(document.getElementById("no").value);  
-  };
+  });
   
-  document.getElementById("btnAdd").onclick = addScore;
+  $("#btnAdd").click(addScore);
 };
 
 function resetForm() {
@@ -16,23 +16,19 @@ function resetForm() {
 }
 
 function changeFormState(state) {
-	var elements = document.querySelectorAll(".x-update-item");
-	for (var i = 0; i < elements.length; i++) {
-	  if (state == "updateState") {
-		elements.item(i).style.display = ""; // 화면에 출력 
-	  } else {
-		elements.item(i).style.display = "none"; // 감추기
-	  }
-	}
+  var elements = $(".x-update-item");
+  if (state == "updateState") {
+	elements.css("display", ""); // 화면에 출력 
+  } else {
+	elements.css("display", "none"); // 감추기
+  }
 	
-	elements = document.querySelectorAll(".x-new-item");
-	for (var i = 0; i < elements.length; i++) {
-	  if (state == "updateState") {
-	    elements.item(i).style.display = "none"; // 감추기
-	  } else {
-		elements.item(i).style.display = "";  // 출력
-	  }
-	}
+  elements = $(".x-new-item");
+  if (state == "updateState") {
+	elements.css("display", "none"); // 감추기
+  } else {
+	elements.css("display", ""); // 화면에 출력 
+  }
 }
 
 function addScore(event) {
@@ -46,11 +42,11 @@ function addScore(event) {
   };
   xhr.open('POST', 'add.json', true);
   xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-  var data = "name=" + encodeURIComponent(document.getElementById("name").value)
-  	+ "&kor=" + document.getElementById("kor").value
-  	+ "&eng=" + document.getElementById("eng").value
-  	+ "&math=" + document.getElementById("math").value
-  	+ "&execDate=" + document.getElementById("execDate").value;
+  var data = "name=" + encodeURIComponent($("#name").val())
+  	+ "&kor=" + $("#kor").val()
+  	+ "&eng=" + $("#eng").val()
+  	+ "&math=" + $("#math").val()
+  	+ "&execDate=" + $("#execDate").val();
   xhr.send(data);
 }
 
@@ -69,12 +65,12 @@ function updateScore(event) {
   
   // 서버에 보낼 데이터 준비
   // ASCII가 아닌 문자는 모두 URL 인코딩 해야 한다.
-  var data = "no=" + document.getElementById("no").value
-  	+ "&name=" + encodeURIComponent(document.getElementById("name").value)
-  	+ "&kor=" + document.getElementById("kor").value
-  	+ "&eng=" + document.getElementById("eng").value
-  	+ "&math=" + document.getElementById("math").value
-  	+ "&execDate=" + document.getElementById("execDate").value;
+  var data = "no=" + $("#no").val()
+  	+ "&name=" + encodeURIComponent($("#name").val())
+  	+ "&kor=" + $("#kor").val()
+  	+ "&eng=" + $("#eng").val()
+  	+ "&math=" + $("#math").val()
+  	+ "&execDate=" + $("#execDate").val();
   	
   xhr.send(data);
 }
@@ -108,13 +104,12 @@ function loadScoreDetail(event) {
 	  var score = JSON.parse(xhr.responseText); 
 	  
 	  // 서버로부터 받은 정보를 가지고 입력폼에 값을 설정한다.
-	  document.getElementById("no").value = score.no;
-	  document.getElementById("name").value = score.name;
-	  document.getElementById("kor").value = score.kor;
-	  document.getElementById("eng").value = score.eng;
-	  document.getElementById("math").value = score.math;
-	  document.getElementById("execDate").value = 
-		  new Date(score.execDate).toString("yyyy-MM-dd");
+	  $("#no").val(score.no);
+	  $("#name").val(score.name);
+	  $("#kor").val(score.kor);
+	  $("#eng").val(score.eng);
+	  $("#math").val(score.math);
+	  $("#execDate").val(new Date(score.execDate).toString("yyyy-MM-dd"));
 	  
 	  // 성적 폼의 상태를 변경 폼 상태로 바꾼다.
 	  changeFormState("updateState");
@@ -132,62 +127,33 @@ function loadScoreList() {
 	  var scores = eval('(' + xhr.responseText + ')');
 	  
 	  //2. 배열을 반복하면서 성적정보 출력
-	  var table = document.getElementById("scoreTable");
+	  var table = $("#scoreTable");
 	  var tr, td, a;
 	  for (var i in scores) {
 		scores[i].total = scores[i].kor + scores[i].eng + scores[i].math;
 		scores[i].average = scores[i].total / 3;
 		
-		tr = document.createElement("tr"); //<tr></tr>
-		table.appendChild(tr); //<table>...<tr></tr></table>
-		
-		td = document.createElement("td"); //<td></td>
-		a = document.createElement("a"); //<a></a>
-		a.href = 'update.json?no=' + scores[i].no; //<a href="..."></a>
-		a.textContent = scores[i].no; //<a href="...">번호</a>
-		a.onclick = loadScoreDetail;
-		td.appendChild(a); //<td><a>...</a></td>
-		tr.appendChild(td); //<tr><td>...</td></tr>
-		
-		td = document.createElement("td");
-		td.textContent = new Date(scores[i].execDate).toString("yyyy-MM-dd");
-		tr.appendChild(td);
-		
-		td = document.createElement("td");
-		td.textContent = scores[i].name;
-		tr.appendChild(td);
-		
-		td = document.createElement("td");
-		td.textContent = scores[i].kor;
-		tr.appendChild(td);
-		
-		td = document.createElement("td");
-		td.textContent = scores[i].eng;
-		tr.appendChild(td);
-		
-		td = document.createElement("td");
-		td.textContent = scores[i].math;
-		tr.appendChild(td);
-		
-		td = document.createElement("td");
-		td.textContent = scores[i].total ;
-		tr.appendChild(td);
-		
-		td = document.createElement("td");
-		td.textContent = scores[i].average;
-		tr.appendChild(td);
-		
-		td = document.createElement("td");
-		a = document.createElement("a");
-		a.setAttribute("data-no", scores[i].no);
-		a.textContent = '삭제';
-		a.className = "btn btn-danger btn-xs";
-		a.onclick = function(event) {
-	      event.preventDefault();
-		  deleteScore(this.getAttribute("data-no"));
-		};
-		td.appendChild(a);
-		tr.appendChild(td);
+		$("<tr>")
+				.append($("<td>").append( 
+						$("<a>").attr('href', 'update.json?no=' + scores[i].no)
+						.text(scores[i].no)
+						.click(loadScoreDetail)))
+				.append($("<td>").text(new Date(scores[i].execDate).toString("yyyy-MM-dd")))
+				.append($("<td>").text(scores[i].name))
+				.append($("<td>").text(scores[i].kor))
+				.append($("<td>").text(scores[i].eng))
+				.append($("<td>").text(scores[i].math))
+				.append($("<td>").text(scores[i].total))
+				.append($("<td>").text(scores[i].average))
+				.append($("<td>").append(
+						$("<a>").attr("data-no", scores[i].no)
+						.text('삭제')
+						.attr("class", "btn btn-danger btn-xs")
+						.click(function(event) {
+							event.preventDefault();
+							deleteScore(this.getAttribute("data-no"));
+						 })))
+				.appendTo(table);
 	  }
 	}
   };
