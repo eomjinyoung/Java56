@@ -2,7 +2,37 @@ window.onload = function() {
   loadScoreList();
   
   document.getElementById("btnUpdate").onclick = updateScore;
+  document.getElementById("btnReset").onclick = resetForm;
+  
+  document.getElementById("btnDelete").onclick = function(event) {
+	deleteScore(document.getElementById("no").value);  
+	location.href = "app.html";
+  };
 };
+
+function resetForm() {
+  changeFormState("newState");
+}
+
+function changeFormState(state) {
+	var elements = document.querySelectorAll(".x-update-item");
+	for (var i = 0; i < elements.length; i++) {
+	  if (state == "updateState") {
+		elements.item(i).style.display = ""; // 화면에 출력 
+	  } else {
+		elements.item(i).style.display = "none"; // 감추기
+	  }
+	}
+	
+	elements = document.querySelectorAll(".x-new-item");
+	for (var i = 0; i < elements.length; i++) {
+	  if (state == "updateState") {
+	    elements.item(i).style.display = "none"; // 감추기
+	  } else {
+		elements.item(i).style.display = "";  // 출력
+	  }
+	}
+}
 
 function updateScore(event) {
   event.preventDefault(); 
@@ -24,14 +54,12 @@ function updateScore(event) {
   	+ "&kor=" + document.getElementById("kor").value
   	+ "&eng=" + document.getElementById("eng").value
   	+ "&math=" + document.getElementById("math").value
-  	+ "&execDate=" + encodeURIComponent(document.getElementById("execDate").value);
+  	+ "&execDate=" + document.getElementById("execDate").value;
   	
   xhr.send(data);
 }
 
-function deleteScore(event) {
-  event.preventDefault(); 
-
+function deleteScore(no) {
   var xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function(event) {
     if (xhr.readyState == 4) {
@@ -45,7 +73,8 @@ function deleteScore(event) {
 	  }
     }
   };
-  xhr.open('GET', this.href, true);
+  
+  xhr.open('GET', "delete.json?no=" + no , true);
   xhr.send(null);
 }
 
@@ -66,6 +95,9 @@ function loadScoreDetail(event) {
 	  document.getElementById("math").value = score.math;
 	  document.getElementById("execDate").value = 
 		  new Date(score.execDate).toString("yyyy-MM-dd");
+	  
+	  // 성적 폼의 상태를 변경 폼 상태로 바꾼다.
+	  changeFormState("updateState");
     }
   };
   xhr.open('GET', this.href, true);
@@ -127,10 +159,13 @@ function loadScoreList() {
 		
 		td = document.createElement("td");
 		a = document.createElement("a");
-		a.href = 'delete.json?no=' + scores[i].no;
+		a.setAttribute("data-no", scores[i].no);
 		a.textContent = '삭제';
 		a.className = "btn btn-danger btn-xs";
-		a.onclick = deleteScore;
+		a.onclick = function(event) {
+	      event.preventDefault();
+		  deleteScore(this.getAttribute("data-no"));
+		};
 		td.appendChild(a);
 		tr.appendChild(td);
 	  }
