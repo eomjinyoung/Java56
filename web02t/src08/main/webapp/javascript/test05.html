@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>test05</title>
+</head>
+<body>
+<script>
+"use strict";
+
+//1. 객체에 속성과 함수 추가하기
+/*
+var calc = new Object();
+calc.result = 0;
+calc.plus = function(value) {...};
+calc.minus = function(value) {...};
+calc.multiple = function(value) {...};
+calc.divide = function(value) {...};
+*/
+var calc = {
+		result: 0,
+		plus: function(value) {
+			this.result += value;
+		},
+		minus: function(value) {
+			this.result -= value;
+		},
+		multiple: function(value) {
+			this.result *= value;
+		},
+		divide: function(value) {
+			this.result /= value;
+		}
+}
+
+calc.result = 100;
+
+//연산자 콤마(,) : 명령어를 나열 => 나열된 순서대로 명령어를 실행한다. 
+console.log( (calc.plus(10), calc.result) );
+console.log( (calc.minus(10), calc.result) );
+console.log( (calc.multiple(10), calc.result) );
+console.log( (calc.divide(10), calc.result) );
+
+//2. 같은 종류의 객체를 여러 개 생성할 경우 생성자 함수를 사용하는 것이 좋다.
+// => 다음 방식은 함수를 중복 생성하는 문제가 있다.
+function Calculator() {
+	this.result = 0;
+	this.plus = function(value) {
+		this.result += value;
+	};
+	this.minus = function(value) {
+	  this.result -= value;
+	};
+  this.multiple = function(value) {
+    this.result *= value;
+  };
+  this.divide = function(value) {
+    this.result /= value;
+  };
+}
+
+var calc2 = new Calculator();
+var calc3 = new Calculator();
+
+calc2.plus(10);
+calc3.plus(20);
+calc2.multiple(3);
+calc3.divide(5);
+
+console.log(calc2.result);
+console.log(calc3.result);
+
+//3. 객체들이 공통으로 사용하는 함수는 공유하는 것이 메모리 절약에 좋다.
+//=> 인스턴스가 공통으로 사용하는 함수는 생성자 함수의 prototype 객체에 등록한다.
+function Calculator2() {
+	this.result = 0;
+}
+// Calculator 생성자 함수의 prototype 객체에 공통 함수 등록
+//=> Calculator는 함수이다. => 자바스크립트는 함수도 객체로 취급한다.
+Calculator2.prototype.plus = function(value) {this.result += value;};
+Calculator2.prototype.minus = function(value) {this.result -= value;};
+Calculator2.prototype.multiple = function(value) {this.result *= value;};
+Calculator2.prototype.divide = function(value) {this.result /= value;};
+
+var calcX = new Calculator2();
+var calcY = new Calculator2();
+
+calcX.plus(10);
+calcY.plus(20);
+calcX.divide(2);
+calcY.multiple(3);
+
+console.log(calcX.result); // 5
+console.log(calcY.result); // 60
+
+//4. 클로저 함수를 이용한 캡슐화
+//=> 자바스크립트는 private, proteced 등 캡슐화 관련 명령이 없다.
+//=> 클로저 함수를 이용하여 캡슐화 구현
+function Calculator3() {
+	var result = 0;
+	
+	// 클로저(내장함수)가 사용하는 로컬 변수는 별도의 메모리 공간에 복제하여 관리한다.
+	this.setResult = function(value) {
+		result = value;
+	};
+	this.getResult = function() {
+		return result; 
+	};
+	this.plus = function(value) {
+		result += value;
+	};
+	this.minus = function(value) {
+		result -= value;
+	};
+	this.multiple = function(value) {
+		result *= value;
+	};
+	this.divide = function(value) {
+		result /= value;
+	};
+}
+
+var c1 = new Calculator(); // result 변수가 인스턴스 변수이다.
+var c2 = new Calculator3(); // result 변수는 로컬 변수이다.
+var c3 = new Calculator3();
+
+c1.result = 100;
+c1.plus(10);
+c1.result = -10; // result는 캡슐로 보호되지 않기 때문에 외부에서 임의의 값을 마음대로 넣을 수 있다. 
+console.log("c1의 result 값", c1.result);
+
+c2.setResult(100);
+c3.setResult(50);
+
+c2.plus(10);
+c3.plus(30);
+
+c2.result = -10;
+console.log("c2의 result 값", c2.getResult());
+console.log("c3의 result 값", c3.getResult());
+
+
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>test08</title>
+</head>
+<body>
+<script>
+//참고. 객체에 속성 추가 및 사용
+/*
+var obj = new Object();
+obj.name = "홍길동"; //ok
+obj["age"] = 20; //ok
+//obj.first name = "길동"; // 프로퍼티 명에 공백이나 특수 문자를 포함할 수 없다. 
+obj["first name"] = "길동"; // 대괄호([])를 사용하면 프로퍼티 이름에 공백이나 특수문자를 사용할 수 있다.
+*/
+
+//1. 태그의 속성 값 설정
+var img = document.createElement("img");
+
+//1) 원래 있던 속성은 "태그객체.속성명 = 값"으로 설정 가능
+//img.src = "https://www.google.co.kr/images/srpr/logo11w.png";
+
+//2) 원래 있던 속성은 "태그객체.setAttribute("속성명", 값)"으로 설정 가능
+img.setAttribute("src", "https://s2.yimg.com/cd/resizer/FIT_TO_WIDTH-w500/0a44503dd700f3d50bdf7f58477913c44738bfac.jpg");
+
+//3) 새로 추가하는 속성은 "태그객체.속성명 = 값"으로 설정할 수 없다.
+//img.no = 20;
+
+//4) 대신 setAttribute()를 사용해야 한다.
+img.setAttribute("no", 20);
+
+document.body.appendChild(img);
+</script>
+</body>
+</html>
+
+

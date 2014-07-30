@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>test10</title>
+<style>
+div, h1, p {
+  border: 1px solid red;
+  padding: 20px;
+  margin: 20px;
+}
+</style>
+</head>
+<body>
+<div id="d1">
+  <h1 id="h1">제목1</h1>
+  <p id="p1">오호라 첫 번째 문단이다.
+    <button id="btn1">버튼</button>
+  </p>
+</div>
+<div id="d2">
+  <h1 id="h2">제목2</h1>
+  <p id="p2">오호라 두 번째 문단이다.
+    <button id="btn2">버튼</button>
+  </p>
+</div>
+
+<script>
+document.getElementById("d1").onclick = function(event) {
+	console.log("d1을 클릭했다.");
+};
+document.getElementById("d2").onclick = function(event) {
+  console.log("d2를 클릭했다.");
+};
+document.getElementById("h1").onclick = function(event) {
+  console.log("h1을 클릭했다.");
+};	
+document.getElementById("h1").onclick = function(event) {
+  console.log("h2를 클릭했다.");
+};	
+document.getElementById("p1").onclick = function(event) {
+  console.log("p1을 클릭했다.");
+};
+document.getElementById("p2").onclick = function(event) {
+  console.log("p2를 클릭했다.");
+};
+document.getElementById("btn1").onclick = function(event) {
+  console.log("btn1을 클릭했다.");
+  event.stopPropagation(); // 이 타켓에 등록된 이벤트 리스너까지만 호출하고 버블링을 멈춰라!
+};
+
+document.getElementById("btn2").addEventListener("click", function(event) {
+  console.log("btn2를 클릭했다.11111111");
+  event.stopImmediatePropagation(); // 현재 리스너까지만 호출하고 즉시 버블링을 멈춰라! 
+});
+document.getElementById("btn2").addEventListener("click", function(event) {
+  console.log("btn2를 클릭했다.22222222");
+});
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
