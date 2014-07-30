@@ -134,26 +134,26 @@ function loadScoreList() {
 		scores[i].average = scores[i].total / 3;
 		
 		$("<tr>")
-				.append($("<td>").append( 
-						$("<a>").attr('href', 'update.json?no=' + scores[i].no)
-						.text(scores[i].no)
-						.click(loadScoreDetail)))
-				.append($("<td>").text(new Date(scores[i].execDate).toString("yyyy-MM-dd")))
-				.append($("<td>").text(scores[i].name))
-				.append($("<td>").text(scores[i].kor))
-				.append($("<td>").text(scores[i].eng))
-				.append($("<td>").text(scores[i].math))
-				.append($("<td>").text(scores[i].total))
-				.append($("<td>").text(scores[i].average))
-				.append($("<td>").append(
-						$("<a>").attr("data-no", scores[i].no)
-						.text('삭제')
-						.attr("class", "btn btn-danger btn-xs")
-						.click(function(event) {
-							event.preventDefault();
-							deleteScore(this.getAttribute("data-no"));
-						 })))
-				.appendTo(table);
+		.append($("<td>").append( 
+					$("<a>").attr('href', 'update.json?no=' + scores[i].no)
+					.text(scores[i].no)
+					.click(loadScoreDetail)))
+		.append($("<td>").text(new Date(scores[i].execDate).toString("yyyy-MM-dd")))
+		.append($("<td>").text(scores[i].name))
+		.append($("<td>").text(scores[i].kor))
+		.append($("<td>").text(scores[i].eng))
+		.append($("<td>").text(scores[i].math))
+		.append($("<td>").text(scores[i].total))
+		.append($("<td>").text(scores[i].average))
+		.append($("<td>").append(
+					$("<a>").attr("data-no", scores[i].no)
+					.text('삭제')
+					.attr("class", "btn btn-danger btn-xs")
+					.click(function(event) {
+						event.preventDefault();
+						deleteScore(this.getAttribute("data-no"));
+					})))
+		.appendTo(table);
 	  }
 	}
   };
