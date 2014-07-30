@@ -96,7 +96,7 @@ public class ScoreControl {
   public String update(Score score)
       throws Exception {
     scoreDao.update(score);
-    return "redirect:list.do";
+    return "/score/json/scoreupdate";
   }
 }
 

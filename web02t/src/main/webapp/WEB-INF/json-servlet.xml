@@ -15,9 +15,8 @@
         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
 	<!-- *.json 요청을 처리할 페이지 컨트롤러 생성 -->
-	<context:component-scan base-package="java56.controller.json">
-	   <context:include-filter type="regex" expression="java56.controller.bind.*"/>
-	</context:component-scan>
+	<context:component-scan base-package="java56.controller.json"/>
+	<context:component-scan base-package="java56.controller.bind"/>
 
 	<!-- @ControllerAdvice 등의 MVC 관련 애노테이션들을 처리할 객체를 등록하라! -->
 	<mvc:annotation-driven />

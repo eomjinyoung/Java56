@@ -1,6 +1,33 @@
 window.onload = function() {
   loadScoreList();
+  
+  document.getElementById("btnUpdate").onclick = updateScore;
 };
+
+function updateScore(event) {
+  event.preventDefault(); 
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function(event) {
+    if (xhr.readyState == 4) {
+    	location.href = "app.html";
+    }
+  };
+  xhr.open('POST', 'update.json', true);
+  
+  // 전송 데이터 형식이 폼 데이터임을 알려야 한다.
+  xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+  
+  // 서버에 보낼 데이터 준비
+  // ASCII가 아닌 문자는 모두 URL 인코딩 해야 한다.
+  var data = "no=" + document.getElementById("no").value
+  	+ "&name=" + encodeURIComponent(document.getElementById("name").value)
+  	+ "&kor=" + document.getElementById("kor").value
+  	+ "&eng=" + document.getElementById("eng").value
+  	+ "&math=" + document.getElementById("math").value
+  	+ "&execDate=" + encodeURIComponent(document.getElementById("execDate").value);
+  	
+  xhr.send(data);
+}
 
 function deleteScore(event) {
   event.preventDefault(); 
