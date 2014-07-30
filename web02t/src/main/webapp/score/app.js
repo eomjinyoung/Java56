@@ -2,6 +2,26 @@ window.onload = function() {
   loadScoreList();
 };
 
+function deleteScore(event) {
+  event.preventDefault(); 
+
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function(event) {
+    if (xhr.readyState == 4) {
+	  var result = JSON.parse(xhr.responseText); 
+	  
+	  if (result.status == "success") {
+		  alert("삭제 성공입니다.");
+		  location.href = "app.html";
+	  } else {
+		  alert("삭제 실패하였습니다.");
+	  }
+    }
+  };
+  xhr.open('GET', this.href, true);
+  xhr.send(null);
+}
+
 function loadScoreDetail(event) {
   event.preventDefault(); // 웹 브라우저야, a 태그를 클릭할 때 수행하는 기본 작업을 하지 말아라!
 
@@ -83,6 +103,7 @@ function loadScoreList() {
 		a.href = 'delete.json?no=' + scores[i].no;
 		a.textContent = '삭제';
 		a.className = "btn btn-danger btn-xs";
+		a.onclick = deleteScore;
 		td.appendChild(a);
 		tr.appendChild(td);
 	  }

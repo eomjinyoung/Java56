@@ -74,10 +74,15 @@ public class ScoreControl {
   }
   
   @RequestMapping(value="/delete", method=RequestMethod.GET)
-  public String delete(int no)
+  public String delete(int no, Model model)
       throws Exception {
-    scoreDao.delete(no);
-    return "redirect:list.do";
+    int count = scoreDao.delete(no);
+    if (count > 0) {
+      model.addAttribute("status", "success");
+    } else {
+      model.addAttribute("status", "failure");
+    }
+    return "/score/json/scoredelete";
   }
   
   @RequestMapping(value="/update", method=RequestMethod.GET)
