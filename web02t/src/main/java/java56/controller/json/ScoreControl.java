@@ -61,16 +61,11 @@ public class ScoreControl {
     return mv;
   }
   
-  @RequestMapping(value="/add", method=RequestMethod.GET)
-  public String form() {
-    return "/score/scoreform";
-  }
-  
   @RequestMapping(value="/add", method=RequestMethod.POST)
   public String add(Score score)
       throws Exception {
     scoreDao.insert(score);
-    return "redirect:list.do";
+    return "/score/json/scoreadd";
   }
   
   @RequestMapping(value="/delete", method=RequestMethod.GET)

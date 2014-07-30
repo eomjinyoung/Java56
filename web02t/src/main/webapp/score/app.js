@@ -6,8 +6,9 @@ window.onload = function() {
   
   document.getElementById("btnDelete").onclick = function(event) {
 	deleteScore(document.getElementById("no").value);  
-	location.href = "app.html";
   };
+  
+  document.getElementById("btnAdd").onclick = addScore;
 };
 
 function resetForm() {
@@ -32,6 +33,25 @@ function changeFormState(state) {
 		elements.item(i).style.display = "";  // 출력
 	  }
 	}
+}
+
+function addScore(event) {
+  event.preventDefault(); 
+  
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function(event) {
+    if (xhr.readyState == 4) {
+    	location.href = "app.html";
+    }
+  };
+  xhr.open('POST', 'add.json', true);
+  xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+  var data = "name=" + encodeURIComponent(document.getElementById("name").value)
+  	+ "&kor=" + document.getElementById("kor").value
+  	+ "&eng=" + document.getElementById("eng").value
+  	+ "&math=" + document.getElementById("math").value
+  	+ "&execDate=" + document.getElementById("execDate").value;
+  xhr.send(data);
 }
 
 function updateScore(event) {
