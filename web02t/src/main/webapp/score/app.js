@@ -1,4 +1,4 @@
-window.onload = function() {
+function initPage() {
   loadScoreList();
   
   $("#btnUpdate").click(updateScore);
@@ -8,7 +8,15 @@ window.onload = function() {
 	deleteScore(document.getElementById("no").value);  
   });
   
-  $("#btnAdd").click(addScore);
+  $("#btnAdd").click(addScore); 
+  $("#logout").click(function(event){
+	  event.preventDefault();
+	  $.getJSON('../auth/logout.json', function(result) {
+		 if(result.status == "success") {
+		    location.href = "../auth/login.html";
+		 }
+	  });
+  });
 };
 
 function resetForm() {
@@ -88,7 +96,8 @@ function deleteScore(no) {
 function loadScoreDetail(event) {
   event.preventDefault(); // 웹 브라우저야, a 태그를 클릭할 때 수행하는 기본 작업을 하지 말아라!
 
-  $.getJSON(this.href, function(score) {
+  $.getJSON(this.href, function(result) {
+	  var score = result.score;
 	  $("#no").val(score.no);
 	  $("#name").val(score.name);
 	  $("#kor").val(score.kor);
@@ -104,7 +113,8 @@ function loadScoreList() {
   $.ajax('list.json', {
 	type: "GET",
 	dataType: "json",
-	success: function(scores) {
+	success: function(result) {
+	  var scores = result.scores;
 	  var table = $("#scoreTable");
 	  var tr, td, a;
 	  for (var i in scores) {

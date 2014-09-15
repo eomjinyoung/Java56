@@ -13,6 +13,7 @@
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script src="../js/jquery-ui.js"></script>
+<script type="text/javascript" src="../js/checkLogin.js"></script>
 <script type="text/javascript" src="app.js"></script>
 
 <script>
@@ -36,6 +37,11 @@ $(function(){
 </head>
 <body>
 <div id="main" class="container">
+<div id="loginInfo">
+  <span id="userName"></span>,
+  (<span id="userEmail"></span>)
+  <a id="logout" href="#">로그아웃</a>
+</div>
 <div id="accordion">
 <h3>성적목록</h3>
 <div>
