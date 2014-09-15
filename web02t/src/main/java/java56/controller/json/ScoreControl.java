@@ -49,7 +49,7 @@ public class ScoreControl {
           scoreDao.list(pageNo, pageSize, columnName, orderType));
     } else {
       result.put("scores", scoreDao.list(pageNo, pageSize, null));
-    }
+    } 
     //result.put("totalPage", totalPage);
     //result.put("pageNo", pageNo);
     //result.put("pageSize", pageSize);
