@@ -1,0 +1,22 @@
+웹 애플리케이션의 서버 측과 클라이언트 측을 완전히 격리시킴.
+1) JSON 컨텐츠를 출력하는 페이지 컨트롤러와 JSP 준비
+. web.xml에 json 프런트 컨트롤러 추가
+. /WEB-INF/json-servlet.xml 추가 
+. java56.controller.json.ScoreControl 추가
+. /WEB-INF/view/score/json/ScoreList.jsp 추가
+
+2) 성적관리 웹 클라이언트 준비
+. webapp/score/app.html 추가
+. webapp/score/app.css 추가
+. webapp/score/app.js 추가
+
+3) app.js에서 성적목록 요청
+. XMLHttpRequest()를 이용한 AJAX 요청 처리
+
+4) app.css 통해 UI 스타일 설정
+
+
+
+
+
+
